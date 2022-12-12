@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "./redux/hooks";
-import { setSearchTerm } from "./redux/movies";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { setSearchTerm } from "../redux/movies";
+import { useNavigate } from "react-router-dom";
 
 export const SearchForm = () => {
   const [inputText, setInputText] = useState("");
   const [timerID, setTimerID] = useState(-1);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (inputText.length > 2 && searchTerm !== inputText) {
@@ -31,14 +33,32 @@ export const SearchForm = () => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
+      <button
+        type="button"
+        onClick={() => {
+          if (location.pathname !== "/movies") navigate("/movies");
+        }}
+      >
+        Movies
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          if (location.pathname !== "/tv-shows") navigate("/tv-shows");
+        }}
+      >
+        TV Shows
+      </button>
+      <label htmlFor="search">Input field for searching movies</label>
       <input
+        name="search"
         type="text"
         value={inputText}
+        placeholder="Start typing to begin search"
         onChange={(e) => {
           setInputText(e.target.value);
         }}
       />
-      SearchBar
     </form>
   );
 };
