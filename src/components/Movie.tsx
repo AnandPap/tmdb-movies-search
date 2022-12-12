@@ -1,24 +1,68 @@
 import { useEffect, useState } from "react";
 import { fetchMovie } from "../apis/fetchMovies";
+import noImage from "../assets/no-image.png";
 
 export type setMovieDetailesType = React.Dispatch<
   React.SetStateAction<{
-    image: string;
-    trailer: string;
+    title: string;
     description: string;
     realeseDate: string;
-    averageRating: string;
+    rating: string;
+    image: string;
+    aspectRatio: string;
+    trailer: string;
   }>
 >;
 
-export const Movie = (props: {
-  movieID: number;
-  setMovieDetailes: setMovieDetailesType;
-}) => {
-  const [movie, setMovie] = useState({});
+export const Movie = (props: { movieID: number }) => {
+  const [movieDetails, setMovieDetails] = useState({
+    title: "",
+    description: "",
+    realeseDate: "",
+    rating: "",
+    image: "",
+    aspectRatio: "",
+    trailer: "",
+  });
   useEffect(() => {
-    fetchMovie(props.movieID, setMovie, props.setMovieDetailes);
+    fetchMovie(props.movieID, setMovieDetails);
   }, [props.movieID]);
 
-  return <div>{props.movieID}</div>;
+  return (
+    <>
+      {location.pathname !== "/movies" ? (
+        <div className="details-page-movie">
+          {movieDetails.trailer ? (
+            <iframe
+              src={movieDetails.trailer}
+              title="Video Player"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <img
+              className="cover-image"
+              src={movieDetails.image}
+              alt="Movie Cover"
+            />
+          )}
+          <h3>{movieDetails.title}</h3>
+          <h6>Movie Overview: </h6>
+          <p>{movieDetails.description}</p>
+        </div>
+      ) : (
+        <div className="main-page-movie">
+          {movieDetails.image ? (
+            <img
+              className="cover-image"
+              src={movieDetails.image}
+              alt="Movie Cover"
+            ></img>
+          ) : (
+            <img src={noImage} alt="No Image" />
+          )}
+          <h1>{movieDetails.title}</h1>
+        </div>
+      )}
+    </>
+  );
 };

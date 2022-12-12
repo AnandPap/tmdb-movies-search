@@ -1,7 +1,11 @@
-import { ResultType } from "@remix-run/router/dist/utils";
 import axios from "axios";
 import { setMovieDetailesType } from "../components/Movie";
 import { array } from "../pages/Movies";
+
+export type videoObject = {
+  site: string;
+  type: string;
+};
 
 export const fetchMovies = async (
   searchTerm: string,
@@ -24,29 +28,57 @@ export const fetchMovies = async (
 
 export const fetchMovie = async (
   movieID: number,
-  setMovie: React.Dispatch<React.SetStateAction<{}>>,
-  setMovieDetailes: setMovieDetailesType
+  setMovieDetails: setMovieDetailesType
 ) => {
+  // function getMovieImageURL(res) {}
+
   await axios
     .get(
       `https://api.themoviedb.org/3/movie/${movieID}?api_key=${
         import.meta.env.VITE_API_KEY
-      }&append_to_response=videos,images`
+      }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
     .then((res) => {
-      console.log(res.data.images);
-      // setVideo()
-      if (res.data.images) if (res.data.images.posters) res.data.images;
-      // setImage()
-      // let resArray = res.data.results;
-      // let indexOfTrailer = resArray.findIndex((result: resultObject) => {
-      //   return result.type === "Trailer" && result.site === "YouTube";
-      // })
-      // let trailerID = res.data.results[indexOfTrailer].key;
-      // setMovie(res.data.results.type);
+      console.log(res.data);
+
+      let movieTitle = res.data.original_title || res.data.title || "";
+
+      let movieDescription = res.data.overview || "";
+
+      let movieRating = res.data.vote_average || "";
+
+      let videosArray = res.data.videos.results;
+      let indexOfTrailer = videosArray.findIndex((video: videoObject) => {
+        return video.type === "Trailer" && video.site === "YouTube";
+      });
+      let trailerURL =
+        indexOfTrailer !== -1 && indexOfTrailer
+          ? `https://www.youtube.com/embed/${videosArray[indexOfTrailer].key}`
+          : "";
+
+      let imageArray;
+      for (let x in res.data.images) {
+        if (res.data.images[x].length > 0) {
+          imageArray = res.data.images[x];
+          break;
+        }
+      }
+      let imageURL = imageArray
+        ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
+        : "";
+      let aspectRatio = imageArray ? `${imageArray[0].aspect_ratio}` : "";
+
+      setMovieDetails((s) => ({
+        ...s,
+        title: movieTitle,
+        description: movieDescription,
+        rating: movieRating,
+        trailer: trailerURL,
+        image: imageURL,
+        aspectRatio: aspectRatio,
+      }));
     })
     .catch((err) => {
       console.log(err);
-      setMovie({});
     });
 };

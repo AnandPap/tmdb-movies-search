@@ -55,6 +55,24 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.cover-image {
+  width: 400px;
+}
+
+.movies-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.main-page-movie {
+  width: 400px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

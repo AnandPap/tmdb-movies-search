@@ -32,33 +32,37 @@ export const SearchForm = () => {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <button
-        type="button"
-        onClick={() => {
-          if (location.pathname !== "/movies") navigate("/movies");
-        }}
-      >
-        Movies
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          if (location.pathname !== "/tv-shows") navigate("/tv-shows");
-        }}
-      >
-        TV Shows
-      </button>
-      <label htmlFor="search">Input field for searching movies</label>
-      <input
-        name="search"
-        type="text"
-        value={inputText}
-        placeholder="Start typing to begin search"
-        onChange={(e) => {
-          setInputText(e.target.value);
-        }}
-      />
-    </form>
+    <div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div>
+          <button
+            type="button"
+            onClick={() => {
+              if (location.pathname !== "/movies") navigate("/movies");
+            }}
+          >
+            Movies
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (location.pathname !== "/tv-shows") navigate("/tv-shows");
+            }}
+          >
+            TV Shows
+          </button>
+        </div>
+        <label htmlFor="search">Input field for searching movies</label>
+        <input
+          name="search"
+          type="text"
+          value={inputText}
+          placeholder="Start typing to begin search"
+          onChange={(e) => {
+            setInputText(e.target.value);
+          }}
+        />
+      </form>
+    </div>
   );
 };
