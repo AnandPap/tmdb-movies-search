@@ -10,7 +10,7 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<SearchForm />}>
           <Route path="movies" element={<Movies />} />
-          <Route path="tv-shows" element={<TVShows />} />
+          <Route path="tvshows" element={<TVShows />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

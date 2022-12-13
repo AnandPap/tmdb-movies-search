@@ -3,28 +3,38 @@
 }
 
 body {
+  margin: 1rem 3rem;
 }
 
 .form-wrapper {
   margin: 0 3rem;
 }
 
+.buttons-container {
+  display: flex;
+}
+
 .change-page-button {
   border-radius: 8px;
-  border: 2px solid transparent;
+  border: 2px solid rgb(150, 150, 150);
   padding: 1rem 2rem;
   font-size: 1em;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin: 0.5rem;
+  margin: 0.5rem 0.2rem;
   font-size: 1.2rem;
 }
 .change-page-button:hover {
-  border-color: #646cff;
+  border-color: black;
 }
 .change-page-button:focus,
 .change-page-button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.selected-button {
+  background-color: rgb(100, 100, 100);
+  border-color: black;
 }
 
 .search-bar {
@@ -34,37 +44,43 @@ body {
   margin-top: 1rem;
 }
 
-.movies-container {
+.movies-container,
+.tvshows-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
 }
 
-.main-page-movie {
+.main-page-movie,
+.main-page-tvshow {
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
   transition: transform, box-shadow, ease, 0.25s;
   transition-delay: 0.05s;
+  max-width: 300px;
+  justify-self: center;
+}
+
+.main-page-movie:hover,
+.main-page-tvshow:hover {
+  box-shadow: 0px 0px 25px grey;
+  background-color: rgb(250, 250, 250);
+  cursor: pointer;
+  transform: scale(1.01);
 }
 
 .cover-image {
   width: 100%;
   max-width: 300px;
   height: 300px;
-  margin: auto;
-  flex-grow: 1;
+  max-height: 300px;
+  margin: 0 auto;
 }
 
-.main-page-movie:hover {
-  box-shadow: 0px 0px 70px -40px black;
-  background-color: rgb(250, 250, 250);
-  cursor: pointer;
-  transform: scale(1.01);
-}
-
-.movie-title {
+.movie-title,
+.tvshow-title {
   text-align: center;
 }
 
@@ -76,15 +92,8 @@ body {
   font-weight: 600;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+@media only screen and (max-width: 500px) {
+  body {
+    margin: 1rem 0;
   }
 }

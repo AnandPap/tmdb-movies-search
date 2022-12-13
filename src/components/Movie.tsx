@@ -9,7 +9,6 @@ export type setMovieDetailesType = React.Dispatch<
     realeseDate: string;
     rating: string;
     image: string;
-    aspectRatio: string;
     trailer: string;
   }>
 >;
@@ -21,7 +20,6 @@ export const Movie = (props: { movieID: number }) => {
     realeseDate: "",
     rating: "",
     image: "",
-    aspectRatio: "",
     trailer: "",
   });
   useEffect(() => {

@@ -39,8 +39,6 @@ export const fetchMovie = async (
       }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
     .then((res) => {
-      console.log(res.data);
-
       let movieTitle = res.data.original_title || res.data.title || "";
 
       let movieDescription = res.data.overview || "";
@@ -66,7 +64,6 @@ export const fetchMovie = async (
       let imageURL = imageArray
         ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
         : "";
-      let aspectRatio = imageArray ? `${imageArray[0].aspect_ratio}` : "";
 
       setMovieDetails((s) => ({
         ...s,
@@ -75,7 +72,6 @@ export const fetchMovie = async (
         rating: movieRating,
         trailer: trailerURL,
         image: imageURL,
-        aspectRatio: aspectRatio,
       }));
     })
     .catch((err) => {

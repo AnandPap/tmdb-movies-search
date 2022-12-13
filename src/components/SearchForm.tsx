@@ -22,7 +22,7 @@ export const SearchForm = () => {
     }
     {
       location.pathname === "/"
-        ? navigate("/tv-shows", { replace: true })
+        ? navigate("/tvshows", { replace: true })
         : null;
     }
   }, [inputText]);
@@ -40,7 +40,7 @@ export const SearchForm = () => {
     <>
       <div className="form-wrapper">
         <form onSubmit={(e) => handleSubmit(e)}>
-          <div>
+          <div className="buttons-container">
             <button
               className="change-page-button"
               type="button"
@@ -54,7 +54,7 @@ export const SearchForm = () => {
               className="change-page-button"
               type="button"
               onClick={() => {
-                if (location.pathname !== "/tv-shows") navigate("/tv-shows");
+                if (location.pathname !== "/tvshows") navigate("/tvshows");
               }}
             >
               TV Shows
