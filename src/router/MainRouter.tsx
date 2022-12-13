@@ -7,12 +7,10 @@ import { SearchForm } from "../components/SearchForm";
 const MainRouter = () => {
   return (
     <BrowserRouter>
-      <SearchForm />
       <Routes>
-        <Route path="/">
-          <Route index element={<TVShows />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/tv-shows" element={<TVShows />} />
+        <Route path="/" element={<SearchForm />}>
+          <Route path="movies" element={<Movies />} />
+          <Route path="tv-shows" element={<TVShows />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

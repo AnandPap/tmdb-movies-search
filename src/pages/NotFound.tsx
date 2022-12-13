@@ -1,3 +1,3 @@
 export const NotFound = () => {
-  return <div>NotFound</div>;
+  return <h1 className="validation-messages">Not found</h1>;
 };

@@ -58,9 +58,9 @@ export const Movie = (props: { movieID: number }) => {
               alt="Movie Cover"
             ></img>
           ) : (
-            <img src={noImage} alt="No Image" />
+            <img className="cover-image" src={noImage} alt="No Image" />
           )}
-          <h1>{movieDetails.title}</h1>
+          <h2 className="movie-title">{movieDetails.title}</h2>
         </div>
       )}
     </>

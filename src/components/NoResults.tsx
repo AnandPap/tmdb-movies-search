@@ -1,3 +1,3 @@
 export const NoResults = () => {
-  return <div>NoResults</div>;
+  return <div className="validation-messages">No results</div>;
 };

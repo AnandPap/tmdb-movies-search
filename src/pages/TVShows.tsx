@@ -9,7 +9,6 @@ export const TVShows = () => {
   const [tvShows, setTVShows] = useState({});
 
   useEffect(() => {
-    if (location.pathname === "/") navigate("/tv-shows", { replace: true });
     if (searchTerm !== "") fetchTVShows();
   }, [searchTerm]);
 
