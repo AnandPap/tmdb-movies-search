@@ -12,26 +12,22 @@ export type array = {
 const showItems = 10;
 
 export const Movies = () => {
-  const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const [movies, setMovies] = useState<array[] | null | undefined>([]);
+  const searchTerm = useAppSelector((state) => state.movies.searchTerm);
 
   useEffect(() => {
     if (searchTerm.length > 2) fetchMovies(searchTerm, setMovies);
-  }, [searchTerm]);
+  }, [searchTerm, location.pathname]);
 
   return (
     <div className="movies-container">
       {searchTerm ? (
         movies && movies.length > 0 ? (
-          location.pathname === "/movies" ? (
-            movies
-              .slice(0, showItems)
-              .map((movie, i) => <Movie key={i} movieID={movie.id} />)
-          ) : (
-            <Movie movieID={movies[0].id} />
-          )
+          movies
+            .slice(0, showItems)
+            .map((movie, i) => <Movie key={i} movieID={movie.id} />)
         ) : (
-          <NoResults />
+          <NoResults text="No results" />
         )
       ) : (
         <SuggestionMessage />

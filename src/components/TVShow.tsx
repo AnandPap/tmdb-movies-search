@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
 import { fetchTVShow } from "../apis/fetchTVShows";
 import noImage from "../assets/no-image.png";
+import { BackButton } from "./reusable/BackButton";
+import { setSelectedMovieID } from "../redux/movies";
+import { NoResults } from "./NoResults";
 
 export type setTVShowDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -22,14 +27,41 @@ export const TVShow = (props: { tvshowID: number }) => {
     image: "",
     trailer: "",
   });
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   useEffect(() => {
-    fetchTVShow(props.tvshowID, setTVShowDetails);
+    if (id) {
+      let fetchID: number = +id;
+      fetchTVShow(fetchID, setTVShowDetails);
+    } else fetchTVShow(props.tvshowID, setTVShowDetails);
   }, [props.tvshowID]);
 
   return (
     <>
-      {location.pathname !== "/tvshows" ? (
+      {location.pathname === "/tvshows" ? (
+        <div
+          className="main-page-tvshow"
+          onClick={() => {
+            navigate(`/tvshows/tvshow-details/${props.tvshowID}`);
+            dispatch(setSelectedMovieID(props.tvshowID));
+          }}
+        >
+          {tvshowDetails.image ? (
+            <img
+              className="cover-image"
+              src={tvshowDetails.image}
+              alt="TVShow Cover"
+            ></img>
+          ) : (
+            <img className="cover-image" src={noImage} alt="No Image" />
+          )}
+          <h2 className="tvshow-title">{tvshowDetails.title}</h2>
+        </div>
+      ) : tvshowDetails.title !== "" && tvshowDetails.description !== "" ? (
         <div className="details-page-tvshow">
+          <BackButton text="back" onClick={() => navigate(-1)} />
           {tvshowDetails.trailer ? (
             <iframe
               src={tvshowDetails.trailer}
@@ -43,23 +75,15 @@ export const TVShow = (props: { tvshowID: number }) => {
               alt="TVShow Cover"
             />
           )}
-          <h3>{tvshowDetails.title}</h3>
-          <h6>TVShow Overview: </h6>
+          <h2>{tvshowDetails.title}</h2>
+          <h4>TVShow Overview: </h4>
           <p>{tvshowDetails.description}</p>
         </div>
       ) : (
-        <div className="main-page-tvshow">
-          {tvshowDetails.image ? (
-            <img
-              className="cover-image"
-              src={tvshowDetails.image}
-              alt="TVShow Cover"
-            ></img>
-          ) : (
-            <img className="cover-image" src={noImage} alt="No Image" />
-          )}
-          <h2 className="tvshow-title">{tvshowDetails.title}</h2>
-        </div>
+        <>
+          <BackButton text="back" onClick={() => navigate(-1)} />
+          <NoResults text="No details" />
+        </>
       )}
     </>
   );

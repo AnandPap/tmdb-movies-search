@@ -31,7 +31,6 @@ export const fetchMovie = async (
   setMovieDetails: setMovieDetailesType
 ) => {
   // function getMovieImageURL(res) {}
-
   await axios
     .get(
       `https://api.themoviedb.org/3/movie/${movieID}?api_key=${
@@ -39,11 +38,11 @@ export const fetchMovie = async (
       }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
     .then((res) => {
-      let movieTitle = res.data.original_title || res.data.title || "";
+      let movieTitle = res.data.original_title || res.data.title || "No Title";
 
-      let movieDescription = res.data.overview || "";
+      let movieDescription = res.data.overview || "No Description";
 
-      let movieRating = res.data.vote_average || "";
+      let movieRating = res.data.vote_average || "0";
 
       let videosArray = res.data.videos.results;
       let indexOfTrailer = videosArray.findIndex((video: videoObject) => {

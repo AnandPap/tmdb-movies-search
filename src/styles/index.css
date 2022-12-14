@@ -33,7 +33,7 @@ body {
 }
 
 .selected-button {
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(215, 215, 215);
   border-color: black;
 }
 
@@ -90,6 +90,28 @@ body {
   font-size: 3.2rem;
   line-height: 1.1;
   font-weight: 600;
+}
+
+.back-button {
+  background-color: rgba(0, 0, 0, 0); /*background: none;*/
+  border: none;
+  color: navy;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-button-arrow {
+  border: solid navy;
+  border-width: 0 2px 2px 0;
+  padding: 3.5px;
+  display: inline-block;
+  position: relative;
+  right: 5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(135deg);
 }
 
 @media only screen and (max-width: 500px) {

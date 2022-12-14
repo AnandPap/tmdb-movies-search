@@ -1,3 +1,3 @@
-export const NoResults = () => {
-  return <div className="validation-messages">No results</div>;
+export const NoResults = (props: { text: string }) => {
+  return <div className="validation-messages">{props.text}</div>;
 };

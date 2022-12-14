@@ -12,26 +12,22 @@ export type array = {
 const showItems = 10;
 
 export const TVShows = () => {
-  const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const [tvshows, setTVShows] = useState<array[] | null | undefined>([]);
+  const searchTerm = useAppSelector((state) => state.movies.searchTerm);
 
   useEffect(() => {
     if (searchTerm.length > 2) fetchTVShows(searchTerm, setTVShows);
-  }, [searchTerm]);
+  }, [searchTerm, location.pathname]);
 
   return (
     <div className="tvshows-container">
       {searchTerm ? (
         tvshows && tvshows.length > 0 ? (
-          location.pathname === "/tvshows" ? (
-            tvshows
-              .slice(0, showItems)
-              .map((tvshow, i) => <TVShow key={i} tvshowID={tvshow.id} />)
-          ) : (
-            <TVShow tvshowID={tvshows[0].id} />
-          )
+          tvshows
+            .slice(0, showItems)
+            .map((tvshow, i) => <TVShow key={i} tvshowID={tvshow.id} />)
         ) : (
-          <NoResults />
+          <NoResults text="No results" />
         )
       ) : (
         <SuggestionMessage />
