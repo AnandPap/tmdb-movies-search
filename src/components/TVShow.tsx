@@ -68,12 +68,14 @@ export const TVShow = (props: { tvshowID: number }) => {
               title="Video Player"
               allowFullScreen
             ></iframe>
-          ) : (
+          ) : tvshowDetails.image ? (
             <img
               className="cover-image"
               src={tvshowDetails.image}
               alt="TVShow Cover"
             />
+          ) : (
+            <img className="cover-image" src={noImage} alt="No Image" />
           )}
           <h2>{tvshowDetails.title}</h2>
           <h4>TVShow Overview: </h4>
