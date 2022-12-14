@@ -79,14 +79,18 @@ export const Movie = (props: { movieID: number }) => {
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
           )}
-          <h1>{movieDetails.title}</h1>
+          <div className="title-and-rating-wrapper">
+            <div className="title-wrapper">
+              <h1 className="title">{movieDetails.title}</h1>
+            </div>
+            <div className="rating-wrapper">
+              <p>Rating: </p>
+              <img className="star-icon" src={star} alt="" />
+              <p>{parseFloat(movieDetails.rating).toFixed(1)}</p>
+            </div>
+          </div>
           <h3>Movie Overview: </h3>
           <p className="description">{movieDetails.description}</p>
-          <div className="rating-wrapper">
-            <p>Rating: </p>
-            <img className="star-icon" src={star} alt="" />
-            <p>{parseFloat(movieDetails.rating).toFixed(1)}</p>
-          </div>
         </div>
       ) : (
         <NoResults text="No result" />

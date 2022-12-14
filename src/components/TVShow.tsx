@@ -79,20 +79,21 @@ export const TVShow = (props: { tvshowID: number }) => {
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
           )}
-          <h1>{tvshowDetails.title}</h1>
+          <div className="title-and-rating-wrapper">
+            <div className="title-wrapper">
+              <h1 className="title">{tvshowDetails.title}</h1>
+            </div>
+            <div className="rating-wrapper">
+              <p>Rating: </p>
+              <img className="star-icon" src={star} alt="" />
+              <p>{parseFloat(tvshowDetails.rating).toFixed(1)}</p>
+            </div>
+          </div>
           <h3>TVShow Overview: </h3>
           <p className="description">{tvshowDetails.description}</p>
-          <div className="rating-wrapper">
-            <p>Rating: </p>
-            <img className="star-icon" src={star} alt="" />
-            <p>{parseFloat(tvshowDetails.rating).toFixed(1)}</p>
-          </div>
         </div>
       ) : (
-        <>
-          <BackButton text="back" onClick={() => navigate(-1)} />
-          <NoResults text="No details" />
-        </>
+        <NoResults text="No details" />
       )}
     </>
   );

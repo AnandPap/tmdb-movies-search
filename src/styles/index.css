@@ -101,6 +101,18 @@ body {
 .details-page-movie,
 .details-page-tvshow {
   margin: 0 3rem;
+  width: fit-content;
+}
+.title-and-rating-wrapper {
+  display: flex;
+  margin-right: 15px;
+  max-width: 100%;
+}
+.title-wrapper {
+  flex-grow: 1;
+}
+.title {
+  max-width: 300px;
 }
 .details-image-trailer {
   width: 100%;
@@ -118,6 +130,8 @@ body {
   border-radius: 0.5rem;
   align-items: center;
   cursor: pointer;
+  height: fit-content;
+  align-self: center;
 }
 .star-icon {
   position: relative;
@@ -207,7 +221,8 @@ body {
   .validation-messages {
     font-size: 2rem;
   }
-  .movies-container {
+  .movies-container,
+  .tvshows-container {
     padding: 0;
     margin: 0.5rem 0;
   }
