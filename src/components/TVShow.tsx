@@ -6,6 +6,7 @@ import noImage from "../assets/no-image.png";
 import { BackButton } from "./reusable/BackButton";
 import { setSelectedMovieID } from "../redux/movies";
 import { NoResults } from "./NoResults";
+import star from "../assets/star.png";
 
 export type setTVShowDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -64,22 +65,28 @@ export const TVShow = (props: { tvshowID: number }) => {
           <BackButton text="back" onClick={() => navigate(-1)} />
           {tvshowDetails.trailer ? (
             <iframe
+              className="details-image-trailer"
               src={tvshowDetails.trailer}
               title="Video Player"
               allowFullScreen
             ></iframe>
           ) : tvshowDetails.image ? (
             <img
-              className="cover-image"
+              className="details-image-trailer"
               src={tvshowDetails.image}
               alt="TVShow Cover"
             />
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
           )}
-          <h2>{tvshowDetails.title}</h2>
-          <h4>TVShow Overview: </h4>
-          <p>{tvshowDetails.description}</p>
+          <h1>{tvshowDetails.title}</h1>
+          <h3>TVShow Overview: </h3>
+          <p className="description">{tvshowDetails.description}</p>
+          <div className="rating-wrapper">
+            <p>Rating: </p>
+            <img className="star-icon" src={star} alt="" />
+            <p>{parseFloat(tvshowDetails.rating).toFixed(1)}</p>
+          </div>
         </div>
       ) : (
         <>

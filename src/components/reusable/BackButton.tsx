@@ -6,7 +6,7 @@ export const BackButton = (props: {
     <div className="back-button-wrapper">
       <button className="back-button" onClick={props.onClick}>
         <div className="back-button-arrow"></div>
-        <p>{props.text}</p>
+        <p className="back-button-text">{props.text}</p>
       </button>
     </div>
   );

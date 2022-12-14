@@ -6,6 +6,7 @@ import noImage from "../assets/no-image.png";
 import { BackButton } from "./reusable/BackButton";
 import { setSelectedMovieID } from "../redux/movies";
 import { NoResults } from "./NoResults";
+import star from "../assets/star.png";
 
 export type setMovieDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -64,22 +65,28 @@ export const Movie = (props: { movieID: number }) => {
           <BackButton text="back" onClick={() => navigate(-1)} />
           {movieDetails.trailer ? (
             <iframe
+              className="details-image-trailer"
               src={movieDetails.trailer}
               title="Video Player"
               allowFullScreen
             ></iframe>
           ) : movieDetails.image ? (
             <img
-              className="cover-image"
+              className="details-image-trailer"
               src={movieDetails.image}
               alt="Movie Cover"
             />
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
           )}
-          <h2>{movieDetails.title}</h2>
-          <h4>Movie Overview: </h4>
-          <p>{movieDetails.description}</p>
+          <h1>{movieDetails.title}</h1>
+          <h3>Movie Overview: </h3>
+          <p className="description">{movieDetails.description}</p>
+          <div className="rating-wrapper">
+            <p>Rating: </p>
+            <img className="star-icon" src={star} alt="" />
+            <p>{parseFloat(movieDetails.rating).toFixed(1)}</p>
+          </div>
         </div>
       ) : (
         <NoResults text="No result" />

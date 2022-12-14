@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchTerm } from "../redux/movies";
 import { Outlet, useNavigate } from "react-router-dom";
+import searchIcon from "../assets/search.png";
 
 export const SearchForm = () => {
   const [inputText, setInputText] = useState("");
@@ -39,7 +40,7 @@ export const SearchForm = () => {
       {location.pathname === "/movies" || location.pathname === "/tvshows" ? (
         <>
           <div className="form-wrapper">
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form className="form" onSubmit={(e) => handleSubmit(e)}>
               <div className="buttons-container">
                 <button
                   className={`change-page-button ${
@@ -67,16 +68,19 @@ export const SearchForm = () => {
               <label hidden htmlFor="search">
                 Input field for searching movies
               </label>
-              <input
-                name="search"
-                type="text"
-                className="search-bar"
-                value={inputText}
-                placeholder="Start typing to begin search"
-                onChange={(e) => {
-                  setInputText(e.target.value);
-                }}
-              />
+              <div className="search-bar-wrapper">
+                <input
+                  name="search"
+                  type="text"
+                  className="search-bar"
+                  value={inputText}
+                  placeholder="Search movies"
+                  onChange={(e) => {
+                    setInputText(e.target.value);
+                  }}
+                />
+                <img src={searchIcon} alt="" className="search-icon" />
+              </div>
             </form>
           </div>
         </>
