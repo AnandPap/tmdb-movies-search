@@ -1,5 +1,5 @@
 {
-  "name": "top-10-movies-tv-shows-search",
+  "name": "tmdb-movies-search",
   "private": true,
   "version": "0.0.0",
   "type": "module",
