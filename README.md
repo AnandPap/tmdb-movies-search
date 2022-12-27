@@ -2,7 +2,7 @@
 
 ## Deployed version:
 
-https://top-10-movies-tv-shows-search-anandpap.vercel.app/
+https://tmdb-movies-search.vercel.app/
 
 ## To get a local copy up and running follow these steps:
 
