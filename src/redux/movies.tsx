@@ -5,11 +5,13 @@ import type { RootState } from "./store";
 interface MoviesState {
   searchTerm: string;
   selectedMovieID: number;
+  loading: boolean;
 }
 
 const initialState: MoviesState = {
   searchTerm: "",
   selectedMovieID: 0,
+  loading: false,
 };
 
 export const moviesSlice = createSlice({
@@ -22,9 +24,13 @@ export const moviesSlice = createSlice({
     setSelectedMovieID: (state, action: PayloadAction<number>) => {
       state.selectedMovieID = action.payload;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setSearchTerm, setSelectedMovieID } = moviesSlice.actions;
+export const { setSearchTerm, setSelectedMovieID, setLoading } =
+  moviesSlice.actions;
 
 export default moviesSlice.reducer;

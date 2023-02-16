@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { setSearchTerm } from "../redux/movies";
+import { setSearchTerm, setLoading } from "../redux/movies";
 import { Outlet, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
 
@@ -16,6 +16,7 @@ export const SearchForm = () => {
       clearTimeout(timerID);
       const tempTimerID = setTimeout(() => {
         dispatch(setSearchTerm(inputText));
+        dispatch(setLoading(true));
       }, 1000);
       setTimerID(tempTimerID);
       return () => clearTimeout(tempTimerID);
@@ -38,7 +39,7 @@ export const SearchForm = () => {
   return (
     <>
       <form
-        autoComplete="off"
+        // autoComplete="off"
         className="search-form"
         onSubmit={(e) => handleSubmit(e)}
       >
