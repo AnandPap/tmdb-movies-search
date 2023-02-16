@@ -84,16 +84,19 @@ export const TVShow = (props: { tvshowID: number }) => {
               <h1 className="title">{tvshowDetails.title}</h1>
             </div>
             <div className="rating-wrapper">
-              <p>Rating: </p>
+              <p style={{ margin: 0 }}>Rating: </p>
               <img className="star-icon" src={star} alt="" />
-              <p>{parseFloat(tvshowDetails.rating).toFixed(1)}</p>
+              <p className="rating" style={{ margin: 0 }}>
+                {parseFloat(tvshowDetails.rating).toFixed(1)}
+              </p>
+              <p style={{ margin: 0 }}>/10</p>
             </div>
           </div>
           <h3>TVShow Overview: </h3>
           <p className="description">{tvshowDetails.description}</p>
         </div>
       ) : (
-        <NoResults text="No details" />
+        <NoResults text="No result" />
       )}
     </>
   );
