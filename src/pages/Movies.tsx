@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { fetchMovies } from "../apis/fetchMovies";
-import { Movie } from "../components/Movie";
-import { NoResults } from "../components/NoResults";
-import { SuggestionMessage } from "../components/SuggestionMessage";
+import { MovieCover } from "../components/MovieCover";
+import { ValidationMessage } from "../components/reusable/ValidationMessage";
 
 export type array = {
   id: number;
@@ -25,12 +24,12 @@ export const Movies = () => {
         movies && movies.length > 0 ? (
           movies
             .slice(0, showItems)
-            .map((movie, i) => <Movie key={i} movieID={movie.id} />)
+            .map((movie, i) => <MovieCover key={i} movieID={movie.id} />)
         ) : (
-          <NoResults text="No results" />
+          <ValidationMessage text="No results" />
         )
       ) : (
-        <SuggestionMessage />
+        <ValidationMessage text="Type more than 2 characters to begin search." />
       )}
     </div>
   );

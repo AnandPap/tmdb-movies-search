@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { fetchTVShows } from "../apis/fetchTVShows";
-import { TVShow } from "../components/TVShow";
-import { NoResults } from "../components/NoResults";
-import { SuggestionMessage } from "../components/SuggestionMessage";
+import { TVShowCover } from "../components/TVShowCover";
+import { ValidationMessage } from "../components/reusable/ValidationMessage";
 
 export type array = {
   id: number;
@@ -25,12 +24,12 @@ export const TVShows = () => {
         tvshows && tvshows.length > 0 ? (
           tvshows
             .slice(0, showItems)
-            .map((tvshow, i) => <TVShow key={i} tvshowID={tvshow.id} />)
+            .map((tvshow, i) => <TVShowCover key={i} tvshowID={tvshow.id} />)
         ) : (
-          <NoResults text="No results" />
+          <ValidationMessage text="No results" />
         )
       ) : (
-        <SuggestionMessage />
+        <ValidationMessage text="Type more than 2 characters to begin search." />
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setTVShowDetailesType } from "../components/TVShow";
+import { setTVShowDetailesType } from "../components/TVShowCover";
 import { array } from "../pages/TVShows";
 
 export type videoObject = {

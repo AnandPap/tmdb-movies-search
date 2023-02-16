@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setMovieDetailesType } from "../components/Movie";
+import { setMovieDetailesType } from "../components/MovieCover";
 import { array } from "../pages/Movies";
 
 export type videoObject = {

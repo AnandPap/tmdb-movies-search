@@ -5,9 +5,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
 
 export const SearchForm = () => {
-  const [inputText, setInputText] = useState("");
-  const [timerID, setTimerID] = useState(-1);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
+  const [inputText, setInputText] = useState(searchTerm);
+  const [timerID, setTimerID] = useState(-1);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -37,54 +37,52 @@ export const SearchForm = () => {
 
   return (
     <>
-      {location.pathname === "/movies" || location.pathname === "/tvshows" ? (
-        <form
-          autoComplete="off"
-          className="search-form"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <div className="buttons-container">
-            <button
-              className={`change-page-button ${
-                location.pathname === "/movies" ? "selected-button" : null
-              }`}
-              type="button"
-              onClick={() => {
-                if (location.pathname !== "/movies") navigate("/movies");
-              }}
-            >
-              Movies
-            </button>
-            <button
-              className={`change-page-button ${
-                location.pathname === "/tvshows" ? "selected-button" : null
-              }`}
-              type="button"
-              onClick={() => {
-                if (location.pathname !== "/tvshows") navigate("/tvshows");
-              }}
-            >
-              TV Shows
-            </button>
-          </div>
-          <label hidden htmlFor="search">
-            Input field for searching movies
-          </label>
-          <div className="search-bar-wrapper">
-            <input
-              id="search"
-              type="text"
-              className="search-bar"
-              value={inputText}
-              placeholder="Search movies"
-              onChange={(e) => {
-                setInputText(e.target.value);
-              }}
-            />
-            <img src={searchIcon} alt="" className="search-icon" />
-          </div>
-        </form>
-      ) : null}
+      <form
+        autoComplete="off"
+        className="search-form"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <div className="buttons-container">
+          <button
+            className={`change-page-button ${
+              location.pathname === "/movies" ? "selected-button" : null
+            }`}
+            type="button"
+            onClick={() => {
+              if (location.pathname !== "/movies") navigate("/movies");
+            }}
+          >
+            Movies
+          </button>
+          <button
+            className={`change-page-button ${
+              location.pathname === "/tvshows" ? "selected-button" : null
+            }`}
+            type="button"
+            onClick={() => {
+              if (location.pathname !== "/tvshows") navigate("/tvshows");
+            }}
+          >
+            TV Shows
+          </button>
+        </div>
+        <label hidden htmlFor="search">
+          Input field for searching movies
+        </label>
+        <div className="search-bar-wrapper">
+          <input
+            id="search"
+            type="text"
+            className="search-bar"
+            value={inputText}
+            placeholder="Search movies"
+            onChange={(e) => {
+              setInputText(e.target.value);
+            }}
+          />
+          <img src={searchIcon} alt="" className="search-icon" />
+        </div>
+      </form>
       <Outlet />
     </>
   );

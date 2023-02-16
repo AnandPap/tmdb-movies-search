@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Movies } from "../pages/Movies";
-import { NotFound } from "../pages/NotFound";
+import { ValidationMessage } from "../components/reusable/ValidationMessage";
 import { TVShows } from "../pages/TVShows";
 import { SearchForm } from "../components/SearchForm";
 import { useAppSelector } from "../redux/hooks";
-import { Movie } from "../components/Movie";
-import { TVShow } from "../components/TVShow";
+import { TVShowDetails } from "../pages/TVShowDetails";
+import { MovieDetails } from "../pages/MovieDetails";
 
 const MainRouter = () => {
   const selectedMovieID = useAppSelector(
@@ -16,17 +16,17 @@ const MainRouter = () => {
       <Routes>
         <Route path="/" element={<SearchForm />}>
           <Route path="/movies" element={<Movies />} />
-          <Route
-            path="/movies/movie-details/:id"
-            element={<Movie movieID={selectedMovieID} />}
-          />
           <Route path="/tvshows" element={<TVShows />} />
-          <Route
-            path="/tvshows/tvshow-details/:id"
-            element={<TVShow tvshowID={selectedMovieID} />}
-          />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/movies/movie-details/:id"
+          element={<MovieDetails movieID={selectedMovieID} />}
+        />
+        <Route
+          path="/tvshows/tvshow-details/:id"
+          element={<TVShowDetails tvshowID={selectedMovieID} />}
+        />
+        <Route path="*" element={<ValidationMessage text="Page not found" />} />
       </Routes>
     </BrowserRouter>
   );
