@@ -1,6 +1,11 @@
 import axios from "axios";
 import { setTVShowDetailesType } from "../components/TVShowCover";
 import { array } from "../pages/TVShows";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "@reduxjs/toolkit";
+import { Dispatch } from "react";
+import { MoviesState } from "../redux/movies";
+import { setLoading } from "../redux/movies";
 
 export type videoObject = {
   site: string;
@@ -9,7 +14,15 @@ export type videoObject = {
 
 export const fetchTVShows = async (
   searchTerm: string,
-  setTVShows: React.Dispatch<React.SetStateAction<array[] | null | undefined>>
+  setTVShows: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
+  dispatch: ThunkDispatch<
+    {
+      movies: MoviesState;
+    },
+    undefined,
+    AnyAction
+  > &
+    Dispatch<AnyAction>
 ) => {
   await axios
     .get(
@@ -19,9 +32,15 @@ export const fetchTVShows = async (
     )
     .then((res) => {
       setTVShows(res.data.results);
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
     })
     .catch((err) => {
       setTVShows(undefined);
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
       console.log(err);
     });
 };
@@ -31,7 +50,6 @@ export const fetchTVShow = async (
   setTVShowDetails: setTVShowDetailesType
 ) => {
   // function getTVShowImageURL(res) {}
-
   await axios
     .get(
       `https://api.themoviedb.org/3/tv/${tvshowID}?api_key=${

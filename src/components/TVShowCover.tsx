@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch } from "../redux/hooks";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTVShow } from "../apis/fetchTVShows";
-import noImage from "../assets/no-image.png";
 import { setSelectedMovieID } from "../redux/movies";
+import noImage from "../assets/no-image.png";
+import spinner from "../assets/spinner.gif";
 
 export type setTVShowDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -25,6 +26,7 @@ export const TVShowCover = (props: { tvshowID: number }) => {
     image: "",
     trailer: "",
   });
+  const loading = useAppSelector((state) => state.movies.loading);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -40,12 +42,18 @@ export const TVShowCover = (props: { tvshowID: number }) => {
         dispatch(setSelectedMovieID(props.tvshowID));
       }}
     >
-      {tvshowDetails.image ? (
+      {loading ? (
+        <img
+          className="cover-spinner-gif"
+          src={spinner}
+          alt="Picture is loading"
+        />
+      ) : tvshowDetails.image ? (
         <img
           className="cover-image"
           src={tvshowDetails.image}
           alt="TVShow Cover"
-        ></img>
+        />
       ) : (
         <img className="cover-image" src={noImage} alt="No Image" />
       )}

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 
-interface MoviesState {
+export interface MoviesState {
   searchTerm: string;
   selectedMovieID: number;
   loading: boolean;

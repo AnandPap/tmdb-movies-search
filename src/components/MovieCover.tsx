@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchMovie } from "../apis/fetchMovies";
-import { setSelectedMovieID, setLoading } from "../redux/movies";
+import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
 import spinner from "../assets/spinner.gif";
 
@@ -32,7 +32,6 @@ export const MovieCover = (props: { movieID: number }) => {
 
   useEffect(() => {
     fetchMovie(props.movieID, setMovieDetails);
-    dispatch(setLoading(false));
   }, [props.movieID]);
 
   return (
@@ -44,13 +43,17 @@ export const MovieCover = (props: { movieID: number }) => {
       }}
     >
       {loading ? (
-        <img src={spinner} alt="Picture is loading" />
+        <img
+          className="cover-spinner-gif"
+          src={spinner}
+          alt="Picture is loading"
+        />
       ) : movieDetails.image ? (
         <img
           className="cover-image"
           src={movieDetails.image}
           alt="Movie Cover"
-        ></img>
+        />
       ) : (
         <img className="cover-image" src={noImage} alt="No Image" />
       )}

@@ -50,7 +50,10 @@ export const SearchForm = () => {
             }`}
             type="button"
             onClick={() => {
-              if (location.pathname !== "/movies") navigate("/movies");
+              if (location.pathname !== "/movies") {
+                navigate("/movies");
+                dispatch(setLoading(true));
+              }
             }}
           >
             Movies
@@ -61,7 +64,10 @@ export const SearchForm = () => {
             }`}
             type="button"
             onClick={() => {
-              if (location.pathname !== "/tvshows") navigate("/tvshows");
+              if (location.pathname !== "/tvshows") {
+                navigate("/tvshows");
+                dispatch(setLoading(true));
+              }
             }}
           >
             TV Shows

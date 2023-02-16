@@ -103,6 +103,7 @@ select:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
   transition: all 0.25s ease 0.05s;
+  width: 100%;
   max-width: 300px;
   justify-self: center;
   border-radius: 0.5rem;
@@ -218,6 +219,10 @@ select:-webkit-autofill:focus {
 }
 .back-button-text {
   margin: 0 5px;
+}
+
+.cover-spinner-gif {
+  height: 300px;
 }
 
 @media only screen and (max-width: 600px) {

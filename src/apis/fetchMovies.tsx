@@ -1,6 +1,11 @@
 import axios from "axios";
 import { setMovieDetailesType } from "../components/MovieCover";
 import { array } from "../pages/Movies";
+import { ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "@reduxjs/toolkit";
+import { Dispatch } from "react";
+import { MoviesState } from "../redux/movies";
+import { setLoading } from "../redux/movies";
 
 export type videoObject = {
   site: string;
@@ -9,7 +14,15 @@ export type videoObject = {
 
 export const fetchMovies = async (
   searchTerm: string,
-  setMovies: React.Dispatch<React.SetStateAction<array[] | null | undefined>>
+  setMovies: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
+  dispatch: ThunkDispatch<
+    {
+      movies: MoviesState;
+    },
+    undefined,
+    AnyAction
+  > &
+    Dispatch<AnyAction>
 ) => {
   await axios
     .get(
@@ -19,9 +32,15 @@ export const fetchMovies = async (
     )
     .then((res) => {
       setMovies(res.data.results);
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
     })
     .catch((err) => {
       setMovies(undefined);
+      setTimeout(() => {
+        dispatch(setLoading(false));
+      }, 500);
       console.log(err);
     });
 };
