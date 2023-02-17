@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchTerm, setLoading } from "../redux/movies";
 import { Outlet, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
+import DarkThemeSwitch from "./reusable/DarkModeButton";
 
 export const SearchForm = () => {
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
@@ -44,34 +45,37 @@ export const SearchForm = () => {
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="buttons-container">
-          <button
-            className={`change-page-button ${
-              location.pathname === "/movies" ? "selected-button" : null
-            }`}
-            type="button"
-            onClick={() => {
-              if (location.pathname !== "/movies") {
-                navigate("/movies");
-                dispatch(setLoading(true));
-              }
-            }}
-          >
-            Movies
-          </button>
-          <button
-            className={`change-page-button ${
-              location.pathname === "/tvshows" ? "selected-button" : null
-            }`}
-            type="button"
-            onClick={() => {
-              if (location.pathname !== "/tvshows") {
-                navigate("/tvshows");
-                dispatch(setLoading(true));
-              }
-            }}
-          >
-            TV Shows
-          </button>
+          <div className="change-page-buttons">
+            <button
+              className={`change-page-button ${
+                location.pathname === "/movies" ? "selected-button" : null
+              }`}
+              type="button"
+              onClick={() => {
+                if (location.pathname !== "/movies") {
+                  navigate("/movies");
+                  dispatch(setLoading(true));
+                }
+              }}
+            >
+              Movies
+            </button>
+            <button
+              className={`change-page-button ${
+                location.pathname === "/tvshows" ? "selected-button" : null
+              }`}
+              type="button"
+              onClick={() => {
+                if (location.pathname !== "/tvshows") {
+                  navigate("/tvshows");
+                  dispatch(setLoading(true));
+                }
+              }}
+            >
+              TV Shows
+            </button>
+          </div>
+          <DarkThemeSwitch />
         </div>
         <label hidden htmlFor="search">
           Input field for searching movies

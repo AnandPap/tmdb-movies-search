@@ -35,7 +35,7 @@ export const TVShowDetails = (props: { tvshowID: number }) => {
 
   return (
     <div className="details-page-tvshow">
-      <BackButton text="back" onClick={() => navigate(-1)} />
+      <BackButton onClick={() => navigate(-1)} />
       {tvshowDetails.trailer ? (
         <iframe
           className="details-image-trailer"

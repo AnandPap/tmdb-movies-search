@@ -18,7 +18,7 @@ export const Movies = () => {
 
   useEffect(() => {
     if (searchTerm.length > 2) fetchMovies(searchTerm, setMovies, dispatch);
-  }, [searchTerm, location.pathname]);
+  }, [searchTerm]);
 
   return (
     <div className="movies-container">

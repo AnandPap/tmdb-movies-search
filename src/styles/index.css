@@ -44,6 +44,9 @@ select:-webkit-autofill:focus {
 .buttons-container {
   display: flex;
 }
+.change-page-buttons {
+  flex-grow: 1;
+}
 
 .change-page-button {
   border-radius: 8px;
@@ -223,6 +226,12 @@ select:-webkit-autofill:focus {
 
 .cover-spinner-gif {
   height: 300px;
+}
+
+.dark-mode-button {
+  width: 100px;
+  align-self: center;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

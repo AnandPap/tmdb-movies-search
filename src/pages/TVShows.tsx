@@ -18,7 +18,7 @@ export const TVShows = () => {
 
   useEffect(() => {
     if (searchTerm.length > 2) fetchTVShows(searchTerm, setTVShows, dispatch);
-  }, [searchTerm, location.pathname]);
+  }, [searchTerm]);
 
   return (
     <div className="tvshows-container">
