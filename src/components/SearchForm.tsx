@@ -3,10 +3,11 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchTerm, setLoading } from "../redux/movies";
 import { Outlet, useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
-import DarkThemeSwitch from "./reusable/DarkModeButton";
+import LottieDarkModeSwitch from "./reusable/components/LottieDarkModeSwitch";
 
 export const SearchForm = () => {
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
+  const darkMode = useAppSelector((state) => state.movies.darkMode);
   const [inputText, setInputText] = useState(searchTerm);
   const [timerID, setTimerID] = useState(-1);
   const dispatch = useAppDispatch();
@@ -41,13 +42,13 @@ export const SearchForm = () => {
     <>
       <form
         // autoComplete="off"
-        className="search-form"
+        className={`search-form ${darkMode ? "dark" : "light"}`}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="buttons-container">
+        <div className="search-form-buttons">
           <div className="change-page-buttons">
             <button
-              className={`change-page-button ${
+              className={`${
                 location.pathname === "/movies" ? "selected-button" : null
               }`}
               type="button"
@@ -61,9 +62,9 @@ export const SearchForm = () => {
               Movies
             </button>
             <button
-              className={`change-page-button ${
+              className={`${
                 location.pathname === "/tvshows" ? "selected-button" : null
-              }`}
+              } ${darkMode ? "dark" : "light"}`}
               type="button"
               onClick={() => {
                 if (location.pathname !== "/tvshows") {
@@ -75,7 +76,7 @@ export const SearchForm = () => {
               TV Shows
             </button>
           </div>
-          <DarkThemeSwitch />
+          <LottieDarkModeSwitch />
         </div>
         <label hidden htmlFor="search">
           Input field for searching movies

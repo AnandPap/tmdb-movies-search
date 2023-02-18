@@ -1,4 +1,4 @@
-export const BackButton = (props: {
+const BackButton = (props: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
@@ -10,3 +10,5 @@ export const BackButton = (props: {
     </div>
   );
 };
+
+export default BackButton;

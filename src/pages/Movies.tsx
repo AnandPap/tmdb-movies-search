@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../apis/fetchMovies";
 import { MovieCover } from "../components/MovieCover";
-import { ValidationMessage } from "../components/reusable/ValidationMessage";
+import ValidationMessage from "../components/reusable/components/ValidationMessage";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 
 export type array = {

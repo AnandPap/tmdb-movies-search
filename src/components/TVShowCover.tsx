@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTVShow } from "../apis/fetchTVShows";
 import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
-import SpinnerGIF from "./reusable/SpinnerGIF";
+import SpinnerGIF from "./reusable/components/SpinnerGIF";
 
 export type setTVShowDetailesType = React.Dispatch<
   React.SetStateAction<{

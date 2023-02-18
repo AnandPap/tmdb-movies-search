@@ -4,26 +4,8 @@
   box-sizing: border-box;
   color: white;
 }
-
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  --small-font: 1.25rem;
-  --medium-font: 1.5rem;
-  --large-font: 2rem;
-  --x-large-font: 3rem;
-}
-
-body {
-  margin: 1rem 3rem;
-  background-color: rgb(40, 40, 40);
-}
-
 p {
   margin: 0;
-}
-
-.search-form {
-  margin: 0 1rem;
 }
 
 input:-webkit-autofill,
@@ -41,35 +23,56 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
-.buttons-container {
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  --small-font: 1.25rem;
+  --medium-font: 1.5rem;
+  --large-font: 2rem;
+  --x-large-font: 3rem;
+}
+
+body {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.dark {
+  background-color: rgb(40, 40, 40);
+}
+.light {
+  background-color: whitesmoke;
+}
+
+.search-form {
+  padding: 1rem;
+}
+.search-form-buttons {
   display: flex;
 }
 .change-page-buttons {
   flex-grow: 1;
 }
-
-.change-page-button {
-  border-radius: 8px;
+.change-page-buttons > button {
+  border-radius: 0.5rem;
   background-color: transparent;
   border: none;
   padding: 1rem 1.5rem;
   font-size: var(--small-font);
   font-weight: 600;
   cursor: pointer;
-  margin: 0.5rem 0.5rem;
+  margin-right: 0.5rem;
 }
-.change-page-button:hover,
-.rating-wrapper:hover {
+.change-page-buttons > button:hover,
+.change-page-buttons > button:hover {
   transition: background-color linear 0.15s;
   background-color: rgb(60, 60, 60);
 }
-
-.selected-button {
+.change-page-buttons > .selected-button {
   background-color: rgb(125, 125, 125);
   box-shadow: 1px 1px 5px rgb(255, 240, 75);
   color: white;
 }
-.selected-button:hover {
+.change-page-buttons > .selected-button:hover {
   background-color: rgb(125, 125, 125);
 }
 
@@ -123,8 +126,7 @@ select:-webkit-autofill:focus {
   color: black;
 }
 
-.details-page-movie,
-.details-page-tvshow {
+.details-page {
   margin: 0 3rem;
   width: fit-content;
 }
@@ -136,7 +138,7 @@ select:-webkit-autofill:focus {
 .title-wrapper {
   flex-grow: 1;
 }
-.title {
+.title-wrapper > h1 {
   max-width: 300px;
 }
 .details-image-trailer {
@@ -177,6 +179,7 @@ select:-webkit-autofill:focus {
   height: 300px;
   max-height: 300px;
   margin: 0 auto;
+  border-radius: 0.5rem;
 }
 
 .movie-title,
@@ -184,61 +187,6 @@ select:-webkit-autofill:focus {
   text-align: center;
   color: inherit;
   min-height: 1rem;
-}
-
-.validation-messages {
-  text-align: center;
-  opacity: 0.6;
-  font-size: var(--x-large-font);
-  line-height: 1.1;
-  font-weight: 600;
-}
-
-.back-button {
-  border-radius: 8px;
-  background-color: transparent;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: var(--medium-font);
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color ease 0.25s;
-  margin: 1.5rem 0rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.back-button:hover {
-  background-color: rgb(60, 60, 60);
-  cursor: pointer;
-}
-.back-button-arrow {
-  border: solid white;
-  border-width: 0 4px 4px 0;
-  padding: 3.5px;
-  position: relative;
-  bottom: 0px;
-  transform: rotate(45deg);
-  -webkit-transform: rotate(135deg);
-}
-.back-button-text {
-  margin: 0 5px;
-}
-
-.spinner-wrapper {
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.spinner-wrapper > img {
-  width: 50px;
-}
-
-.dark-mode-button {
-  width: 100px;
-  align-self: center;
-  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
@@ -255,10 +203,10 @@ select:-webkit-autofill:focus {
   .search-bar {
     font-size: var(--small-font);
   }
-  .buttons-container {
+  .search-form-buttons {
     justify-content: center;
   }
-  .change-page-button {
+  .change-page-buttons > button {
     padding: 0.5rem 1rem;
   }
   .validation-messages {

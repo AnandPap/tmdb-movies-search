@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
-import { BackButton } from "../components/reusable/BackButton";
+import BackButton from "../components/reusable/components/BackButton";
 import star from "../assets/star.png";
 
 export type setMovieDetailesType = React.Dispatch<
@@ -34,7 +34,7 @@ export const MovieDetails = (props: { movieID: number }) => {
   }, [props.movieID]);
 
   return (
-    <div className="details-page-movie">
+    <div className="details-page">
       <BackButton onClick={() => navigate(-1)} />
       {movieDetails.trailer ? (
         <iframe
@@ -54,7 +54,7 @@ export const MovieDetails = (props: { movieID: number }) => {
       )}
       <div className="title-and-rating-wrapper">
         <div className="title-wrapper">
-          <h1 className="title">{movieDetails.title}</h1>
+          <h1>{movieDetails.title}</h1>
         </div>
         <div className="rating-wrapper">
           <p>Rating: </p>
