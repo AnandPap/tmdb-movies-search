@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTVShow } from "../apis/fetchTVShows";
 import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
-import spinner from "../assets/spinner.gif";
+import SpinnerGIF from "./reusable/SpinnerGIF";
 
 export type setTVShowDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -43,11 +43,7 @@ export const TVShowCover = (props: { tvshowID: number }) => {
       }}
     >
       {loading ? (
-        <img
-          className="cover-spinner-gif"
-          src={spinner}
-          alt="Picture is loading"
-        />
+        <SpinnerGIF />
       ) : tvshowDetails.image ? (
         <img
           className="cover-image"

@@ -183,6 +183,7 @@ select:-webkit-autofill:focus {
 .tvshow-title {
   text-align: center;
   color: inherit;
+  min-height: 1rem;
 }
 
 .validation-messages {
@@ -224,8 +225,14 @@ select:-webkit-autofill:focus {
   margin: 0 5px;
 }
 
-.cover-spinner-gif {
+.spinner-wrapper {
   height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner-wrapper > img {
+  width: 50px;
 }
 
 .dark-mode-button {

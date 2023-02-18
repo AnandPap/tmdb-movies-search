@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchMovie } from "../apis/fetchMovies";
 import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
-import spinner from "../assets/spinner.gif";
+import SpinnerGIF from "./reusable/SpinnerGIF";
 
 export type setMovieDetailesType = React.Dispatch<
   React.SetStateAction<{
@@ -43,11 +43,7 @@ export const MovieCover = (props: { movieID: number }) => {
       }}
     >
       {loading ? (
-        <img
-          className="cover-spinner-gif"
-          src={spinner}
-          alt="Picture is loading"
-        />
+        <SpinnerGIF />
       ) : movieDetails.image ? (
         <img
           className="cover-image"
