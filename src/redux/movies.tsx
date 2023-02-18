@@ -26,11 +26,11 @@ export const moviesSlice = createSlice({
     setSelectedMovieID: (state, action: PayloadAction<number>) => {
       state.selectedMovieID = action.payload;
     },
-    setLoading: (state, action) => {
+    setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    setDarkMode: (state) => {
-      state.darkMode = !state.darkMode;
+    setDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.darkMode = action.payload;
     },
   },
 });

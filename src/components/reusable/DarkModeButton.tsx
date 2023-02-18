@@ -10,30 +10,34 @@ const DarkModeButton = () => {
   const lottieRef = useRef<any>();
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
-  const speed = 5;
+  let switchAudio = new Audio(switchSound);
+  const animationSpeed = 10;
+  const startingFrame = 20;
+  const endingFrame = 225;
+  const durationInFrames = endingFrame - startingFrame;
+  const frameMultiplier = lottieRef.current?.animationItem.frameMult;
 
   useEffect(() => {
     if (clicked) {
-      lottieRef.current.setSpeed(speed);
-      let audio = new Audio(switchSound);
-      audio.play();
+      lottieRef.current.setSpeed(animationSpeed);
+      switchAudio.play();
       if (darkMode) {
         lottieRef.current.setDirection(-1);
-        lottieRef.current.goToAndPlay(220, true);
+        lottieRef.current.goToAndPlay(endingFrame, true);
         setTimeout(() => {
-          lottieRef.current.goToAndStop(20, true);
+          lottieRef.current.goToAndStop(startingFrame, true);
           setClicked(false);
-          dispatch(setDarkMode());
-        }, 200 / lottieRef.current.animationItem.frameMult / speed);
+          dispatch(setDarkMode(false));
+        }, durationInFrames / frameMultiplier / animationSpeed);
       } else {
-        lottieRef.current.goToAndPlay(20, true);
+        lottieRef.current.goToAndPlay(startingFrame, true);
         setTimeout(() => {
-          lottieRef.current.goToAndStop(220, true);
+          lottieRef.current.goToAndStop(endingFrame, true);
           setClicked(false);
-          dispatch(setDarkMode());
-        }, 200 / lottieRef.current.animationItem.frameMult / speed);
+          dispatch(setDarkMode(true));
+        }, durationInFrames / frameMultiplier / animationSpeed);
       }
-    } else if (darkMode) lottieRef.current.goToAndStop(220, true);
+    } else if (darkMode) lottieRef.current.goToAndStop(225, true);
   }, [clicked]);
 
   return (
