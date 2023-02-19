@@ -54,3 +54,9 @@
 .back-button-text {
   margin: 0 5px;
 }
+
+@media only screen and (max-width: 600px) {
+  .validation-messages {
+    font-size: var(--large-font);
+  }
+}

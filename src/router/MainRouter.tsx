@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Movies } from "../pages/Movies";
 import ValidationMessage from "../components/reusable/components/ValidationMessage";
 import { TVShows } from "../pages/TVShows";
-import { SearchForm } from "../components/SearchForm";
+import { MainPage } from "../pages/MainPage";
 import { useAppSelector } from "../redux/hooks";
 import { TVShowDetails } from "../pages/TVShowDetails";
 import { MovieDetails } from "../pages/MovieDetails";
@@ -14,7 +14,7 @@ const MainRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SearchForm />}>
+        <Route path="/" element={<MainPage />}>
           <Route path="/movies" element={<Movies />} />
           <Route path="/tvshows" element={<TVShows />} />
         </Route>
