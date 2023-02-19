@@ -16,7 +16,8 @@ const LottieDarkModeSwitch = () => {
   const moonFrame = 180;
 
   useEffect(() => {
-    lottieRef.current.goToAndStop(moonFrame, true);
+    if (darkMode) lottieRef.current.goToAndStop(moonFrame, true);
+    else lottieRef.current.goToAndStop(sunFrame, true);
   }, []);
 
   const switchDarkMode = (
