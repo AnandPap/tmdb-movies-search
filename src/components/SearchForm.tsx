@@ -78,14 +78,14 @@ export const SearchForm = () => {
         <input
           id="search"
           type="text"
-          className={`search-bar  ${darkMode ? "light" : "light2"}`}
+          className={`search-bar ${darkMode ? null : "input-light"}`}
           value={inputText}
           placeholder="Search movies"
           onChange={(e) => {
             setInputText(e.target.value);
           }}
         />
-        <img src={searchIcon} alt="" className="search-icon" />
+        <img src={searchIcon} alt="Search icon" className="search-icon" />
       </div>
     </form>
   );

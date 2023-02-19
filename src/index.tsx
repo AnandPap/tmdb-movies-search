@@ -5,6 +5,7 @@ import { Provider } from "react-redux/es/exports";
 import MainRouter from "./router/MainRouter";
 import "./styles/index.css";
 import "./styles/reusable.css";
+import "./styles/search-form.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
