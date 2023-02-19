@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { setSearchTerm, setLoading } from "../redux/movies";
+import { setSearchTerm, setLoading, setCurrentPage } from "../redux/movies";
 import { useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
 import LottieDarkModeSwitch from "./reusable/components/LottieDarkModeSwitch";
@@ -8,6 +8,7 @@ import LottieDarkModeSwitch from "./reusable/components/LottieDarkModeSwitch";
 export const SearchForm = () => {
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const currentPage = useAppSelector((state) => state.movies.currentPage);
   const [inputText, setInputText] = useState(searchTerm);
   const [timerID, setTimerID] = useState(-1);
   const dispatch = useAppDispatch();
@@ -33,6 +34,14 @@ export const SearchForm = () => {
     }
   };
 
+  const setPage = (pageName: string) => {
+    if (currentPage !== `${pageName}`) {
+      navigate(`/${pageName}`);
+      dispatch(setLoading(true));
+      dispatch(setCurrentPage(`${pageName}`));
+    }
+  };
+
   return (
     <form
       // autoComplete="off"
@@ -43,29 +52,19 @@ export const SearchForm = () => {
         <div className="change-page-buttons">
           <button
             className={`${
-              location.pathname === "/movies" ? "selected-button" : null
+              currentPage === "movies" ? "selected-button" : null
             } ${darkMode ? "dark" : "light"}`}
             type="button"
-            onClick={() => {
-              if (location.pathname !== "/movies") {
-                navigate("/movies");
-                dispatch(setLoading(true));
-              }
-            }}
+            onClick={() => setPage("movies")}
           >
             Movies
           </button>
           <button
             className={`${
-              location.pathname === "/tvshows" ? "selected-button" : null
+              currentPage === "tvshows" ? "selected-button" : null
             } ${darkMode ? "dark" : "light"}`}
             type="button"
-            onClick={() => {
-              if (location.pathname !== "/tvshows") {
-                navigate("/tvshows");
-                dispatch(setLoading(true));
-              }
-            }}
+            onClick={() => setPage("tvshows")}
           >
             TV Shows
           </button>

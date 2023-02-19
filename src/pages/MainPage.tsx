@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { SearchForm } from "../components/SearchForm";
+import { setCurrentPage } from "../redux/movies";
 
 export const MainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const currentPage = useAppSelector((state) => state.movies.currentPage);
 
   useEffect(() => {
-    {
-      location.pathname === "/"
-        ? navigate("/tvshows", { replace: true })
-        : null;
+    if (currentPage !== "movies") {
+      dispatch(setCurrentPage("tvshows"));
+      navigate("/tvshows", { replace: true });
     }
   }, []);
 
