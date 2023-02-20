@@ -24,6 +24,7 @@ select:-webkit-autofill:focus {
 input::placeholder {
   user-select: none;
 }
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   --small-font: 1.25rem;
@@ -46,103 +47,6 @@ body {
   height: 100%;
 }
 
-.main-page {
-  height: 100%;
-  min-height: 100vh;
-  padding-bottom: 1rem;
-}
-.movies-container,
-.tvshows-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem 2rem;
-}
-.main-page-movie,
-.main-page-tvshow {
-  padding: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.25s ease 0.05s;
-  width: 100%;
-  max-width: 300px;
-  justify-self: center;
-  border-radius: 0.5rem;
-  background-color: rgb(60, 60, 60);
-  cursor: pointer;
-}
-.main-page-movie:hover,
-.main-page-tvshow:hover {
-  box-shadow: 0px 0px 25px grey;
-  background-color: rgb(250, 250, 250);
-  border-radius: 1.25rem;
-  transform: scale(1.01);
-  color: black;
-}
-
-.details-page {
-  margin: 0 3rem;
-  width: fit-content;
-}
-.title-and-rating-wrapper {
-  display: flex;
-  margin-right: 15px;
-  max-width: 100%;
-}
-.title-wrapper {
-  flex-grow: 1;
-}
-.title-wrapper > h1 {
-  max-width: 300px;
-}
-.details-image-trailer {
-  width: 100%;
-  max-width: 500px;
-  height: 400px;
-}
-.description {
-  max-width: 500px;
-  margin-left: 0.75rem;
-}
-.rating-wrapper {
-  display: flex;
-  width: fit-content;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  height: fit-content;
-  align-self: center;
-  transition: background-color 0.25s linear;
-}
-.star-icon {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  bottom: 3px;
-  margin: 0 5px;
-}
-.rating {
-  font-weight: 600;
-  font-size: var(--medium-font);
-}
-
-.cover-image {
-  width: 100%;
-  max-width: 300px;
-  height: 300px;
-  max-height: 300px;
-  margin: 0 auto;
-  border-radius: 0.5rem;
-}
-
-.movie-title,
-.tvshow-title {
-  text-align: center;
-  color: inherit;
-  min-height: 1rem;
-}
-
 .dark {
   background-color: var(--very-heavy-gray-background-color);
   color: white;
@@ -152,19 +56,11 @@ body {
   color: black;
 }
 
-@media only screen and (max-width: 600px) {
-  .main-page {
-  }
-  .movies-container,
-  .tvshows-container {
-    padding: 0;
-    margin-bottom: 0.5rem;
-  }
-  .details-page-movie,
-  .details-page-tvshow {
-    margin: 0 1.5rem;
-  }
-  .details-image-trailer {
-    height: 300px;
-  }
+.cover-image {
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
 }
