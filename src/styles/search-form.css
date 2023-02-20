@@ -1,5 +1,4 @@
 .search-form {
-  padding: 1rem;
 }
 .search-form-buttons {
   display: flex;
@@ -14,18 +13,18 @@
   border-radius: 0.5rem;
   border: none;
   padding: 1rem 2rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   cursor: pointer;
 }
 .change-page-buttons > button:hover {
   transition: all 0.15s ease 0.05s;
   background-color: var(--heavy-gray-background-color);
-  box-shadow: 1px 1px 6px -2px gold;
+  box-shadow: 1px 1px 5px -2px gold;
 }
 .change-page-buttons > .selected-button,
 .change-page-buttons > button:hover.selected-button {
   background-color: var(--medium-gray-background-color);
-  box-shadow: 1px 1px 6px -2px gold;
+  box-shadow: 1px 1px 5px -2px gold;
   color: white;
 }
 .change-page-buttons > button {
@@ -38,8 +37,8 @@
 .search-bar {
   width: 100%;
   font-size: var(--medium-font);
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  margin: 1.5rem 0;
   border-radius: 0.5rem;
   border: none;
   color: black;
@@ -47,7 +46,7 @@
 .search-icon {
   position: absolute;
   width: 25px;
-  top: 25px;
+  top: 34px;
   right: 10px;
 }
 
@@ -66,7 +65,15 @@
   color: var(--heavy-gray-background-color);
 }
 
-.input-light {
+.search-bar {
+  outline: 1px solid black;
+}
+.search-bar:focus {
+  box-shadow: 1px 1px 5px lightcoral;
+  outline: none;
+}
+
+.search-bar.input-light {
   box-shadow: 0px 0px 4px -2px black;
 }
 .input-light:focus {

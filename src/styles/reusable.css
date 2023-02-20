@@ -33,14 +33,23 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color ease 0.25s;
-  margin: 1.5rem 0rem;
   display: flex;
+  margin-bottom: 1rem;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 .back-button:hover {
-  background-color: rgb(60, 60, 60);
+  background-color: var(--heavy-gray-background-color);
   cursor: pointer;
+}
+.back-button.light {
+  transition: all 0.15s ease 0.05s;
+  background-color: var(--medium-heavy-gray-background-color);
+}
+.back-button.light:hover {
+  transition: all 0.15s ease 0.05s;
+  background-color: var(--medium-gray-background-color);
 }
 .back-button-arrow {
   border: solid white;

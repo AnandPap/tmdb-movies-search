@@ -40,6 +40,10 @@ export const ResultsPage = () => {
       {searchTerm ? (
         results && results.length > 0 ? (
           results
+            .filter((result) => {
+              if (results.length < 5) return true;
+              else return result.poster_path || result.backdrop_path;
+            })
             .slice(0, showItems)
             .map((result, i) => (
               <Cover

@@ -32,6 +32,8 @@ export const fetchMovie = async (id: number, type: string) => {
       }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
     .then((res) => {
+      console.log(res.data);
+
       let title =
         res.data.original_title ||
         res.data.title ||

@@ -6,7 +6,7 @@ import MainRouter from "./router/MainRouter";
 import "./styles/index.css";
 import "./styles/reusable.css";
 import "./styles/search-form.css";
-import "./styles/main-page.css";
+import "./styles/home-page.css";
 import "./styles/details-page.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

@@ -1,17 +1,20 @@
 .details-page {
-  margin: 0 3rem;
-  width: fit-content;
+  height: 100%;
+  min-height: 100vh;
+  padding: 1rem 1.5rem;
 }
 .title-and-rating-wrapper {
-  display: flex;
   margin-right: 15px;
-  max-width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
 }
 .title-wrapper {
   flex-grow: 1;
+  width: fit-content;
 }
 .title-wrapper > h1 {
-  max-width: 300px;
+  margin: 0;
 }
 .details-image-trailer {
   width: 100%;
@@ -24,14 +27,23 @@
 }
 .rating-wrapper {
   display: flex;
-  width: fit-content;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   align-items: center;
   cursor: pointer;
-  height: fit-content;
-  align-self: center;
-  transition: background-color 0.25s linear;
+  transition: background-color 0.15s linear;
+}
+.rating-wrapper:hover {
+  background-color: var(--medium-heavy-gray-background-color);
+}
+.rating-wrapper.light {
+  background-color: var(--light-gray-background-color);
+}
+.rating-wrapper.light:hover {
+  background-color: var(--light-medium-gray-background-color);
+}
+.rating-wrapper > p {
+  margin: 0;
 }
 .star-icon {
   position: relative;

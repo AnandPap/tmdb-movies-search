@@ -6,6 +6,7 @@ import BackButton from "../reusable-components/BackButton";
 import star from "../assets/star.png";
 import { useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../reusable-components/ValidationMessage";
+import CoverImage from "../components/CoverImage";
 
 export type detailsType =
   | {
@@ -28,6 +29,7 @@ export const DetailsPage = (props: { id: number }) => {
     trailer: "",
   });
   const currentPage = useAppSelector((state) => state.movies.currentPage);
+  const darkMode = useAppSelector((state) => state.movies.darkMode);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -41,7 +43,7 @@ export const DetailsPage = (props: { id: number }) => {
   }, [props.id]);
 
   return (
-    <div className="details-page">
+    <div className={`details-page ${darkMode ? "dark" : "light"}`}>
       <BackButton onClick={() => navigate(-1)} />
       {details ? (
         <>
@@ -53,10 +55,10 @@ export const DetailsPage = (props: { id: number }) => {
               allowFullScreen
             ></iframe>
           ) : details.image ? (
-            <img
-              className="cover-image"
-              src={details.image}
-              alt="Cover Image"
+            <CoverImage
+              loading={false}
+              darkMode={darkMode}
+              imagePath={details.image}
             />
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
@@ -65,7 +67,7 @@ export const DetailsPage = (props: { id: number }) => {
             <div className="title-wrapper">
               <h1>{details.title}</h1>
             </div>
-            <div className="rating-wrapper">
+            <div className={`rating-wrapper ${darkMode ? "dark" : "light"}`}>
               <p>Rating: </p>
               {+parseFloat(details.rating).toFixed(1) === 0 ? (
                 <p>Not rated</p>
@@ -80,9 +82,11 @@ export const DetailsPage = (props: { id: number }) => {
               )}
             </div>
           </div>
-          <h3>
-            {`${currentPage === "movies" ? "Movie" : "TVShow"}`} Overview:{" "}
-          </h3>
+          {details.description !== "No Description" ? (
+            <h3>
+              {`${currentPage === "movies" ? "Movie" : "TVShow"}`} Overview:{" "}
+            </h3>
+          ) : null}
           <p className="description">{details.description}</p>
         </>
       ) : (

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { setSelectedMovieID } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import noImage from "../assets/no-image.png";
-import SpinnerGIF from "../reusable-components/SpinnerGIF";
+import CoverTitle from "./CoverTitle";
+import CoverImage from "./CoverImage";
 
 export const Cover = (props: {
   title: string;
@@ -11,29 +11,24 @@ export const Cover = (props: {
   type: string;
 }) => {
   const loading = useAppSelector((state) => state.movies.loading);
+  const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
     <div
-      className="main-page-cover"
+      className={`main-page-cover ${darkMode ? "dark" : "light"}`}
       onClick={() => {
         navigate(`/${props.type}/details/${props.id}`);
         dispatch(setSelectedMovieID(props.id));
       }}
     >
-      {loading ? (
-        <SpinnerGIF />
-      ) : props.imagePath ? (
-        <img
-          className="cover-image"
-          src={`https://image.tmdb.org/t/p/original${props.imagePath}`}
-          alt="Cover Image"
-        />
-      ) : (
-        <img className="cover-image" src={noImage} alt="No Image" />
-      )}
-      <h2>{props.title ? props.title : "No title"}</h2>
+      <CoverImage
+        loading={loading}
+        darkMode={darkMode}
+        imagePath={`https://image.tmdb.org/t/p/original${props.imagePath}`}
+      />
+      <CoverTitle className="title-wrapper" title={props.title} />
     </div>
   );
 };
