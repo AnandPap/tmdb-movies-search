@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setMovieDetailesType } from "../components/MovieCover";
-import { array } from "../pages/Movies";
+import { setDetailesType } from "../components/Cover";
+import { array } from "../pages/SearchResults";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
@@ -14,7 +14,7 @@ export type videoObject = {
 
 export const fetchMovies = async (
   searchTerm: string,
-  setMovies: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
+  setResults: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
   dispatch: ThunkDispatch<
     {
       movies: MoviesState;
@@ -31,13 +31,13 @@ export const fetchMovies = async (
       }&query=${searchTerm}`
     )
     .then((res) => {
-      setMovies(res.data.results);
+      setResults(res.data.results);
       setTimeout(() => {
         dispatch(setLoading(false));
       }, 500);
     })
     .catch((err) => {
-      setMovies(undefined);
+      setResults(undefined);
       setTimeout(() => {
         dispatch(setLoading(false));
       }, 500);
@@ -45,14 +45,11 @@ export const fetchMovies = async (
     });
 };
 
-export const fetchMovie = async (
-  movieID: number,
-  setMovieDetails: setMovieDetailesType
-) => {
+export const fetchMovie = async (id: number, setDetails: setDetailesType) => {
   // function getMovieImageURL(res) {}
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${
         import.meta.env.VITE_API_KEY
       }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
@@ -83,7 +80,7 @@ export const fetchMovie = async (
         ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
         : "";
 
-      setMovieDetails((s) => ({
+      setDetails((s) => ({
         ...s,
         title: movieTitle,
         description: movieDescription,

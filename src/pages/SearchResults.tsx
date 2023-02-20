@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { fetchTVShows } from "../apis/fetchTVShows";
 import { fetchMovies } from "../apis/fetchMovies";
-import { MovieCover } from "../components/MovieCover";
+import { Cover } from "../components/Cover";
 import ValidationMessage from "../components/reusable/components/ValidationMessage";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 
@@ -10,23 +11,30 @@ export type array = {
 
 const showItems = 10;
 
-export const Movies = () => {
-  const [movies, setMovies] = useState<array[] | null | undefined>([]);
+export const SearchResults = () => {
+  const [results, setResults] = useState<array[] | null | undefined>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
+  const currentPage = useAppSelector((state) => state.movies.currentPage);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (searchTerm.length > 2) fetchMovies(searchTerm, setMovies, dispatch);
-  }, [searchTerm]);
+    if (searchTerm.length > 2) {
+      if (currentPage === "tvshows")
+        fetchTVShows(searchTerm, setResults, dispatch);
+      else fetchMovies(searchTerm, setResults, dispatch);
+    }
+  }, [searchTerm, currentPage]);
 
   return (
-    <div className="movies-container">
+    <div className="content-container">
       {searchTerm ? (
-        movies && movies.length > 0 ? (
-          movies
+        results && results.length > 0 ? (
+          results
             .slice(0, showItems)
-            .map((movie, i) => <MovieCover key={i} movieID={movie.id} />)
+            .map((result, i) => (
+              <Cover key={i} id={result.id} type={currentPage} />
+            ))
         ) : loading ? null : (
           <ValidationMessage text="No results" />
         )

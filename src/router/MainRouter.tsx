@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Movies } from "../pages/Movies";
 import ValidationMessage from "../components/reusable/components/ValidationMessage";
-import { TVShows } from "../pages/TVShows";
+import { SearchResults } from "../pages/SearchResults";
 import { MainPage } from "../pages/MainPage";
 import { useAppSelector } from "../redux/hooks";
 import { TVShowDetails } from "../pages/TVShowDetails";
@@ -15,15 +14,15 @@ const MainRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />}>
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/tvshows" element={<TVShows />} />
+          <Route path="/movies" element={<SearchResults />} />
+          <Route path="/tvshows" element={<SearchResults />} />
         </Route>
         <Route
-          path="/movies/movie-details/:id"
+          path="/movies/details/:id"
           element={<MovieDetails movieID={selectedMovieID} />}
         />
         <Route
-          path="/tvshows/tvshow-details/:id"
+          path="/tvshows/details/:id"
           element={<TVShowDetails tvshowID={selectedMovieID} />}
         />
         <Route path="*" element={<ValidationMessage text="Page not found" />} />

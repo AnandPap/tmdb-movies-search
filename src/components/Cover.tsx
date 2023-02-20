@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchTVShow } from "../apis/fetchTVShows";
+import { fetchMovie } from "../apis/fetchMovies";
 import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
 import SpinnerGIF from "./reusable/components/SpinnerGIF";
 
-export type setTVShowDetailesType = React.Dispatch<
+export type setDetailesType = React.Dispatch<
   React.SetStateAction<{
     title: string;
     description: string;
@@ -17,8 +18,8 @@ export type setTVShowDetailesType = React.Dispatch<
   }>
 >;
 
-export const TVShowCover = (props: { tvshowID: number }) => {
-  const [tvshowDetails, setTVShowDetails] = useState({
+export const Cover = (props: { id: number; type: string }) => {
+  const [details, setDetails] = useState({
     title: "",
     description: "",
     realeseDate: "",
@@ -31,29 +32,26 @@ export const TVShowCover = (props: { tvshowID: number }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchTVShow(props.tvshowID, setTVShowDetails);
-  }, [props.tvshowID]);
+    if (props.type === "movies") fetchMovie(props.id, setDetails);
+    else fetchTVShow(props.id, setDetails);
+  }, [props.id]);
 
   return (
     <div
-      className="main-page-tvshow"
+      className="main-page-cover"
       onClick={() => {
-        navigate(`/tvshows/tvshow-details/${props.tvshowID}`);
-        dispatch(setSelectedMovieID(props.tvshowID));
+        navigate(`/${props.type}/details/${props.id}`);
+        dispatch(setSelectedMovieID(props.id));
       }}
     >
       {loading ? (
         <SpinnerGIF />
-      ) : tvshowDetails.image ? (
-        <img
-          className="cover-image"
-          src={tvshowDetails.image}
-          alt="TVShow Cover"
-        />
+      ) : details.image ? (
+        <img className="cover-image" src={details.image} alt="Cover Image" />
       ) : (
         <img className="cover-image" src={noImage} alt="No Image" />
       )}
-      <h2 className="tvshow-title">{tvshowDetails.title}</h2>
+      <h2>{details.title}</h2>
     </div>
   );
 };
