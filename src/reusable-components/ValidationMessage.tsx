@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 
 const ValidationMessage = (props: { text: string }) => {
   const darkMode = useAppSelector((state) => state.movies.darkMode);

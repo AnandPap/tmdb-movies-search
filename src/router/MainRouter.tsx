@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ValidationMessage from "../components/reusable/components/ValidationMessage";
+import ValidationMessage from "../reusable-components/ValidationMessage";
 import { ResultsPage } from "../pages/ResultsPage";
 import { HomePage } from "../pages/HomePage";
 import { useAppSelector } from "../redux/hooks";

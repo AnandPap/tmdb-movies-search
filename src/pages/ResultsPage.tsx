@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../apis/fetchMovies";
 import { Cover } from "../components/Cover";
-import ValidationMessage from "../components/reusable/components/ValidationMessage";
+import ValidationMessage from "../reusable-components/ValidationMessage";
+import { setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 
 export type array = {
   id: number;
 };
 
-const showItems = 10;
-
 export const ResultsPage = () => {
-  const [results, setResults] = useState<array[] | null | undefined>([]);
+  const [results, setResults] = useState<array[]>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
   const currentPage = useAppSelector((state) => state.movies.currentPage);
   const dispatch = useAppDispatch();
+  const showItems = 10;
+
+  const fetchMoviesData = async () => {
+    let res = await fetchMovies(searchTerm, currentPage);
+    setResults(res);
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 500);
+  };
 
   useEffect(() => {
-    if (searchTerm.length > 2)
-      fetchMovies(searchTerm, currentPage, setResults, dispatch);
+    if (searchTerm.length > 2) fetchMoviesData();
   }, [searchTerm, currentPage]);
 
   return (

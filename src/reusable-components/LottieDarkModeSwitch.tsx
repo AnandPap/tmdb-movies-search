@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
-import { setDarkMode } from "../../../redux/movies";
-import darkModeButton from "../assets/dark-mode-button1.json";
-import switchSound from "../assets/switch-sound.mp3";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { setDarkMode } from "../redux/movies";
+import darkModeButton from "./assets/dark-mode-button1.json";
+import switchSound from "./assets/switch-sound.mp3";
 
 const LottieDarkModeSwitch = () => {
   const [timerID, setTimerID] = useState(-1);

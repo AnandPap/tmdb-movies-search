@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchTerm, setLoading, setCurrentPage } from "../redux/movies";
 import { useNavigate } from "react-router-dom";
 import searchIcon from "../assets/search.png";
-import LottieDarkModeSwitch from "./reusable/components/LottieDarkModeSwitch";
+import LottieDarkModeSwitch from "../reusable-components/LottieDarkModeSwitch";
 
 export const SearchForm = () => {
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);

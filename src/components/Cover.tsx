@@ -1,24 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchMovie } from "../apis/fetchMovies";
 import { setSelectedMovieID } from "../redux/movies";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import noImage from "../assets/no-image.png";
-import SpinnerGIF from "./reusable/components/SpinnerGIF";
-
-export type setDetailsType = React.Dispatch<
-  React.SetStateAction<{
-    title: string;
-    description: string;
-    realeseDate: string;
-    rating: string;
-    image: string;
-    trailer: string;
-  }>
->;
+import SpinnerGIF from "../reusable-components/SpinnerGIF";
+import { detailsType } from "../pages/DetailsPage";
 
 export const Cover = (props: { id: number; type: string }) => {
-  const [details, setDetails] = useState({
+  const [details, setDetails] = useState<detailsType>({
     title: "",
     description: "",
     realeseDate: "",
@@ -30,8 +20,13 @@ export const Cover = (props: { id: number; type: string }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const fetchMovieData = async (id: number, currentPage: string) => {
+    let res = await fetchMovie(id, currentPage);
+    setDetails(res);
+  };
+
   useEffect(() => {
-    fetchMovie(props.id, props.type, setDetails);
+    fetchMovieData(props.id, props.type);
   }, [props.id]);
 
   return (
@@ -44,12 +39,12 @@ export const Cover = (props: { id: number; type: string }) => {
     >
       {loading ? (
         <SpinnerGIF />
-      ) : details.image ? (
+      ) : details?.image ? (
         <img className="cover-image" src={details.image} alt="Cover Image" />
       ) : (
         <img className="cover-image" src={noImage} alt="No Image" />
       )}
-      <h2>{details.title}</h2>
+      <h2>{details?.title}</h2>
     </div>
   );
 };

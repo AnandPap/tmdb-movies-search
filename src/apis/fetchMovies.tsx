@@ -1,58 +1,30 @@
 import axios from "axios";
-import { setDetailsType } from "../components/Cover";
-import { array } from "../pages/ResultsPage";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "@reduxjs/toolkit";
-import { Dispatch } from "react";
-import { MoviesState } from "../redux/movies";
-import { setLoading } from "../redux/movies";
+import { detailsType } from "../pages/DetailsPage";
 
 export type videoObject = {
   site: string;
   type: string;
 };
 
-export const fetchMovies = async (
-  searchTerm: string,
-  type: string,
-  setResults: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
-  dispatch: ThunkDispatch<
-    {
-      movies: MoviesState;
-    },
-    undefined,
-    AnyAction
-  > &
-    Dispatch<AnyAction>
-) => {
-  await axios
+export const fetchMovies = async (searchTerm: string, type: string) => {
+  return await axios
     .get(
       `https://api.themoviedb.org/3/search/${
         type === "movies" ? "movie" : "tv"
       }?api_key=${import.meta.env.VITE_API_KEY}&query=${searchTerm}`
     )
     .then((res) => {
-      setResults(res.data.results);
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 500);
+      return res.data.results;
     })
     .catch((err) => {
-      setResults(undefined);
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 500);
       console.log(err);
+      return undefined;
     });
 };
 
-export const fetchMovie = async (
-  id: number,
-  type: string,
-  setDetails: setDetailsType
-) => {
+export const fetchMovie = async (id: number, type: string) => {
   // function getMovieImageURL(res) {}
-  await axios
+  return await axios
     .get(
       `https://api.themoviedb.org/3/${
         type === "movies" ? "movie" : "tv"
@@ -92,16 +64,18 @@ export const fetchMovie = async (
         ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
         : "";
 
-      setDetails((s) => ({
-        ...s,
+      const returnObject: detailsType = {
         title: title,
         description: description,
         rating: rating,
         trailer: trailerURL,
         image: imageURL,
-      }));
+      };
+
+      return returnObject;
     })
     .catch((err) => {
       console.log(err);
+      return undefined;
     });
 };
