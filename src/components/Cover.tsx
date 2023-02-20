@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { fetchTVShow } from "../apis/fetchTVShows";
 import { fetchMovie } from "../apis/fetchMovies";
 import { setSelectedMovieID } from "../redux/movies";
 import noImage from "../assets/no-image.png";
 import SpinnerGIF from "./reusable/components/SpinnerGIF";
 
-export type setDetailesType = React.Dispatch<
+export type setDetailsType = React.Dispatch<
   React.SetStateAction<{
     title: string;
     description: string;
@@ -32,8 +31,7 @@ export const Cover = (props: { id: number; type: string }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.type === "movies") fetchMovie(props.id, setDetails);
-    else fetchTVShow(props.id, setDetails);
+    fetchMovie(props.id, props.type, setDetails);
   }, [props.id]);
 
   return (

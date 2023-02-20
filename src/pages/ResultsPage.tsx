@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { fetchTVShows } from "../apis/fetchTVShows";
 import { fetchMovies } from "../apis/fetchMovies";
 import { Cover } from "../components/Cover";
 import ValidationMessage from "../components/reusable/components/ValidationMessage";
@@ -11,7 +10,7 @@ export type array = {
 
 const showItems = 10;
 
-export const SearchResults = () => {
+export const ResultsPage = () => {
   const [results, setResults] = useState<array[] | null | undefined>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
@@ -19,11 +18,8 @@ export const SearchResults = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (searchTerm.length > 2) {
-      if (currentPage === "tvshows")
-        fetchTVShows(searchTerm, setResults, dispatch);
-      else fetchMovies(searchTerm, setResults, dispatch);
-    }
+    if (searchTerm.length > 2)
+      fetchMovies(searchTerm, currentPage, setResults, dispatch);
   }, [searchTerm, currentPage]);
 
   return (

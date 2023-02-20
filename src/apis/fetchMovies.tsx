@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setDetailesType } from "../components/Cover";
-import { array } from "../pages/SearchResults";
+import { setDetailsType } from "../components/Cover";
+import { array } from "../pages/ResultsPage";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
@@ -14,6 +14,7 @@ export type videoObject = {
 
 export const fetchMovies = async (
   searchTerm: string,
+  type: string,
   setResults: React.Dispatch<React.SetStateAction<array[] | null | undefined>>,
   dispatch: ThunkDispatch<
     {
@@ -26,9 +27,9 @@ export const fetchMovies = async (
 ) => {
   await axios
     .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&query=${searchTerm}`
+      `https://api.themoviedb.org/3/search/${
+        type === "movies" ? "movie" : "tv"
+      }?api_key=${import.meta.env.VITE_API_KEY}&query=${searchTerm}`
     )
     .then((res) => {
       setResults(res.data.results);
@@ -45,20 +46,31 @@ export const fetchMovies = async (
     });
 };
 
-export const fetchMovie = async (id: number, setDetails: setDetailesType) => {
+export const fetchMovie = async (
+  id: number,
+  type: string,
+  setDetails: setDetailsType
+) => {
   // function getMovieImageURL(res) {}
   await axios
     .get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${
+      `https://api.themoviedb.org/3/${
+        type === "movies" ? "movie" : "tv"
+      }/${id}?api_key=${
         import.meta.env.VITE_API_KEY
       }&language=en-US&append_to_response=videos,images&include_image_language=en,null`
     )
     .then((res) => {
-      let movieTitle = res.data.original_title || res.data.title || "No Title";
+      let title =
+        res.data.original_title ||
+        res.data.title ||
+        res.data.original_name ||
+        res.data.name ||
+        "No Title";
 
-      let movieDescription = res.data.overview || "No Description";
+      let description = res.data.overview || "No Description";
 
-      let movieRating = res.data.vote_average || "0";
+      let rating = res.data.vote_average || "0";
 
       let videosArray = res.data.videos.results;
       let indexOfTrailer = videosArray.findIndex((video: videoObject) => {
@@ -82,9 +94,9 @@ export const fetchMovie = async (id: number, setDetails: setDetailesType) => {
 
       setDetails((s) => ({
         ...s,
-        title: movieTitle,
-        description: movieDescription,
-        rating: movieRating,
+        title: title,
+        description: description,
+        rating: rating,
         trailer: trailerURL,
         image: imageURL,
       }));

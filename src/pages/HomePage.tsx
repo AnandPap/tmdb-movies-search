@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { SearchForm } from "../components/SearchForm";
 import { setCurrentPage } from "../redux/movies";
 
-export const MainPage = () => {
+export const HomePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const darkMode = useAppSelector((state) => state.movies.darkMode);
