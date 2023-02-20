@@ -7,6 +7,12 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 
 export type array = {
   id: number;
+  original_name: string;
+  original_title: string;
+  name: string;
+  title: string;
+  poster_path: string;
+  backdrop_path: string;
 };
 
 export const ResultsPage = () => {
@@ -18,7 +24,7 @@ export const ResultsPage = () => {
   const showItems = 10;
 
   const fetchMoviesData = async () => {
-    let res = await fetchMovies(searchTerm, currentPage);
+    const res = await fetchMovies(searchTerm, currentPage);
     setResults(res);
     setTimeout(() => {
       dispatch(setLoading(false));
@@ -36,7 +42,18 @@ export const ResultsPage = () => {
           results
             .slice(0, showItems)
             .map((result, i) => (
-              <Cover key={i} id={result.id} type={currentPage} />
+              <Cover
+                key={i}
+                id={result.id}
+                type={currentPage}
+                title={
+                  result.original_name ||
+                  result.original_title ||
+                  result.name ||
+                  result.title
+                }
+                imagePath={result.poster_path || result.backdrop_path}
+              />
             ))
         ) : loading ? null : (
           <ValidationMessage text="No results" />

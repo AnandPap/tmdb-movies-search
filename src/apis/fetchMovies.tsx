@@ -1,5 +1,4 @@
 import axios from "axios";
-import { detailsType } from "../pages/DetailsPage";
 
 export type videoObject = {
   site: string;
@@ -64,7 +63,7 @@ export const fetchMovie = async (id: number, type: string) => {
         ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
         : "";
 
-      const returnObject: detailsType = {
+      const returnObject = {
         title: title,
         description: description,
         rating: rating,

@@ -32,7 +32,7 @@ export const DetailsPage = (props: { id: number }) => {
   const { id } = useParams();
 
   const fetchMovieData = async (id: number, currentPage: string) => {
-    let res = await fetchMovie(id, currentPage);
+    const res = await fetchMovie(id, currentPage);
     setDetails(res);
   };
 
