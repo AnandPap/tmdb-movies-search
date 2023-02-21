@@ -128,7 +128,7 @@ export const DetailsPage = (props: { id: number }) => {
             )}
             {details.trailerURL ? (
               <iframe
-                className="details-image-trailer"
+                className="details-page-trailer"
                 src={details.trailerURL}
                 title="Video Player"
                 allowFullScreen

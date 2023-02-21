@@ -14,7 +14,7 @@ const initialState: MoviesState = {
   selectedMovieID: 0,
   loading: false,
   darkMode: true,
-  currentPage: "tvshows",
+  currentPage: "",
 };
 
 export const moviesSlice = createSlice({

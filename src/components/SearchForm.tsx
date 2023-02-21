@@ -36,7 +36,7 @@ export const SearchForm = () => {
 
   const setPage = (pageName: string) => {
     if (currentPage !== `${pageName}`) {
-      navigate(`/${pageName}`);
+      navigate(`/${pageName}`, { replace: true });
       dispatch(setLoading(true));
       dispatch(setCurrentPage(`${pageName}`));
     }
