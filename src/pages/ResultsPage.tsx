@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../apis/fetchMovies";
-import { Cover } from "../components/Cover";
-import ValidationMessage from "../reusable-components/ValidationMessage";
+import { Cover } from "../components/MainPageCover";
+import ValidationMessage from "../components-reusable/ValidationMessage";
 import { setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 

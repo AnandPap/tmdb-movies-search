@@ -57,6 +57,9 @@
   font-size: var(--medium-font);
 }
 
+.details-page-cover-image {
+}
+
 @media only screen and (max-width: 600px) {
   .details-page-movie,
   .details-page-tvshow {

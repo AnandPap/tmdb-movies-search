@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
-import BackButton from "../reusable-components/BackButton";
+import BackButton from "../components-reusable/BackButton";
 import star from "../assets/star.png";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import ValidationMessage from "../reusable-components/ValidationMessage";
+import ValidationMessage from "../components-reusable/ValidationMessage";
 import CoverImage from "../components/CoverImage";
 import { setLoading } from "../redux/movies";
 
@@ -115,22 +115,26 @@ export const DetailsPage = (props: { id: number }) => {
       />
       {loading ? null : details ? (
         <>
-          {details.trailerURL ? (
-            <iframe
-              className="details-image-trailer"
-              src={details.trailerURL}
-              title="Video Player"
-              allowFullScreen
-            ></iframe>
-          ) : details.imageURL ? (
-            <CoverImage
-              loading={loading}
-              darkMode={darkMode}
-              imagePath={details.imageURL}
-            />
-          ) : (
-            <img className="cover-image" src={noImage} alt="No Image" />
-          )}
+          <div className="">
+            {details.imageURL ? (
+              <CoverImage
+                className="details-page-cover-image"
+                loading={loading}
+                darkMode={darkMode}
+                imagePath={details.imageURL}
+              />
+            ) : (
+              <img className="cover-image" src={noImage} alt="No Image" />
+            )}
+            {details.trailerURL ? (
+              <iframe
+                className="details-image-trailer"
+                src={details.trailerURL}
+                title="Video Player"
+                allowFullScreen
+              ></iframe>
+            ) : null}
+          </div>
           <div className="title-and-rating-wrapper">
             <div className="title-wrapper">
               <h1>{details.title}</h1>

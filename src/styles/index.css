@@ -26,6 +26,7 @@ input::placeholder {
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  height: auto;
   --small-font: 1.25rem;
   --medium-font: 1.5rem;
   --large-font: 2rem;
@@ -37,7 +38,6 @@ input::placeholder {
   --medium-gray-background-color: hsl(0, 0%, 50%);
   --light-medium-gray-background-color: hsl(0, 0%, 60%);
   --light-gray-background-color: hsl(0, 0%, 70%);
-  height: auto;
 }
 body {
   margin: 0;

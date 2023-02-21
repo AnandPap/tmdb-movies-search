@@ -1,18 +1,24 @@
 import noImage from "../assets/no-image.png";
-import SpinnerGIF from "../reusable-components/SpinnerGIF";
+import SpinnerGIF from "../components-reusable/SpinnerGIF";
 
 type CoverImage = {
+  className?: string;
   loading: boolean;
   darkMode: boolean;
   imagePath: string;
 };
 
-const CoverImage = ({ loading, darkMode, imagePath }: CoverImage) => {
+const CoverImage = ({
+  className,
+  loading,
+  darkMode,
+  imagePath,
+}: CoverImage) => {
   return loading ? (
     <SpinnerGIF />
   ) : imagePath ? (
     <img
-      className={`cover-image ${darkMode ? "dark" : "light"}`}
+      className={`cover-image ${className} ${darkMode ? "dark" : "light"}`}
       src={imagePath}
       alt="Cover Image"
     />
