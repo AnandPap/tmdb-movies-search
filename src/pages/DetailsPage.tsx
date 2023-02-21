@@ -4,38 +4,101 @@ import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
 import BackButton from "../reusable-components/BackButton";
 import star from "../assets/star.png";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../reusable-components/ValidationMessage";
 import CoverImage from "../components/CoverImage";
+import { setLoading } from "../redux/movies";
 
-export type detailsType =
+type detailsType =
   | {
       title: string;
       description: string;
       realeseDate?: string;
       rating: string;
-      image: string;
-      trailer: string;
+      imageURL: string;
+      trailerURL: string;
     }
-  | undefined;
+  | undefined
+  | null;
+
+type dataType = {
+  original_title: string;
+  title: string;
+  original_name: string;
+  name: string;
+  overview: string;
+  vote_average: string;
+  videos: { results: [{ site: string; type: string; key: string }] };
+  images: Array<[]>;
+};
 
 export const DetailsPage = (props: { id: number }) => {
-  const [details, setDetails] = useState<detailsType>({
-    title: "",
-    description: "",
-    realeseDate: "",
-    rating: "",
-    image: "",
-    trailer: "",
-  });
+  const [details, setDetails] = useState<detailsType>(null);
   const currentPage = useAppSelector((state) => state.movies.currentPage);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const loading = useAppSelector((state) => state.movies.loading);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
 
+  const getTitle = (data: dataType) => {
+    return (
+      data.original_title ||
+      data.title ||
+      data.original_name ||
+      data.name ||
+      "No Title"
+    );
+  };
+  const getDescription = (data: dataType) => {
+    return data.overview || "No Description";
+  };
+  const getRating = (data: dataType) => {
+    return data.vote_average || "0";
+  };
+  const getTrailerURL = (data: dataType) => {
+    let videosArray = data.videos.results;
+    let indexOfTrailer = videosArray.findIndex((video) => {
+      return video.type === "Trailer" && video.site === "YouTube";
+    });
+    let trailerURL =
+      indexOfTrailer !== -1 && indexOfTrailer
+        ? `https://www.youtube.com/embed/${videosArray[indexOfTrailer].key}`
+        : "";
+    return trailerURL;
+  };
+  const getImageURL = (data: dataType) => {
+    let imageArray = [{ file_path: "" }];
+    for (let x in data.images) {
+      if (data.images[x].length > 0) {
+        imageArray = data.images[x];
+        break;
+      }
+    }
+    let imageURL =
+      imageArray.length > 0
+        ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
+        : "";
+    return imageURL;
+  };
+
   const fetchMovieData = async (id: number, currentPage: string) => {
-    const res = await fetchMovie(id, currentPage);
-    setDetails(res);
+    const data = await fetchMovie(id, currentPage);
+    console.log(data);
+    setDetails((s) => {
+      if (data)
+        return {
+          title: getTitle(data),
+          description: getDescription(data),
+          rating: getRating(data),
+          imageURL: getImageURL(data),
+          trailerURL: getTrailerURL(data),
+        };
+      else return undefined;
+    });
+    setTimeout(() => {
+      dispatch(setLoading(false));
+    }, 50);
   };
 
   useEffect(() => {
@@ -44,21 +107,26 @@ export const DetailsPage = (props: { id: number }) => {
 
   return (
     <div className={`details-page ${darkMode ? "dark" : "light"}`}>
-      <BackButton onClick={() => navigate(-1)} />
-      {details ? (
+      <BackButton
+        onClick={() => {
+          navigate(-1);
+          dispatch(setLoading(true));
+        }}
+      />
+      {loading ? null : details ? (
         <>
-          {details.trailer ? (
+          {details.trailerURL ? (
             <iframe
               className="details-image-trailer"
-              src={details.trailer}
+              src={details.trailerURL}
               title="Video Player"
               allowFullScreen
             ></iframe>
-          ) : details.image ? (
+          ) : details.imageURL ? (
             <CoverImage
-              loading={false}
+              loading={loading}
               darkMode={darkMode}
-              imagePath={details.image}
+              imagePath={details.imageURL}
             />
           ) : (
             <img className="cover-image" src={noImage} alt="No Image" />
@@ -84,7 +152,7 @@ export const DetailsPage = (props: { id: number }) => {
           </div>
           {details.description !== "No Description" ? (
             <h3>
-              {`${currentPage === "movies" ? "Movie" : "TVShow"}`} Overview:{" "}
+              {`${currentPage === "movies" ? "Movie" : "TVShow"}`} Overview:
             </h3>
           ) : null}
           <p className="description">{details.description}</p>

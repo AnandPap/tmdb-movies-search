@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { setSelectedMovieID } from "../redux/movies";
+import { setLoading, setSelectedMovieID } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import CoverTitle from "./CoverTitle";
 import CoverImage from "./CoverImage";
 
-export const Cover = (props: {
+type CoverProps = {
   title: string;
   imagePath: string;
   id: number;
   type: string;
-}) => {
+};
+
+export const Cover = ({ id, type, title, imagePath }: CoverProps) => {
   const loading = useAppSelector((state) => state.movies.loading);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
@@ -19,16 +21,17 @@ export const Cover = (props: {
     <div
       className={`main-page-cover ${darkMode ? "dark" : "light"}`}
       onClick={() => {
-        navigate(`/${props.type}/details/${props.id}`);
-        dispatch(setSelectedMovieID(props.id));
+        navigate(`/${type}/details/${id}`);
+        dispatch(setSelectedMovieID(id));
+        dispatch(setLoading(true));
       }}
     >
       <CoverImage
         loading={loading}
         darkMode={darkMode}
-        imagePath={`https://image.tmdb.org/t/p/original${props.imagePath}`}
+        imagePath={`https://image.tmdb.org/t/p/original${imagePath}`}
       />
-      <CoverTitle className="title-wrapper" title={props.title} />
+      <CoverTitle className="title-wrapper" title={title} />
     </div>
   );
 };

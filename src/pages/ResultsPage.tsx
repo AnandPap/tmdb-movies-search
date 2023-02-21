@@ -28,7 +28,7 @@ export const ResultsPage = () => {
     setResults(res);
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 500);
+    }, 250);
   };
 
   useEffect(() => {
