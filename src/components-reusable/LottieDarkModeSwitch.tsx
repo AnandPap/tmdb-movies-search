@@ -16,8 +16,21 @@ const LottieDarkModeSwitch = () => {
   const moonFrame = 180;
 
   useEffect(() => {
-    if (darkMode) lottieRef.current.goToAndStop(moonFrame, true);
-    else lottieRef.current.goToAndStop(sunFrame, true);
+    let item = localStorage.getItem("darkMode");
+    if (item !== null) {
+      let darkMode = JSON.parse(item);
+      if (darkMode) {
+        lottieRef.current.goToAndStop(moonFrame, true);
+        dispatch(setDarkMode(true));
+      } else {
+        lottieRef.current.goToAndStop(sunFrame, true);
+        dispatch(setDarkMode(false));
+      }
+    } else {
+      lottieRef.current.goToAndStop(moonFrame, true);
+      dispatch(setDarkMode(true));
+      localStorage.setItem("darkMode", "true");
+    }
   }, []);
 
   const switchDarkMode = (
@@ -35,6 +48,7 @@ const LottieDarkModeSwitch = () => {
     clearTimeout(timerID);
 
     if (darkMode) {
+      localStorage.setItem("darkMode", JSON.stringify(false));
       lottieRef.current.setDirection(-1);
       lottieRef.current.goToAndPlay(currentFrame, true);
       const tempTimerID = setTimeout(() => {
@@ -43,6 +57,7 @@ const LottieDarkModeSwitch = () => {
       setTimerID(tempTimerID);
       dispatch(setDarkMode(false));
     } else {
+      localStorage.setItem("darkMode", JSON.stringify(true));
       lottieRef.current.setDirection(1);
       lottieRef.current.goToAndPlay(currentFrame, true);
       const tempTimerID = setTimeout(() => {
