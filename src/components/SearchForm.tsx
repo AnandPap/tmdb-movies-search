@@ -37,9 +37,16 @@ export const SearchForm = () => {
     if (pageName === "/") {
       navigate("tvshows", { replace: true });
     } else {
-      dispatch(setLoading(searchParam ? true : false));
-      dispatch(setSearchTerm(searchParam ? searchParam : ""));
-      setInputText(searchParam ? searchParam : "");
+      if (searchParam) {
+        dispatch(setLoading(true));
+        dispatch(setSearchTerm(searchParam));
+        setInputText(searchParam);
+      } else {
+        dispatch(setLoading(false));
+        dispatch(setSearchTerm(""));
+        setInputText("");
+        navigate(`${pageName}`, { replace: true });
+      }
     }
   }, [searchParam, location.pathname]);
 
@@ -55,8 +62,12 @@ export const SearchForm = () => {
 
   const setPage = (pageName: string) => {
     if (pageName !== location.pathname) {
-      navigate(`${pageName}${searchParam ? `?search=${searchTerm}` : ""}`);
-      dispatch(setLoading(true));
+      if (searchParam) {
+        navigate(`${pageName}?search=${searchParam}`);
+        dispatch(setLoading(true));
+      } else {
+        navigate(`${pageName}`);
+      }
     }
   };
 
