@@ -1,44 +1,62 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { setSearchTerm, setLoading, setCurrentPage } from "../redux/movies";
-import { useNavigate } from "react-router-dom";
+import { setSearchTerm, setLoading } from "../redux/movies";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import searchIcon from "../assets/search.png";
 import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
 
 export const SearchForm = () => {
+  const dispatch = useAppDispatch();
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
-  const currentPage = useAppSelector((state) => state.movies.currentPage);
+
   const [inputText, setInputText] = useState(searchTerm);
   const [timerID, setTimerID] = useState(-1);
-  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams({ search: "" });
+  const searchParam = searchParams.get("search");
+  document.title = location.pathname + location.search;
 
   useEffect(() => {
     if (inputText.length > 2 && searchTerm !== inputText) {
       clearTimeout(timerID);
       const tempTimerID = setTimeout(() => {
-        dispatch(setSearchTerm(inputText));
         dispatch(setLoading(true));
+        setSearchParams({ search: inputText });
+        dispatch(setSearchTerm(inputText));
       }, 1000);
       setTimerID(tempTimerID);
-      return () => clearTimeout(tempTimerID);
+      return () => clearTimeout(tempTimerID); // Da li mi treba?
     }
   }, [inputText]);
+
+  useEffect(() => {
+    const pageName = location.pathname;
+    if (pageName === "/") {
+      navigate("tvshows", { replace: true });
+    } else {
+      dispatch(setLoading(searchParam ? true : false));
+      dispatch(setSearchTerm(searchParam ? searchParam : ""));
+      setInputText(searchParam ? searchParam : "");
+    }
+  }, [searchParam, location.pathname]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputText.length > 2 && searchTerm !== inputText) {
+      dispatch(setLoading(true));
+      setSearchParams({ search: inputText });
       dispatch(setSearchTerm(inputText));
       clearTimeout(timerID);
     }
   };
 
   const setPage = (pageName: string) => {
-    if (currentPage !== `${pageName}`) {
-      navigate(`/${pageName}`, { replace: true });
+    if (pageName !== location.pathname) {
+      navigate(`${pageName}${searchParam ? `?search=${searchTerm}` : ""}`);
       dispatch(setLoading(true));
-      dispatch(setCurrentPage(`${pageName}`));
     }
   };
 
@@ -52,19 +70,19 @@ export const SearchForm = () => {
         <div className="change-page-buttons">
           <button
             className={`${
-              currentPage === "movies" ? "selected-button" : null
+              location.pathname === "/movies" ? "selected-button" : null
             } ${darkMode ? "dark" : "light"}`}
             type="button"
-            onClick={() => setPage("movies")}
+            onClick={() => setPage("/movies")}
           >
             Movies
           </button>
           <button
             className={`${
-              currentPage === "tvshows" ? "selected-button" : null
+              location.pathname === "/tvshows" ? "selected-button" : null
             } ${darkMode ? "dark" : "light"}`}
             type="button"
-            onClick={() => setPage("tvshows")}
+            onClick={() => setPage("/tvshows")}
           >
             TV Shows
           </button>

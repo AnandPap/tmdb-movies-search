@@ -6,7 +6,6 @@ export interface MoviesState {
   selectedMovieID: number;
   loading: boolean;
   darkMode: boolean;
-  currentPage: string;
 }
 
 const initialState: MoviesState = {
@@ -14,7 +13,6 @@ const initialState: MoviesState = {
   selectedMovieID: 0,
   loading: false,
   darkMode: true,
-  currentPage: "",
 };
 
 export const moviesSlice = createSlice({
@@ -33,18 +31,10 @@ export const moviesSlice = createSlice({
     setDarkMode: (state, action: PayloadAction<boolean>) => {
       state.darkMode = action.payload;
     },
-    setCurrentPage: (state, action: PayloadAction<string>) => {
-      state.currentPage = action.payload;
-    },
   },
 });
 
-export const {
-  setSearchTerm,
-  setSelectedMovieID,
-  setLoading,
-  setDarkMode,
-  setCurrentPage,
-} = moviesSlice.actions;
+export const { setSearchTerm, setSelectedMovieID, setLoading, setDarkMode } =
+  moviesSlice.actions;
 
 export default moviesSlice.reducer;

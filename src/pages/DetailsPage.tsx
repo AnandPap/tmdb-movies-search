@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
 import BackButton from "../components-reusable/BackButton";
@@ -34,11 +34,11 @@ type dataType = {
 
 export const DetailsPage = (props: { id: number }) => {
   const [details, setDetails] = useState<detailsType>(null);
-  const currentPage = useAppSelector((state) => state.movies.currentPage);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const loading = useAppSelector((state) => state.movies.loading);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const { id } = useParams();
 
   const getTitle = (data: dataType) => {
@@ -76,15 +76,15 @@ export const DetailsPage = (props: { id: number }) => {
       }
     }
     let imageURL =
-      imageArray.length > 0
+      imageArray.length > 0 && imageArray[0].file_path
         ? `https://image.tmdb.org/t/p/original${imageArray[0].file_path}`
         : "";
     return imageURL;
   };
 
-  const fetchMovieData = async (id: number, currentPage: string) => {
-    const data = await fetchMovie(id, currentPage);
-    console.log(data);
+  const fetchMovieData = async (id: number, pageType: string) => {
+    const data = await fetchMovie(id, pageType);
+    // console.log(data);
     setDetails((s) => {
       if (data)
         return {
@@ -102,7 +102,8 @@ export const DetailsPage = (props: { id: number }) => {
   };
 
   useEffect(() => {
-    fetchMovieData(id ? +id : props.id, currentPage);
+    const firstPartOfThePath = "/" + location.pathname.split("/")[1];
+    fetchMovieData(id ? +id : props.id, firstPartOfThePath);
   }, [props.id]);
 
   return (
@@ -156,7 +157,8 @@ export const DetailsPage = (props: { id: number }) => {
           </div>
           {details.description !== "No Description" ? (
             <h3>
-              {`${currentPage === "movies" ? "Movie" : "TVShow"}`} Overview:
+              {`${location.pathname === "/movies" ? "Movie" : "TVShow"}`}{" "}
+              Overview:
             </h3>
           ) : null}
           <p className="description">{details.description}</p>

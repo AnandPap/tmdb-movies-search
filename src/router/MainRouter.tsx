@@ -24,6 +24,7 @@ const MainRouter = () => {
           path="/tvshows/details/:id"
           element={<DetailsPage id={selectedMovieID} />}
         />
+        {/* <Route path="" element={<Navigate to="/users" />} /> */}
         <Route path="*" element={<ValidationMessage text="Page not found" />} />
       </Routes>
     </BrowserRouter>

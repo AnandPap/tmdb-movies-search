@@ -5,13 +5,13 @@ import CoverTitle from "./CoverTitle";
 import CoverImage from "./CoverImage";
 
 type CoverProps = {
+  id: number;
+  pageType: string;
   title: string;
   imagePath: string;
-  id: number;
-  type: string;
 };
 
-export const Cover = ({ id, type, title, imagePath }: CoverProps) => {
+export const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
   const loading = useAppSelector((state) => state.movies.loading);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export const Cover = ({ id, type, title, imagePath }: CoverProps) => {
     <div
       className={`main-page-cover ${darkMode ? "dark" : "light"}`}
       onClick={() => {
-        navigate(`/${type}/details/${id}`);
+        navigate(`${pageType}/details/${id}`);
         dispatch(setSelectedMovieID(id));
         dispatch(setLoading(true));
       }}

@@ -4,6 +4,7 @@ import { Cover } from "../components/Cover";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 import { setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { useLocation } from "react-router-dom";
 
 export type array = {
   id: number;
@@ -19,12 +20,12 @@ export const ResultsPage = () => {
   const [results, setResults] = useState<array[]>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
-  const currentPage = useAppSelector((state) => state.movies.currentPage);
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const showItems = 10;
 
-  const fetchMoviesData = async () => {
-    const res = await fetchMovies(searchTerm, currentPage);
+  const fetchMoviesData = async (pageType: string) => {
+    const res = await fetchMovies(searchTerm, pageType);
     setResults(res);
     setTimeout(() => {
       dispatch(setLoading(false));
@@ -32,38 +33,34 @@ export const ResultsPage = () => {
   };
 
   useEffect(() => {
-    if (searchTerm.length > 2) fetchMoviesData();
-  }, [searchTerm, currentPage]);
+    if (searchTerm.length > 2) fetchMoviesData(location.pathname);
+  }, [searchTerm, location.pathname]);
 
   return (
     <div className="content-container">
-      {searchTerm ? (
-        results && results.length > 0 ? (
-          results
-            .filter((result) => {
-              if (results.length < 5) return true;
-              else return result.poster_path || result.backdrop_path;
-            })
-            .slice(0, showItems)
-            .map((result, i) => (
-              <Cover
-                key={i}
-                id={result.id}
-                type={currentPage}
-                title={
-                  result.original_name ||
-                  result.original_title ||
-                  result.name ||
-                  result.title
-                }
-                imagePath={result.poster_path || result.backdrop_path}
-              />
-            ))
-        ) : loading ? null : (
-          <ValidationMessage text="No results" />
-        )
-      ) : (
-        <ValidationMessage text="Type more than 2 characters to begin search." />
+      {results && results.length > 0 ? (
+        results
+          .filter((result) => {
+            if (results.length < 5) return true;
+            else return result.poster_path || result.backdrop_path;
+          })
+          .slice(0, showItems)
+          .map((result, i) => (
+            <Cover
+              key={i}
+              id={result.id}
+              pageType={location.pathname}
+              title={
+                result.original_name ||
+                result.original_title ||
+                result.name ||
+                result.title
+              }
+              imagePath={result.poster_path || result.backdrop_path}
+            />
+          ))
+      ) : loading ? null : (
+        <ValidationMessage text="No results" />
       )}
     </div>
   );
