@@ -9,7 +9,7 @@ const BackButton = ({ onClick }: BackButtonProps) => {
   return (
     <div className="back-button-wrapper">
       <button
-        className={`back-button ${darkMode ? "dark" : "light"}`}
+        className={`nav-button back-button ${darkMode ? "dark" : "light"}`}
         onClick={onClick}
       >
         <div className="back-button-arrow"></div>

@@ -1,76 +1,27 @@
 .search-form {
+  margin: 2rem;
 }
-.search-form-buttons {
-  display: flex;
-}
-.change-page-buttons {
-  flex-grow: 1;
-}
-.change-page-buttons > button {
-  background-color: transparent;
-  font-size: var(--small-font);
-  font-weight: 600;
-  border-radius: 0.5rem;
-  border: none;
-  padding: 1rem 2rem;
-  margin-right: 1.5rem;
-  cursor: pointer;
-}
-.change-page-buttons > button:hover {
-  transition: all 0.15s ease 0.05s;
-  background-color: var(--heavy-gray-background-color);
-  box-shadow: 1px 1px 5px -2px gold;
-}
-.change-page-buttons > .selected-button,
-.change-page-buttons > button:hover.selected-button {
-  background-color: var(--medium-gray-background-color);
-  box-shadow: 1px 1px 5px -2px gold;
-  color: white;
-}
-.change-page-buttons > button {
-  user-select: none;
-}
-
 .search-bar-wrapper {
   position: relative;
 }
 .search-bar {
   width: 100%;
   font-size: var(--medium-font);
-  padding: 0.6rem 1rem;
-  margin: 1.5rem 0;
+  padding: 0.7rem 1rem;
   border-radius: 0.5rem;
   border: none;
   color: black;
-}
-.search-icon {
-  position: absolute;
-  width: 25px;
-  top: 34px;
-  right: 10px;
-}
-
-.change-page-buttons > .light:hover {
-  transition: all 0.15s ease 0.05s;
-  background-color: var(--medium-gray-background-color);
-  box-shadow: 1px 1px 6px -3px black;
-  color: white;
-}
-.change-page-buttons > .selected-button.light,
-.change-page-buttons > .selected-button.light:hover {
-  background-color: var(--medium-heavy-gray-background-color);
-  box-shadow: 1px 1px 6px -3px black;
-}
-.change-page-buttons > .light:not(.selected-button, .light:hover) {
-  color: var(--heavy-gray-background-color);
-}
-
-.search-bar {
   outline: 1px solid black;
 }
 .search-bar:focus {
   box-shadow: 1px 1px 5px lightcoral;
   outline: none;
+}
+.search-icon {
+  position: absolute;
+  width: 25px;
+  top: 10px;
+  right: 10px;
 }
 
 .search-bar.input-light {
@@ -94,8 +45,5 @@
       } */
   .search-form-buttons {
     justify-content: center;
-  }
-  .change-page-buttons > button {
-    padding: 0.5rem 1rem;
   }
 }

@@ -8,6 +8,7 @@ import "./styles/reusable.css";
 import "./styles/search-form.css";
 import "./styles/home-page.css";
 import "./styles/details-page.css";
+import "./styles/nav-bar.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

@@ -1,0 +1,60 @@
+.home-nav-bar,
+.details-nav-bar {
+  display: flex;
+  background-color: var(--gray25-background-color);
+  padding: 0.5rem 2rem;
+}
+
+.tmdb-icon {
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-button {
+  border-radius: 0.5rem;
+  font-size: var(--small-font);
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  transition: all 0.25s ease 0.05s;
+  cursor: pointer;
+  color: white;
+  user-select: none;
+}
+.nav-button:hover {
+  background-color: var(--gray35-background-color);
+  box-shadow: 1px 1px 5px -2px var(--gray10-background-color);
+}
+.nav-button:active {
+  background-color: var(--gray40-background-color);
+}
+.change-page-buttons-wrapper {
+  flex-grow: 1;
+}
+.change-page-buttons-wrapper > button {
+  margin-right: 1rem;
+}
+.change-page-buttons-wrapper > .selected-button,
+.change-page-buttons-wrapper > button:hover.selected-button {
+  background-color: var(--gray50-background-color);
+  box-shadow: 1px 1px 5px -2px var(--gray10-background-color);
+}
+
+.dark-mode-button {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 5px lightblue;
+}
+
+@media only screen and (max-width: 600px) {
+  .change-page-buttons > button {
+    padding: 0.5rem 1rem;
+  }
+}

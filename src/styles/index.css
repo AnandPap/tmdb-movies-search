@@ -31,13 +31,15 @@ input::placeholder {
   --medium-font: 1.5rem;
   --large-font: 2rem;
   --x-large-font: 3rem;
-  --very-heavy-gray-background-color: hsl(0, 0%, 15%);
-  --heavy-gray-background-color: hsl(0, 0%, 25%);
-  --high-heavy-gray-background-color: hsl(0, 0%, 30%);
-  --medium-heavy-gray-background-color: hsl(0, 0%, 40%);
-  --medium-gray-background-color: hsl(0, 0%, 50%);
-  --light-medium-gray-background-color: hsl(0, 0%, 60%);
-  --light-gray-background-color: hsl(0, 0%, 70%);
+  --gray10-background-color: hsl(0, 0%, 10%);
+  --gray15-background-color: hsl(0, 0%, 15%);
+  --gray25-background-color: hsl(0, 0%, 25%);
+  --gray30-background-color: hsl(0, 0%, 30%);
+  --gray35-background-color: hsl(0, 0%, 35%);
+  --gray40-background-color: hsl(0, 0%, 40%);
+  --gray50-background-color: hsl(0, 0%, 50%);
+  --gray60-background-color: hsl(0, 0%, 60%);
+  --gray70-background-color: hsl(0, 0%, 70%);
 }
 body {
   margin: 0;
@@ -48,10 +50,10 @@ body {
 }
 
 .dark {
-  background-color: var(--very-heavy-gray-background-color);
+  background-color: var(--gray15-background-color);
   color: white;
 }
 .light {
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
 }

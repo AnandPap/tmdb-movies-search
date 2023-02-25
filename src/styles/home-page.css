@@ -1,7 +1,10 @@
 .main-page {
   height: 100%;
   min-height: 100vh;
-  padding: 1rem 1.5rem;
+}
+.content-container {
+  margin: 2rem;
+  margin-bottom: 0;
   padding-bottom: 2rem;
 }
 .content-container {
@@ -18,14 +21,14 @@
   transition: all 0.25s ease 0.03s;
   box-shadow: 1px 1px 7px -2px black;
   border-radius: 0.5rem;
-  background-color: var(--heavy-gray-background-color);
+  background-color: var(--gray25-background-color);
   cursor: pointer;
   max-width: 400px;
   font-size: var(--medium-font);
 }
 .main-page-cover.light {
   color: white;
-  background-color: var(--high-heavy-gray-background-color);
+  background-color: var(--gray30-background-color);
 }
 .main-page-cover:hover {
   box-shadow: 0px 0px 50px gray;
