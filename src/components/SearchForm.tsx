@@ -1,11 +1,30 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchTerm, setLoading } from "../redux/movies";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  NavigateOptions,
+  URLSearchParamsInit,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import searchIcon from "../assets/search.png";
-import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
 
-export const SearchForm = () => {
+type SetURLSearchParams = (
+  nextInit?:
+    | URLSearchParamsInit
+    | ((prev: URLSearchParams) => URLSearchParamsInit),
+  navigateOpts?: NavigateOptions
+) => void;
+
+type SearchFormProps = {
+  setSearchParams: SetURLSearchParams;
+  searchParam: string | null;
+};
+
+export const SearchForm = ({
+  setSearchParams,
+  searchParam,
+}: SearchFormProps) => {
   const dispatch = useAppDispatch();
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
@@ -15,8 +34,7 @@ export const SearchForm = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams({ search: "" });
-  const searchParam = searchParams.get("search");
+
   document.title = location.pathname + location.search;
 
   useEffect(() => {
@@ -60,46 +78,12 @@ export const SearchForm = () => {
     }
   };
 
-  const setPage = (pageName: string) => {
-    if (pageName !== location.pathname) {
-      if (searchParam) {
-        navigate(`${pageName}?search=${searchParam}`);
-        dispatch(setLoading(true));
-      } else {
-        navigate(`${pageName}`);
-      }
-    }
-  };
-
   return (
     <form
       // autoComplete="off"
       className={`search-form ${darkMode ? "dark" : "light"}`}
       onSubmit={(e) => handleSubmit(e)}
     >
-      <div className="search-form-buttons">
-        <div className="change-page-buttons">
-          <button
-            className={`${
-              location.pathname === "/movies" ? "selected-button" : null
-            } ${darkMode ? "dark" : "light"}`}
-            type="button"
-            onClick={() => setPage("/movies")}
-          >
-            Movies
-          </button>
-          <button
-            className={`${
-              location.pathname === "/tvshows" ? "selected-button" : null
-            } ${darkMode ? "dark" : "light"}`}
-            type="button"
-            onClick={() => setPage("/tvshows")}
-          >
-            TV Shows
-          </button>
-        </div>
-        <LottieDarkModeSwitch />
-      </div>
       <label hidden htmlFor="search">
         Input field for searching movies
       </label>

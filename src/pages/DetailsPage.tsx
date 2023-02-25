@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
-import BackButton from "../components-reusable/BackButton";
 import star from "../assets/star.png";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 import CoverImage from "../components/CoverImage";
 import { setLoading } from "../redux/movies";
+import DetailsNavBar from "../components/DetailsNavBar";
 
 type detailsType =
   | {
@@ -108,15 +108,13 @@ export const DetailsPage = (props: { id: number }) => {
 
   return (
     <div className={`details-page ${darkMode ? "dark" : "light"}`}>
-      <BackButton
-        onClick={() => {
-          navigate(-1);
-          dispatch(setLoading(true));
-        }}
-      />
+      <DetailsNavBar />
       {loading ? null : details ? (
         <>
-          <div className="">
+          <div className="title-wrapper">
+            <h1>{details.title}</h1>
+          </div>
+          <div className="details-image-and-trailer-wrapper">
             {details.imageURL ? (
               <CoverImage
                 className="details-page-cover-image"
@@ -137,9 +135,6 @@ export const DetailsPage = (props: { id: number }) => {
             ) : null}
           </div>
           <div className="title-and-rating-wrapper">
-            <div className="title-wrapper">
-              <h1>{details.title}</h1>
-            </div>
             <div className={`rating-wrapper ${darkMode ? "dark" : "light"}`}>
               <p>Rating: </p>
               {+parseFloat(details.rating).toFixed(1) === 0 ? (
