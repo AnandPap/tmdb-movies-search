@@ -1,7 +1,7 @@
 import noImage from "../assets/no-image.png";
 import SpinnerGIF from "../components-reusable/SpinnerGIF";
 
-type CoverImage = {
+type CoverImageProps = {
   className?: string;
   loading: boolean;
   darkMode: boolean;
@@ -13,7 +13,7 @@ const CoverImage = ({
   loading,
   darkMode,
   imagePath,
-}: CoverImage) => {
+}: CoverImageProps) => {
   return loading ? (
     <SpinnerGIF />
   ) : imagePath ? (

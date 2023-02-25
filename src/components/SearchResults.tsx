@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchMovies } from "../apis/fetchMovies";
-import { Cover } from "../components/Cover";
+import { Cover } from "./Cover";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 import { setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
@@ -16,7 +16,7 @@ export type array = {
   backdrop_path: string;
 };
 
-export const ResultsPage = () => {
+export const SearchResults = () => {
   const [results, setResults] = useState<array[]>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
@@ -36,7 +36,7 @@ export const ResultsPage = () => {
     if (searchTerm.length > 2) fetchMoviesData(location.pathname);
   }, [searchTerm, location.pathname]);
 
-  return (
+  return searchTerm ? (
     <div className="content-container">
       {results && results.length > 0 ? (
         results
@@ -63,5 +63,7 @@ export const ResultsPage = () => {
         <ValidationMessage text="No results" />
       )}
     </div>
+  ) : (
+    <ValidationMessage text="Type more than 2 characters to begin search." />
   );
 };

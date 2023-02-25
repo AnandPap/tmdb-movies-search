@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ValidationMessage from "../components-reusable/ValidationMessage";
-import { ResultsPage } from "../pages/ResultsPage";
+import { SearchResults } from "../components/SearchResults";
 import { HomePage } from "../pages/HomePage";
 import { useAppSelector } from "../redux/hooks";
 import { DetailsPage } from "../pages/DetailsPage";
@@ -13,8 +13,8 @@ const MainRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />}>
-          <Route path="/movies" element={<ResultsPage />} />
-          <Route path="/tvshows" element={<ResultsPage />} />
+          <Route path="/movies" element={<SearchResults />} />
+          <Route path="/tvshows" element={<SearchResults />} />
         </Route>
         <Route
           path="/movies/details/:id"
