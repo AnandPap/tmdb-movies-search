@@ -55,11 +55,14 @@
   font-size: inherit;
 }
 
-@media only screen and (max-width: 630px) {
+@media only screen and (max-width: 646px) {
   .content-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 2rem;
   }
   .main-page-cover {
     justify-self: center;
-    max-width: 300px;
+    max-width: 250px;
   }
 }

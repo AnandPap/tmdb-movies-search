@@ -16,6 +16,9 @@
   font-weight: 600;
 }
 
+.back-button-wrapper {
+  display: flex;
+}
 .back-button {
   display: flex;
   justify-content: center;
@@ -34,23 +37,8 @@
   margin: 0 5px;
 }
 
-/* .hamburger-menu,
-.hamburger-menu::before,
-.hamburger-menu::after {
-  display: block;
-  background-color: #fff;
-  position: absolute;
-  height: 4px;
-  width: 30px;
-  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-  border-radius: 2px;
-} */
-
 @media only screen and (max-width: 600px) {
   .validation-messages {
     font-size: var(--large-font);
-  }
-  .hamburger-menu {
-    display: flex;
   }
 }
