@@ -53,7 +53,7 @@ export const SearchForm = ({
   useEffect(() => {
     const pageName = location.pathname;
     if (pageName === "/") {
-      navigate("tvshows", { replace: true });
+      navigate("/movies", { replace: true });
     } else {
       if (searchParam) {
         dispatch(setLoading(true));

@@ -3,6 +3,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { setLoading } from "../redux/movies";
 import BackButton from "../components-reusable/BackButton";
 import tmdbIcon from "../assets/tmdbIcon.svg";
+import AppIcon from "../components-reusable/AppIcon";
 
 const DetailsNavBar = () => {
   const navigate = useNavigate();
@@ -10,7 +11,12 @@ const DetailsNavBar = () => {
 
   return (
     <div className="details-nav-bar">
-      <img className="tmdb-icon" src={tmdbIcon} alt="TMDB Icon" />
+      <AppIcon
+        className="tmdb-icon"
+        src={tmdbIcon}
+        alt="TMDB Icon"
+        onClick={() => location.pathname !== "/movies" && navigate("/movies")}
+      />
       <BackButton
         onClick={() => {
           navigate(-1);
