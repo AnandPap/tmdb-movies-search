@@ -17,56 +17,39 @@ const HomeNavBar = ({ searchParam }: HomeNavBarProps) => {
   const location = useLocation();
 
   return (
-    <>
-      <div className="home-nav-bar">
-        <AppIcon
-          className="tmdb-icon"
-          src={tmdbIcon}
-          alt="TMDB Icon"
-          onClick={() => location.pathname !== "/movies" && navigate("/movies")}
+    <div className="home-nav-bar">
+      <AppIcon
+        className="tmdb-icon"
+        src={tmdbIcon}
+        alt="TMDB Icon"
+        onClick={() => location.pathname !== "/movies" && navigate("/movies")}
+      />
+      <div
+        className={`nav-bar-buttons-wrapper hamburger-menu-content ${
+          displayHamburgerContent ? "hamburger-open" : "hamburger-close"
+        }`}
+      >
+        <ChangePageButton
+          className="nav-button"
+          page="/movies"
+          searchParam={searchParam}
         />
-        <div className="nav-bar-buttons-wrapper">
-          <div className="nav-buttons-wrapper">
-            <ChangePageButton
-              className="nav-button"
-              page="/movies"
-              searchParam={searchParam}
-            />
-            <ChangePageButton
-              className="nav-button"
-              page="/tvshows"
-              searchParam={searchParam}
-            />
-          </div>
-          <LottieDarkModeSwitch />
-        </div>
-        <div
-          className={`hamburger-menu-wrapper ${
-            displayHamburgerContent ? "hamburger-open" : "hamburger-close"
-          }`}
-          onClick={() => setDisplayHamburgerContent((s) => !s)}
-        >
-          <div className="hamburger-menu"></div>
-        </div>
-        <div
-          className={`hamburger-menu-content ${
-            displayHamburgerContent ? "hamburger-open" : "hamburger-close"
-          }`}
-        >
-          <ChangePageButton
-            className="hamburger-nav-button"
-            page="/movies"
-            searchParam={searchParam}
-          />
-          <ChangePageButton
-            className="hamburger-nav-button"
-            page="/tvshows"
-            searchParam={searchParam}
-          />
-          <LottieDarkModeSwitch />
-        </div>
+        <ChangePageButton
+          className="nav-button"
+          page="/tvshows"
+          searchParam={searchParam}
+        />
+        <LottieDarkModeSwitch />
       </div>
-    </>
+      <div
+        className={`hamburger-menu-wrapper ${
+          displayHamburgerContent ? "hamburger-open" : "hamburger-close"
+        }`}
+        onClick={() => setDisplayHamburgerContent((s) => !s)}
+      >
+        <div className="hamburger-menu"></div>
+      </div>
+    </div>
   );
 };
 

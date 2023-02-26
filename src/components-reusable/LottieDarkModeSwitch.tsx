@@ -69,37 +69,39 @@ const LottieDarkModeSwitch = () => {
   };
 
   return (
-    <Lottie
-      lottieRef={lottieRef}
-      animationData={darkModeButton}
-      autoplay={false}
-      className={`dark-mode-button`}
-      onClick={() =>
-        switchDarkMode(
-          animationSpeed,
-          sunFrame,
-          moonFrame,
-          lottieRef.current.animationItem.frameMult,
-          lottieRef.current.animationItem.currentFrame,
-          timerID,
-          switchAudio
-        )
-      }
-      onKeyDown={(e) =>
-        e.key.match(/(Enter)/g)
-          ? switchDarkMode(
-              animationSpeed,
-              sunFrame,
-              moonFrame,
-              lottieRef.current.animationItem.frameMult,
-              lottieRef.current.animationItem.currentFrame,
-              timerID,
-              switchAudio
-            )
-          : null
-      }
-      tabIndex={0}
-    />
+    <div className="dark-mode-button-wrapper">
+      <Lottie
+        lottieRef={lottieRef}
+        animationData={darkModeButton}
+        autoplay={false}
+        className={`dark-mode-button`}
+        onClick={() =>
+          switchDarkMode(
+            animationSpeed,
+            sunFrame,
+            moonFrame,
+            lottieRef.current.animationItem.frameMult,
+            lottieRef.current.animationItem.currentFrame,
+            timerID,
+            switchAudio
+          )
+        }
+        onKeyDown={(e) =>
+          e.key.match(/(Enter)/g)
+            ? switchDarkMode(
+                animationSpeed,
+                sunFrame,
+                moonFrame,
+                lottieRef.current.animationItem.frameMult,
+                lottieRef.current.animationItem.currentFrame,
+                timerID,
+                switchAudio
+              )
+            : null
+        }
+        tabIndex={0}
+      />
+    </div>
   );
 };
 
