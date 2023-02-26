@@ -1,6 +1,10 @@
-.main-page {
+.home-page {
   height: 100%;
   min-height: 100vh;
+  background-color: var(--gray15-background-color);
+}
+.home-page.light {
+  background-color: whitesmoke;
 }
 .content-container {
   margin: 2rem;
@@ -13,7 +17,7 @@
   gap: 2rem;
 }
 
-.main-page-cover {
+.home-page-cover {
   padding: 1.25rem;
   padding-bottom: 0;
   display: flex;
@@ -25,19 +29,20 @@
   cursor: pointer;
   max-width: 400px;
   font-size: var(--medium-font);
+  color: white;
 }
-.main-page-cover.light {
+.home-page-cover.light {
   color: white;
   background-color: var(--gray30-background-color);
 }
-.main-page-cover:hover {
+.home-page-cover:hover {
   box-shadow: 0px 0px 50px gray;
   background-color: rgb(250, 250, 250);
   border-radius: 1.25rem;
   transform: scale(1.01);
   color: black;
 }
-.main-page-cover:hover > .cover-image {
+.home-page-cover:hover > .cover-image {
   box-shadow: 0 0 5px black;
   border-radius: 1.25rem;
 }
@@ -61,7 +66,7 @@
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 2rem;
   }
-  .main-page-cover {
+  .home-page-cover {
     justify-self: center;
     max-width: 250px;
   }

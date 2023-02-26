@@ -9,7 +9,7 @@ export const HomePage = () => {
   const searchParam = searchParams.get("search");
 
   return (
-    <div className={`main-page ${darkMode ? "dark" : "light"}`}>
+    <div className={`home-page ${darkMode ? "dark" : "light"}`}>
       <HomeNavBar searchParam={searchParam} />
       <SearchForm setSearchParams={setSearchParams} searchParam={searchParam} />
       <Outlet />

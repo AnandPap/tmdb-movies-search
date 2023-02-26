@@ -4,6 +4,7 @@ import { setLoading } from "../redux/movies";
 import BackButton from "../components-reusable/BackButton";
 import tmdbIcon from "../assets/tmdbIcon.svg";
 import AppIcon from "../components-reusable/AppIcon";
+import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
 
 const DetailsNavBar = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const DetailsNavBar = () => {
           dispatch(setLoading(true));
         }}
       />
+      <LottieDarkModeSwitch />
     </div>
   );
 };

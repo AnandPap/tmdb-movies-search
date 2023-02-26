@@ -48,12 +48,3 @@ body {
 #root {
   height: 100%;
 }
-
-.dark {
-  background-color: var(--gray15-background-color);
-  color: white;
-}
-.light {
-  background-color: whitesmoke;
-  color: black;
-}

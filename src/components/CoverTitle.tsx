@@ -1,7 +1,12 @@
-const CoverTitle = (props: { className: string; title: string }) => {
+type CoverTitleProps = {
+  className: string;
+  title: string;
+};
+
+const CoverTitle = ({ className, title }: CoverTitleProps) => {
   return (
-    <div className={props.className}>
-      <h2>{props.title ? props.title : "No title"}</h2>
+    <div className={className}>
+      <h2>{title ? title : "No title"}</h2>
     </div>
   );
 };

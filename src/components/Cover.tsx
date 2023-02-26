@@ -19,7 +19,7 @@ export const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
 
   return (
     <div
-      className={`main-page-cover ${darkMode ? "dark" : "light"}`}
+      className={`home-page-cover ${darkMode ? "dark" : "light"}`}
       onClick={() => {
         navigate(`${pageType}/details/${id}`);
         dispatch(setSelectedMovieID(id));
