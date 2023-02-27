@@ -6,15 +6,14 @@
 .home-page.light {
   background-color: whitesmoke;
 }
+
 .content-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  gap: 2rem;
   margin: 2rem;
   margin-bottom: 0;
   padding-bottom: 2rem;
-}
-.content-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-  gap: 2rem;
 }
 
 .home-page-cover {

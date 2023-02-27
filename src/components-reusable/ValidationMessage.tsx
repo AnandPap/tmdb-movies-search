@@ -8,7 +8,7 @@ const ValidationMessage = ({ text }: ValidationMessageProps) => {
   const darkMode = useAppSelector((state) => state.movies.darkMode);
 
   return (
-    <h1 className={`validation-messages ${darkMode ? "dark" : "light"}`}>
+    <h1 className={`validation-message ${darkMode ? "dark" : "light"}`}>
       {text}
     </h1>
   );

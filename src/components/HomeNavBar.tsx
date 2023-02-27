@@ -1,8 +1,7 @@
+import { useState } from "react";
 import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
 import tmdbIcon from "../assets/tmdbIcon.svg";
 import ChangePageButton from "./ChangePageButton";
-import { useState } from "react";
-import { useAppSelector } from "../redux/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppIcon from "../components-reusable/AppIcon";
 
@@ -12,7 +11,6 @@ type HomeNavBarProps = {
 
 const HomeNavBar = ({ searchParam }: HomeNavBarProps) => {
   const [displayHamburgerContent, setDisplayHamburgerContent] = useState(false);
-  const darkmode = useAppSelector((state) => state.movies.darkMode);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,6 +47,12 @@ const HomeNavBar = ({ searchParam }: HomeNavBarProps) => {
       >
         <div className="hamburger-menu"></div>
       </div>
+      {displayHamburgerContent ? (
+        <div
+          className="modal-cover"
+          onClick={() => setDisplayHamburgerContent((s) => !s)}
+        ></div>
+      ) : null}
     </div>
   );
 };

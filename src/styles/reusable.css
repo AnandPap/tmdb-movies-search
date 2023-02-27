@@ -28,7 +28,7 @@
   width: 50px;
 }
 
-.validation-messages {
+.validation-message {
   text-align: center;
   opacity: 0.6;
   font-size: var(--x-large-font);
@@ -36,7 +36,7 @@
   font-weight: 600;
   color: white;
 }
-.validation-messages.light {
+.validation-message.light {
   color: black;
 }
 
@@ -63,7 +63,7 @@
 }
 
 @media only screen and (max-width: 625px) {
-  .validation-messages {
+  .validation-message {
     font-size: var(--large-font);
   }
   .dark-mode-button-wrapper {
