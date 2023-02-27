@@ -37,9 +37,9 @@ export const SearchResults = () => {
   }, [searchTerm, location.pathname]);
 
   return searchTerm ? (
-    <div className="content-container">
-      {results && results.length > 0 ? (
-        results
+    results && results.length > 0 ? (
+      <div className="content-container">
+        {results
           .filter((result) => {
             if (results.length < 5) return true;
             else return result.poster_path || result.backdrop_path;
@@ -58,11 +58,11 @@ export const SearchResults = () => {
               }
               imagePath={result.poster_path || result.backdrop_path}
             />
-          ))
-      ) : loading ? null : (
-        <ValidationMessage text="No results" />
-      )}
-    </div>
+          ))}
+      </div>
+    ) : loading ? null : (
+      <ValidationMessage text="No results" />
+    )
   ) : (
     <ValidationMessage text="Type more than 2 characters to begin search." />
   );
