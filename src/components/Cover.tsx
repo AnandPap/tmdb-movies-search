@@ -11,8 +11,7 @@ type CoverProps = {
   imagePath: string;
 };
 
-export const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
-  const loading = useAppSelector((state) => state.movies.loading);
+const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,13 +26,15 @@ export const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
       }}
     >
       <CoverImage
-        loading={loading}
+        className="cover-image"
         darkMode={darkMode}
         imagePath={
           imagePath ? `https://image.tmdb.org/t/p/original${imagePath}` : ""
         }
       />
-      <CoverTitle className="title-wrapper" title={title} />
+      <CoverTitle className="cover-image-title-wrapper" title={title} />
     </div>
   );
 };
+
+export default Cover;

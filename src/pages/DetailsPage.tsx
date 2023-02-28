@@ -53,7 +53,7 @@ export const DetailsPage = (props: { id: number }) => {
     });
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 50);
+    }, 250);
   };
 
   useEffect(() => {
@@ -73,7 +73,6 @@ export const DetailsPage = (props: { id: number }) => {
             {details.imageURL ? (
               <CoverImage
                 className="details-page-cover-image"
-                loading={loading}
                 darkMode={darkMode}
                 imagePath={details.imageURL}
               />

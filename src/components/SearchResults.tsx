@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { fetchMovies } from "../apis/fetchMovies";
-import { Cover } from "./Cover";
-import ValidationMessage from "../components-reusable/ValidationMessage";
 import { setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { useLocation } from "react-router-dom";
+import Cover from "./Cover";
+import PlaceholderCover from "./PlaceholderCover";
+import ValidationMessage from "../components-reusable/ValidationMessage";
 
 export type array = {
   id: number;
@@ -29,7 +30,7 @@ export const SearchResults = () => {
     setResults(res);
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 250);
+    }, 500);
   };
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const SearchResults = () => {
   }, [searchTerm, location.pathname]);
 
   return searchTerm ? (
-    results && results.length > 0 ? (
+    results && results.length > 0 && !loading ? (
       <div className="content-container">
         {results
           .filter((result) => {
@@ -60,7 +61,13 @@ export const SearchResults = () => {
             />
           ))}
       </div>
-    ) : loading ? null : (
+    ) : loading && results.length > 0 ? (
+      <div className="content-container">
+        {[...Array(10)].map((element, i) => (
+          <PlaceholderCover key={i} />
+        ))}
+      </div>
+    ) : (
       <ValidationMessage text="No results" />
     )
   ) : (
