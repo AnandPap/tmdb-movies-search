@@ -3,9 +3,6 @@
 *::before {
   box-sizing: border-box;
 }
-p {
-  /* margin: 0; */
-}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -37,7 +34,9 @@ input::placeholder {
   --gray30-background-color: hsl(0, 0%, 30%);
   --gray35-background-color: hsl(0, 0%, 35%);
   --gray40-background-color: hsl(0, 0%, 40%);
+  --gray45-background-color: hsl(0, 0%, 45%);
   --gray50-background-color: hsl(0, 0%, 50%);
+  --gray55-background-color: hsl(0, 0%, 55%);
   --gray60-background-color: hsl(0, 0%, 60%);
   --gray70-background-color: hsl(0, 0%, 70%);
 }

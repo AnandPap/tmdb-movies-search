@@ -65,13 +65,6 @@
   font-weight: 600;
   font-size: var(--medium-font);
 }
-.cover-image {
-  border-radius: 0.5rem;
-  box-shadow: 0px 0px 4px -2px whitesmoke;
-  aspect-ratio: 3/4;
-  transition: all 0.25s ease 0.03s;
-  max-width: 450px;
-}
 .details-page-cover-image {
   border-radius: 0;
   box-shadow: 0;
