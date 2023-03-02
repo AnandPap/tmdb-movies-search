@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setLoading } from "../redux/movies";
+import { useAppSelector } from "../redux/hooks";
 
 type ChangePageButtonProps = {
   className: string;
@@ -13,19 +12,14 @@ const ChangePageButton = ({
   page,
   searchParam,
 }: ChangePageButtonProps) => {
-  const dispatch = useAppDispatch();
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const navigate = useNavigate();
   const location = useLocation();
 
   const setPage = (pageName: string) => {
     if (pageName !== location.pathname) {
-      if (searchParam) {
-        navigate(`${pageName}?search=${searchParam}`);
-        dispatch(setLoading(true));
-      } else {
-        navigate(`${pageName}`);
-      }
+      if (searchParam) navigate(`${pageName}?search=${searchParam}`);
+      else navigate(`${pageName}`);
     }
   };
 

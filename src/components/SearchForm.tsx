@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { setSearchTerm, setLoading } from "../redux/movies";
+import { setSearchTerm, setFetchResults } from "../redux/movies";
 import {
   NavigateOptions,
   URLSearchParamsInit,
@@ -22,29 +22,24 @@ type SearchFormProps = {
 };
 
 export const SearchForm = ({
-  setSearchParams,
   searchParam,
+  setSearchParams,
 }: SearchFormProps) => {
   const dispatch = useAppDispatch();
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
-
   const [inputText, setInputText] = useState(searchTerm);
   const [timerID, setTimerID] = useState(-1);
-
   const navigate = useNavigate();
   const location = useLocation();
-
-  document.title = location.pathname + location.search;
 
   useEffect(() => {
     if (inputText.length > 2 && searchTerm !== inputText) {
       clearTimeout(timerID);
-      const tempTimerID = setTimeout(() => {
-        dispatch(setLoading(true));
-        setSearchParams({ search: inputText });
-        dispatch(setSearchTerm(inputText));
-      }, 1000);
+      const tempTimerID = setTimeout(
+        () => setSearchParams({ search: inputText }),
+        1000
+      );
       setTimerID(tempTimerID);
       return () => clearTimeout(tempTimerID); // Da li mi treba?
     }
@@ -52,28 +47,26 @@ export const SearchForm = ({
 
   useEffect(() => {
     const pageName = location.pathname;
-    if (pageName === "/") {
-      navigate("/movies", { replace: true });
-    } else {
-      if (searchParam) {
-        dispatch(setLoading(true));
-        dispatch(setSearchTerm(searchParam));
-        setInputText(searchParam);
-      } else {
-        dispatch(setLoading(false));
-        dispatch(setSearchTerm(""));
-        setInputText("");
-        navigate(`${pageName}`, { replace: true });
-      }
+    if (!searchParam) {
+      dispatch(setSearchTerm(""));
+      setInputText("");
+      dispatch(setFetchResults({ tvshows: [], movies: [] }));
+      navigate(`${pageName}`, { replace: true });
+    } else if (searchParam.length < 3) {
+      dispatch(setSearchTerm(""));
+      setInputText(searchParam);
+      dispatch(setFetchResults({ tvshows: [], movies: [] }));
+    } else if (searchParam !== searchTerm) {
+      dispatch(setSearchTerm(searchParam));
+      setInputText(searchParam);
+      dispatch(setFetchResults({ tvshows: [], movies: [] }));
     }
-  }, [searchParam, location.pathname]);
+  }, [searchParam]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputText.length > 2 && searchTerm !== inputText) {
-      dispatch(setLoading(true));
       setSearchParams({ search: inputText });
-      dispatch(setSearchTerm(inputText));
       clearTimeout(timerID);
     }
   };

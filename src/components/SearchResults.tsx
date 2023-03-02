@@ -1,48 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { fetchMovies } from "../apis/fetchMovies";
-import { setLoading } from "../redux/movies";
+import { setFetchResults, setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import Cover from "./Cover";
 import PlaceholderCover from "./PlaceholderCover";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 
-export type array = {
-  id: number;
-  original_name: string;
-  original_title: string;
-  name: string;
-  title: string;
-  poster_path: string;
-  backdrop_path: string;
-};
-
 export const SearchResults = () => {
-  const [results, setResults] = useState<array[]>([]);
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
   const loading = useAppSelector((state) => state.movies.loading);
+  const fetchResults = useAppSelector((state) => state.movies.fetchResults);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const showItems = 10;
+  const page = location.pathname.slice(1, location.pathname.length);
 
   const fetchMoviesData = async (pageType: string) => {
+    dispatch(setLoading(true));
     const res = await fetchMovies(searchTerm, pageType);
-    setResults(res);
+    dispatch(setFetchResults({ [page]: res }));
     setTimeout(() => {
       dispatch(setLoading(false));
     }, 500);
   };
 
   useEffect(() => {
-    if (searchTerm.length > 2) fetchMoviesData(location.pathname);
+    if (fetchResults[page].length === 0) fetchMoviesData(location.pathname);
   }, [searchTerm, location.pathname]);
 
   return searchTerm ? (
-    results && results.length > 0 && !loading ? (
+    fetchResults && fetchResults[page].length > 0 && !loading ? (
       <div className="content-container">
-        {results
+        {fetchResults[page]
+          // ovaj filter je tu da osigura da li da se prikazuju filmovi koji
+          // nemaju postera ili da ih ne prikazuje medu rezultatima
           .filter((result) => {
-            if (results.length < 5) return true;
+            if (fetchResults[page].length < 5) return true;
             else return result.poster_path || result.backdrop_path;
           })
           .slice(0, showItems)
