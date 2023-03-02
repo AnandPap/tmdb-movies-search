@@ -61,16 +61,19 @@ export const SearchResults = () => {
             />
           ))}
       </div>
-    ) : loading && results.length > 0 ? (
+    ) : loading ? (
       <div className="content-container">
         {[...Array(10)].map((element, i) => (
           <PlaceholderCover key={i} />
         ))}
       </div>
     ) : (
-      <ValidationMessage text="No results" />
+      <ValidationMessage className="" text="No results" />
     )
   ) : (
-    <ValidationMessage text="Type more than 2 characters to begin search." />
+    <ValidationMessage
+      className=""
+      text="Type more than 2 characters to begin search."
+    />
   );
 };

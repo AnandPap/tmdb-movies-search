@@ -113,7 +113,7 @@ export const DetailsPage = (props: { id: number }) => {
           <p className="description">{details.description}</p>
         </>
       ) : (
-        <ValidationMessage text="No details to show." />
+        <ValidationMessage className="" text="No details to show." />
       )}
     </div>
   );

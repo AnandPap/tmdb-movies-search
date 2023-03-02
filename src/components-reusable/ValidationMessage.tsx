@@ -1,16 +1,20 @@
-import { useAppSelector } from "../redux/hooks";
-
 type ValidationMessageProps = {
+  className: string;
   text: string;
 };
 
-const ValidationMessage = ({ text }: ValidationMessageProps) => {
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+const ValidationMessage = ({ className, text }: ValidationMessageProps) => {
+  let darkMode = localStorage.getItem("darkMode");
+  darkMode ? (darkMode = JSON.parse(darkMode)) : null;
 
   return (
-    <h1 className={`validation-message ${darkMode ? "dark" : "light"}`}>
-      {text}
-    </h1>
+    <div
+      className={`validation-message-wrapper ${className} ${
+        darkMode ? "dark" : "light"
+      }`}
+    >
+      <h2>{text}</h2>
+    </div>
   );
 };
 

@@ -25,7 +25,15 @@ const MainRouter = () => {
           element={<DetailsPage id={selectedMovieID} />}
         />
         {/* <Route path="" element={<Navigate to="/users" />} /> */}
-        <Route path="*" element={<ValidationMessage text="Page not found" />} />
+        <Route
+          path="*"
+          element={
+            <ValidationMessage
+              className="on-empty-page"
+              text="Page not found"
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
