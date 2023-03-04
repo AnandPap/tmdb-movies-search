@@ -1,5 +1,4 @@
 .details-page {
-  height: 100%;
   min-height: 100vh;
   background-color: var(--gray15-background-color);
   color: white;
@@ -8,8 +7,20 @@
   background-color: whitesmoke;
   color: black;
 }
+.details-content-container {
+  margin: 0 2rem;
+  padding-bottom: 2rem;
+}
+
+.title-wrapper {
+  width: fit-content;
+}
+.title-wrapper > h1 {
+  margin: 1.5rem 0;
+}
 .details-image-and-trailer-wrapper {
   display: flex;
+  margin: 1.5rem 0;
   gap: 2rem;
 }
 .details-page-trailer {
@@ -21,13 +32,6 @@
   max-width: 500px;
   display: flex;
   align-items: center;
-}
-.title-wrapper {
-  flex-grow: 1;
-  width: fit-content;
-}
-.title-wrapper > h1 {
-  margin: 0;
 }
 
 .description {
@@ -64,23 +68,22 @@
   font-weight: 600;
   font-size: var(--medium-font);
 }
-.details-page-cover-image {
-  border-radius: 0;
-  box-shadow: 0;
-}
 .cover-image.light {
   box-shadow: 0 0 5px black;
 }
-.details-page-cover-image,
-.details-page-trailer {
-  max-width: 500px;
-  aspect-ratio: 3/2;
-}
-
 .details-page-cover-image {
+  max-width: 300px;
+}
+.details-page-trailer {
+  width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
+  .details-page-cover-image {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1/1;
+  }
   .details-page-movie,
   .details-page-tvshow {
     margin: 0 1.5rem;

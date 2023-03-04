@@ -4,7 +4,7 @@ import { useAppSelector } from "../redux/hooks";
 import { setDarkMode } from "../redux/movies";
 
 type ValidationMessageProps = {
-  className: string;
+  className?: string;
   text: string;
 };
 

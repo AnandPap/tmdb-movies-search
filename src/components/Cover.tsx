@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { setLoading, setSelectedMovieID } from "../redux/movies";
+import { setSelectedMovieID } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import CoverTitle from "./CoverTitle";
 import CoverImage from "./CoverImage";
@@ -8,10 +8,10 @@ type CoverProps = {
   id: number;
   pageType: string;
   title: string;
-  imagePath: string;
+  posterURL: string;
 };
 
-const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
+const Cover = ({ id, pageType, title, posterURL }: CoverProps) => {
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -25,11 +25,8 @@ const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
       }}
     >
       <CoverImage
-        className="cover-image"
-        darkMode={darkMode}
-        imagePath={
-          imagePath ? `https://image.tmdb.org/t/p/original${imagePath}` : ""
-        }
+        className={`cover-image ${darkMode ? "dark" : "light"}`}
+        posterURL={posterURL}
       />
       <CoverTitle className="cover-image-title-wrapper" title={title} />
     </div>

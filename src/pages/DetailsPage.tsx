@@ -10,23 +10,26 @@ import { setLoading } from "../redux/movies";
 import DetailsNavBar from "../components/DetailsNavBar";
 import {
   getDescription,
-  getImageURL,
+  getGenres,
+  getImages,
+  getPosterURL,
   getRating,
+  getRuntime,
   getTitle,
   getTrailerURL,
 } from "../apis/helperFunctions";
 
-type detailsType =
-  | {
-      title: string;
-      description: string;
-      realeseDate?: string;
-      rating: string;
-      imageURL: string;
-      trailerURL: string;
-    }
-  | undefined
-  | null;
+type detailsType = {
+  title: string;
+  runtime: string;
+  description: string;
+  realeseDate?: string;
+  rating: string;
+  genres: string[] | null;
+  images: string[] | null;
+  posterURL: string;
+  trailerURL: string;
+} | null;
 
 export const DetailsPage = (props: { id: number }) => {
   const [details, setDetails] = useState<detailsType>(null);
@@ -39,17 +42,20 @@ export const DetailsPage = (props: { id: number }) => {
   const fetchMovieData = async (id: number, pageType: string) => {
     dispatch(setLoading(true));
     const data = await fetchMovie(id, pageType);
-    // console.log(data);
-    setDetails((s) => {
+    console.log(data);
+    setDetails(() => {
       if (data)
         return {
           title: getTitle(data),
+          runtime: getRuntime(data),
           description: getDescription(data),
           rating: getRating(data),
-          imageURL: getImageURL(data),
+          genres: getGenres(data),
+          images: getImages(data),
+          posterURL: getPosterURL(data),
           trailerURL: getTrailerURL(data),
         };
-      else return undefined;
+      else return null;
     });
     setTimeout(() => {
       dispatch(setLoading(false));
@@ -65,16 +71,15 @@ export const DetailsPage = (props: { id: number }) => {
     <div className={`details-page ${darkMode ? "dark" : "light"}`}>
       <DetailsNavBar />
       {loading ? null : details ? (
-        <>
+        <div className="details-content-container">
           <div className="title-wrapper">
             <h1>{details.title}</h1>
           </div>
           <div className="details-image-and-trailer-wrapper">
-            {details.imageURL ? (
+            {details.posterURL ? (
               <CoverImage
                 className="details-page-cover-image"
-                darkMode={darkMode}
-                imagePath={details.imageURL}
+                posterURL={details.posterURL}
               />
             ) : (
               <img className="cover-image" src={noImage} alt="No Image" />
@@ -111,9 +116,9 @@ export const DetailsPage = (props: { id: number }) => {
             </h3>
           ) : null}
           <p className="description">{details.description}</p>
-        </>
+        </div>
       ) : (
-        <ValidationMessage className="" text="No details to show." />
+        <ValidationMessage text="No details to show." />
       )}
     </div>
   );

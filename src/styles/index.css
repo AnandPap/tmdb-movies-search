@@ -23,7 +23,7 @@ input::placeholder {
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  height: auto;
+  height: 100%;
   --small-font: 1.25rem;
   --medium-font: 1.5rem;
   --large-font: 2rem;

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type resultsType = {
+export type resultsType = {
   id: number;
   original_name: string;
   original_title: string;

@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import Cover from "./Cover";
 import PlaceholderCover from "./PlaceholderCover";
 import ValidationMessage from "../components-reusable/ValidationMessage";
+import { getPosterURL } from "../apis/helperFunctions";
 
 export const SearchResults = () => {
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
@@ -33,11 +34,11 @@ export const SearchResults = () => {
     fetchResults && fetchResults[page].length > 0 && !loading ? (
       <div className="content-container">
         {fetchResults[page]
-          // ovaj filter je tu da osigura da li da se prikazuju filmovi koji
-          // nemaju postera ili da ih ne prikazuje medu rezultatima
+          // Ovaj filter je tu da osigura da li da se prikazuju filmovi koji
+          // nemaju postera ili da ih ne prikazuje medu rezultatima.
           .filter((result) => {
             if (fetchResults[page].length < 5) return true;
-            else return result.poster_path || result.backdrop_path;
+            else return getPosterURL(result);
           })
           .slice(0, showItems)
           .map((result, i) => (
@@ -51,7 +52,7 @@ export const SearchResults = () => {
                 result.name ||
                 result.title
               }
-              imagePath={result.poster_path || result.backdrop_path}
+              posterURL={getPosterURL(result)}
             />
           ))}
       </div>
@@ -62,12 +63,9 @@ export const SearchResults = () => {
         ))}
       </div>
     ) : (
-      <ValidationMessage className="" text="No results" />
+      <ValidationMessage text="No results" />
     )
   ) : (
-    <ValidationMessage
-      className=""
-      text="Type more than 2 characters to begin search."
-    />
+    <ValidationMessage text="Type more than 2 characters to begin search." />
   );
 };
