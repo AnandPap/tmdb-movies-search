@@ -39,10 +39,6 @@
   font-weight: 600;
 }
 
-.back-button-wrapper {
-  display: flex;
-  flex-grow: 1;
-}
 .back-button {
   display: flex;
   justify-content: center;

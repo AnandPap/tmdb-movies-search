@@ -3,8 +3,12 @@ import BackButton from "../components-reusable/BackButton";
 import tmdbIcon from "../assets/tmdbIcon.svg";
 import AppIcon from "../components-reusable/AppIcon";
 import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
+import HamburgerMenu from "../components-reusable/HamburgerMenu";
+import ModalCover from "../components-reusable/ModalCover";
+import { useState } from "react";
 
 const DetailsNavBar = () => {
+  const [displayHamburgerContent, setDisplayHamburgerContent] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -13,14 +17,28 @@ const DetailsNavBar = () => {
         className="tmdb-icon"
         src={tmdbIcon}
         alt="TMDB Icon"
-        onClick={() => location.pathname !== "/movies" && navigate("/movies")}
+        onClick={() => navigate(-1)}
       />
-      <BackButton
-        onClick={() => {
-          navigate(-1);
-        }}
+      <div
+        className={`nav-bar-buttons-wrapper hamburger-menu-content ${
+          displayHamburgerContent ? "hamburger-open" : "hamburger-close"
+        }`}
+      >
+        <BackButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+        <LottieDarkModeSwitch />
+      </div>
+      <HamburgerMenu
+        displayHamburgerContent={displayHamburgerContent}
+        setDisplayHamburgerContent={setDisplayHamburgerContent}
       />
-      <LottieDarkModeSwitch />
+      <ModalCover
+        displayHamburgerContent={displayHamburgerContent}
+        setDisplayHamburgerContent={setDisplayHamburgerContent}
+      />
     </div>
   );
 };

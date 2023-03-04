@@ -4,6 +4,8 @@ import tmdbIcon from "../assets/tmdbIcon.svg";
 import ChangePageButton from "./ChangePageButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppIcon from "../components-reusable/AppIcon";
+import ModalCover from "../components-reusable/ModalCover";
+import HamburgerMenu from "../components-reusable/HamburgerMenu";
 
 type HomeNavBarProps = {
   searchParam: string | null;
@@ -39,20 +41,14 @@ const HomeNavBar = ({ searchParam }: HomeNavBarProps) => {
         />
         <LottieDarkModeSwitch />
       </div>
-      <div
-        className={`hamburger-menu-wrapper ${
-          displayHamburgerContent ? "hamburger-open" : "hamburger-close"
-        }`}
-        onClick={() => setDisplayHamburgerContent((s) => !s)}
-      >
-        <div className="hamburger-menu"></div>
-      </div>
-      {displayHamburgerContent ? (
-        <div
-          className="modal-cover"
-          onClick={() => setDisplayHamburgerContent((s) => !s)}
-        ></div>
-      ) : null}
+      <HamburgerMenu
+        displayHamburgerContent={displayHamburgerContent}
+        setDisplayHamburgerContent={setDisplayHamburgerContent}
+      />
+      <ModalCover
+        displayHamburgerContent={displayHamburgerContent}
+        setDisplayHamburgerContent={setDisplayHamburgerContent}
+      />
     </div>
   );
 };
