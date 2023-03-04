@@ -34,12 +34,7 @@ export const SearchResults = () => {
     fetchResults && fetchResults[page].length > 0 && !loading ? (
       <div className="content-container">
         {fetchResults[page]
-          // Ovaj filter je tu da osigura da li da se prikazuju filmovi koji
-          // nemaju postera ili da ih ne prikazuje medu rezultatima.
-          .filter((result) => {
-            if (fetchResults[page].length < 5) return true;
-            else return getPosterURL(result);
-          })
+          .filter((result) => getPosterURL(result)) // Filtrira one filmove koji nemaju postera.
           .slice(0, showItems)
           .map((result, i) => (
             <Cover

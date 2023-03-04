@@ -1,8 +1,12 @@
 import spinner from "./assets/spinner.gif";
 
-const SpinnerGIF = () => {
+type SpinnerGIFProps = {
+  className: string;
+};
+
+const SpinnerGIF = ({ className }: SpinnerGIFProps) => {
   return (
-    <div className="spinner-wrapper">
+    <div className={className}>
       <img src={spinner} alt="Picture is loading" />
     </div>
   );

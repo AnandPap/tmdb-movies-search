@@ -39,6 +39,9 @@
   transition: all 0.25s ease 0.03s;
   align-self: center;
 }
+.cover-image.light {
+  box-shadow: 0 0 5px black;
+}
 .cover-image-title-wrapper {
   display: flex;
   align-self: center;

@@ -2,6 +2,7 @@
   min-height: 100vh;
   background-color: var(--gray15-background-color);
   color: white;
+  font-size: var(--small-font);
 }
 .details-page.light {
   background-color: whitesmoke;
@@ -18,28 +19,23 @@
 .title-wrapper > h1 {
   margin: 1.5rem 0;
 }
-.details-image-and-trailer-wrapper {
+
+.cover-image-and-trailer-wrapper {
   display: flex;
   margin: 1.5rem 0;
   gap: 2rem;
 }
+.details-page-cover-image {
+  max-width: 300px;
+  min-width: 200px;
+}
 .details-page-trailer {
   width: 100%;
-  height: 600px;
-}
-.title-and-rating-wrapper {
-  margin-right: 15px;
-  max-width: 500px;
-  display: flex;
-  align-items: center;
 }
 
-.description {
-  max-width: 500px;
-  margin-left: 0.75rem;
-}
 .rating-wrapper {
   display: flex;
+  width: fit-content;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   align-items: center;
@@ -49,10 +45,8 @@
 .rating-wrapper:hover {
   background-color: var(--gray40-background-color);
 }
-.rating-wrapper.light {
-}
 .rating-wrapper.light:hover {
-  background-color: var(--gray15-background-color);
+  background-color: var(--gray70-background-color);
 }
 .rating-wrapper > p {
   margin: 0;
@@ -66,23 +60,27 @@
 }
 .rating {
   font-weight: 600;
-  font-size: var(--medium-font);
-}
-.cover-image.light {
-  box-shadow: 0 0 5px black;
-}
-.details-page-cover-image {
-  max-width: 300px;
-}
-.details-page-trailer {
-  width: 100%;
 }
 
-@media only screen and (max-width: 600px) {
+.description {
+  max-width: 500px;
+  margin-left: 0.75rem;
+}
+
+@media only screen and (max-width: 625px) {
+  .details-page {
+  }
+  .cover-image-and-trailer-wrapper {
+    flex-direction: column;
+  }
   .details-page-cover-image {
     width: 100%;
     max-width: none;
-    aspect-ratio: 1/1;
+    max-width: 400px;
+    align-self: center;
+  }
+  .details-page-trailer {
+    width: 100%;
   }
   .details-page-movie,
   .details-page-tvshow {

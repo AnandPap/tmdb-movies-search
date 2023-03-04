@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
 
 type ChangePageButtonProps = {
   className: string;
@@ -12,7 +11,6 @@ const ChangePageButton = ({
   page,
   searchParam,
 }: ChangePageButtonProps) => {
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,7 +25,7 @@ const ChangePageButton = ({
     <button
       className={`${className} ${
         location.pathname === page ? "selected-button" : null
-      } ${darkMode ? "dark" : "light"}`}
+      }`}
       type="button"
       onClick={() => setPage(page)}
     >

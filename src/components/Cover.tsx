@@ -26,7 +26,7 @@ const Cover = ({ id, pageType, title, posterURL }: CoverProps) => {
     >
       <CoverImage
         className={`cover-image ${darkMode ? "dark" : "light"}`}
-        posterURL={posterURL}
+        src={posterURL}
       />
       <CoverTitle className="cover-image-title-wrapper" title={title} />
     </div>

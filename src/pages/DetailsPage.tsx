@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
-import noImage from "../assets/no-image.png";
 import star from "../assets/star.png";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../components-reusable/ValidationMessage";
@@ -18,6 +17,7 @@ import {
   getTitle,
   getTrailerURL,
 } from "../apis/helperFunctions";
+import SpinnerGIF from "../components-reusable/SpinnerGIF";
 
 type detailsType = {
   title: string;
@@ -70,51 +70,47 @@ export const DetailsPage = (props: { id: number }) => {
   return (
     <div className={`details-page ${darkMode ? "dark" : "light"}`}>
       <DetailsNavBar />
-      {loading ? null : details ? (
+      {loading ? (
+        <SpinnerGIF className="details-page-spinner-wrapper" />
+      ) : details ? (
         <div className="details-content-container">
           <div className="title-wrapper">
             <h1>{details.title}</h1>
           </div>
-          <div className="details-image-and-trailer-wrapper">
-            {details.posterURL ? (
-              <CoverImage
-                className="details-page-cover-image"
-                posterURL={details.posterURL}
-              />
-            ) : (
-              <img className="cover-image" src={noImage} alt="No Image" />
-            )}
-            {details.trailerURL ? (
+          <div className="cover-image-and-trailer-wrapper">
+            <CoverImage
+              className="details-page-cover-image"
+              src={details.posterURL}
+            />
+            {details.trailerURL && (
               <iframe
                 className="details-page-trailer"
                 src={details.trailerURL}
                 title="Video Player"
                 allowFullScreen
               ></iframe>
-            ) : null}
+            )}
           </div>
-          <div className="title-and-rating-wrapper">
-            <div className={`rating-wrapper ${darkMode ? "dark" : "light"}`}>
-              <p>Rating: </p>
-              {+parseFloat(details.rating).toFixed(1) === 0 ? (
-                <p>Not rated</p>
-              ) : (
-                <>
-                  <img className="star-icon" src={star} alt="" />
-                  <p className="rating">
-                    {parseFloat(details.rating).toFixed(1)}
-                  </p>
-                  <p>/10</p>
-                </>
-              )}
-            </div>
+          <div className={`rating-wrapper ${darkMode ? "dark" : "light"}`}>
+            <p>Rating: </p>
+            {+parseFloat(details.rating).toFixed(1) === 0 ? (
+              <p>Not rated</p>
+            ) : (
+              <>
+                <img className="star-icon" src={star} alt="" />
+                <p className="rating">
+                  {parseFloat(details.rating).toFixed(1)}
+                </p>
+                <p>/10</p>
+              </>
+            )}
           </div>
-          {details.description !== "No Description" ? (
+          {details.description !== "No Description" && (
             <h3>
               {`${location.pathname === "/movies" ? "Movie" : "TVShow"}`}{" "}
               Overview:
             </h3>
-          ) : null}
+          )}
           <p className="description">{details.description}</p>
         </div>
       ) : (
