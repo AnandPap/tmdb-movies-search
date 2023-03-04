@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
 import noImage from "../assets/no-image.png";
 import star from "../assets/star.png";
@@ -32,12 +32,12 @@ export const DetailsPage = (props: { id: number }) => {
   const [details, setDetails] = useState<detailsType>(null);
   const darkMode = useAppSelector((state) => state.movies.darkMode);
   const loading = useAppSelector((state) => state.movies.loading);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { id } = useParams();
 
   const fetchMovieData = async (id: number, pageType: string) => {
+    dispatch(setLoading(true));
     const data = await fetchMovie(id, pageType);
     // console.log(data);
     setDetails((s) => {
@@ -53,7 +53,7 @@ export const DetailsPage = (props: { id: number }) => {
     });
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 250);
+    }, 500);
   };
 
   useEffect(() => {

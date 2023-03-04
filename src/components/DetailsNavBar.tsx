@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../redux/hooks";
-import { setLoading } from "../redux/movies";
 import BackButton from "../components-reusable/BackButton";
 import tmdbIcon from "../assets/tmdbIcon.svg";
 import AppIcon from "../components-reusable/AppIcon";
@@ -8,7 +6,6 @@ import LottieDarkModeSwitch from "../components-reusable/LottieDarkModeSwitch";
 
 const DetailsNavBar = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   return (
     <div className="details-nav-bar">
@@ -21,7 +18,6 @@ const DetailsNavBar = () => {
       <BackButton
         onClick={() => {
           navigate(-1);
-          dispatch(setLoading(true));
         }}
       />
       <LottieDarkModeSwitch />

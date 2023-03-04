@@ -22,7 +22,6 @@ const Cover = ({ id, pageType, title, imagePath }: CoverProps) => {
       onClick={() => {
         navigate(`${pageType}/details/${id}`);
         dispatch(setSelectedMovieID(id));
-        dispatch(setLoading(true));
       }}
     >
       <CoverImage
