@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { fetchMovie } from "../apis/fetchMovies";
-import star from "../assets/star.png";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 import CoverImage from "../components/CoverImage";
@@ -13,23 +12,31 @@ import {
   getImages,
   getPosterURL,
   getRating,
+  getReleaseDate,
+  getReleaseYear,
   getRuntime,
   getTitle,
   getTrailerURL,
 } from "../apis/helperFunctions";
 import SpinnerGIF from "../components-reusable/SpinnerGIF";
+import TMDBRating from "../components/TMDBRating";
 
 type detailsType = {
   title: string;
-  runtime: string;
+  basicInfo: string[];
   description: string;
-  realeseDate?: string;
-  rating: string;
+  rating: ratingType | null;
   genres: string[] | null;
   images: string[] | null;
   posterURL: string;
   trailerURL: string;
+  releaseDate: string | null;
 } | null;
+
+export type ratingType = {
+  voteAverage: number;
+  voteCount: string;
+};
 
 export const DetailsPage = (props: { id: number }) => {
   const [details, setDetails] = useState<detailsType>(null);
@@ -47,19 +54,20 @@ export const DetailsPage = (props: { id: number }) => {
       if (data)
         return {
           title: getTitle(data),
-          runtime: getRuntime(data),
+          basicInfo: [getReleaseYear(data), getRuntime(data)],
           description: getDescription(data),
           rating: getRating(data),
           genres: getGenres(data),
           images: getImages(data),
           posterURL: getPosterURL(data),
           trailerURL: getTrailerURL(data),
+          releaseDate: getReleaseDate(data),
         };
       else return null;
     });
     setTimeout(() => {
       dispatch(setLoading(false));
-    }, 500);
+    }, 0);
   };
 
   useEffect(() => {
@@ -77,6 +85,16 @@ export const DetailsPage = (props: { id: number }) => {
           <div className="title-wrapper">
             <h1>{details.title}</h1>
           </div>
+          <ul className={`basic-info-wrapper ${darkMode ? "dark" : "light"}`}>
+            {details.basicInfo.map((item, i) => {
+              if (item[i])
+                return (
+                  <div key={i} className="info-item-wrapper">
+                    <li>{item}</li>
+                  </div>
+                );
+            })}
+          </ul>
           <div className="cover-image-and-trailer-wrapper">
             <CoverImage
               className="details-page-cover-image"
@@ -91,20 +109,7 @@ export const DetailsPage = (props: { id: number }) => {
               ></iframe>
             )}
           </div>
-          <div className={`rating-wrapper ${darkMode ? "dark" : "light"}`}>
-            <p>Rating: </p>
-            {+parseFloat(details.rating).toFixed(1) === 0 ? (
-              <p>Not rated</p>
-            ) : (
-              <>
-                <img className="star-icon" src={star} alt="" />
-                <p className="rating">
-                  {parseFloat(details.rating).toFixed(1)}
-                </p>
-                <p>/10</p>
-              </>
-            )}
-          </div>
+          <TMDBRating darkMode={darkMode} rating={details.rating} />
           {details.description !== "No Description" && (
             <h3>
               {`${location.pathname === "/movies" ? "Movie" : "TVShow"}`}{" "}

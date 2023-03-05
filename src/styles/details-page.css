@@ -15,9 +15,48 @@
 
 .title-wrapper {
   width: fit-content;
+  margin: 1.5rem 0;
 }
 .title-wrapper > h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.basic-info-wrapper {
   margin: 1.5rem 0;
+  padding-left: 0;
+  opacity: 0.8;
+}
+.info-item-wrapper {
+  display: inline-block;
+}
+.info-item-wrapper > li {
+  display: inline-block;
+  cursor: pointer;
+}
+.info-item-wrapper > li:hover {
+  text-decoration: underline;
+}
+.info-item-wrapper,
+.info-item-wrapper::before {
+  vertical-align: middle;
+}
+.info-item-wrapper:not(:nth-child(1))::before {
+  display: inline-block;
+  content: "";
+  font-size: 1rem;
+  padding: 2px;
+  border-radius: 50%;
+  vertical-align: middle;
+  background-color: white;
+  margin: 0 0.5rem 0.2rem;
+  vertical-align: middle;
+}
+.basic-info-wrapper.light > :not(:nth-child(1))::before {
+  background-color: black;
+}
+.basic-info-wrapper.light {
+  opacity: 1;
 }
 
 .cover-image-and-trailer-wrapper {
@@ -28,43 +67,71 @@
 .details-page-cover-image {
   max-width: 300px;
   min-width: 200px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .details-page-trailer {
   width: 100%;
 }
 
+.tmdb-rating {
+  opacity: 0.8;
+  margin: 0;
+  font-size: 1rem;
+  fill: rgb(245, 197, 24);
+  letter-spacing: 1px;
+}
 .rating-wrapper {
   display: flex;
   width: fit-content;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
+  padding: 0.1rem 1rem 0.1rem 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
   align-items: center;
   cursor: pointer;
   transition: background-color 0.15s linear;
 }
 .rating-wrapper:hover {
-  background-color: var(--gray40-background-color);
+  background-color: var(--gray25-background-color);
 }
 .rating-wrapper.light:hover {
   background-color: var(--gray70-background-color);
 }
-.rating-wrapper > p {
-  margin: 0;
-}
 .star-icon {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  bottom: 3px;
-  margin: 0 5px;
+  width: 35px;
+  height: 35px;
+  align-self: center;
 }
-.rating {
+.average-and-total-rating-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.average-rating-wrapper {
+  display: flex;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+}
+.average-rating {
   font-weight: 600;
+  margin-right: 3px;
+}
+.vote-highest-mark {
+  opacity: 0.8;
+  font-size: 1rem;
+  align-self: center;
+}
+.vote-count {
+  opacity: 0.8;
+  font-size: 0.9rem;
 }
 
 .description {
-  max-width: 500px;
-  margin-left: 0.75rem;
+  max-width: 50%;
+  margin-left: 1rem;
+}
+
+.light {
+  opacity: 1;
 }
 
 @media only screen and (max-width: 625px) {
@@ -88,5 +155,8 @@
   }
   .details-page-trailer {
     height: 300px;
+  }
+  .description {
+    max-width: none;
   }
 }

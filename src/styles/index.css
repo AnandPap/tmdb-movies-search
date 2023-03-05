@@ -20,9 +20,12 @@ select:-webkit-autofill:focus {
 input::placeholder {
   user-select: none;
 }
+p {
+  margin: 0;
+}
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Times New Roman", Times, serif;
   height: 100%;
   --small-font: 1.25rem;
   --medium-font: 1.5rem;
