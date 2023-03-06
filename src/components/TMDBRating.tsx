@@ -8,7 +8,7 @@ type TMDBRatingProps = {
 
 const TMDBRating = ({ darkMode, rating }: TMDBRatingProps) => {
   return (
-    <>
+    <div className="tmdb-rating-wrapper">
       <h4 className={`tmdb-rating ${darkMode ? "dark" : "light"}`}>
         TMDB RATING
       </h4>
@@ -34,7 +34,7 @@ const TMDBRating = ({ darkMode, rating }: TMDBRatingProps) => {
           <p>Not rated</p>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

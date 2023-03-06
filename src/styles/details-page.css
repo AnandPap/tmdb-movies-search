@@ -13,6 +13,13 @@
   padding-bottom: 2rem;
 }
 
+.top-part-wrapper {
+  display: flex;
+}
+.title-and-basic-info-wrapper {
+  flex-grow: 1;
+}
+
 .title-wrapper {
   width: fit-content;
   margin: 1.5rem 0;
@@ -59,42 +66,9 @@
   opacity: 1;
 }
 
-.cover-image-and-trailer-wrapper {
-  display: flex;
-  margin: 1.5rem 0;
-  gap: 2rem;
+.tmdb-rating-wrapper {
+  align-self: flex-end;
 }
-.details-page-cover-image {
-  max-width: 300px;
-  min-width: 200px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.details-page-trailer {
-  width: 100%;
-}
-
-.genres-wrapper {
-  display: flex;
-  margin: 1.5rem 0;
-}
-.genre {
-  border-radius: 5rem;
-  border: 1px solid gray;
-  background-color: transparent;
-  width: fit-content;
-  margin-right: 1rem;
-  padding: 0.25rem 0.75rem;
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-.genre:hover {
-  background-color: var(--gray25-background-color);
-}
-.genre.light:hover {
-  background-color: var(--gray80-background-color);
-}
-
 .tmdb-rating {
   opacity: 0.8;
   margin: 0;
@@ -104,7 +78,6 @@
 }
 .rating-wrapper {
   display: flex;
-  width: fit-content;
   padding: 0.1rem 1rem 0.1rem 0.75rem;
   margin: 0.5rem 0;
   border-radius: 0.25rem;
@@ -119,8 +92,8 @@
   background-color: var(--gray80-background-color);
 }
 .star-icon {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   align-self: center;
 }
 .average-and-total-rating-wrapper {
@@ -146,7 +119,44 @@
   font-size: 0.9rem;
 }
 
-.description {
+.cover-image-and-trailer-wrapper {
+  display: flex;
+  margin: 1.5rem 0;
+  gap: 2rem;
+}
+.details-page-cover-image {
+  max-width: 300px;
+  min-width: 200px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.details-page-trailer {
+  width: 100%;
+}
+
+.genres-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+  gap: 1rem;
+}
+.genre {
+  border-radius: 5rem;
+  border: 1px solid gray;
+  background-color: transparent;
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+.genre:hover {
+  background-color: var(--gray25-background-color);
+}
+.genre.light:hover {
+  background-color: var(--gray80-background-color);
+}
+
+.short-description {
   max-width: 50%;
   margin: 1.5rem 0;
 }
@@ -157,6 +167,9 @@
 
 @media only screen and (max-width: 625px) {
   .details-page {
+  }
+  .top-part-wrapper {
+    flex-wrap: wrap;
   }
   .cover-image-and-trailer-wrapper {
     flex-direction: column;

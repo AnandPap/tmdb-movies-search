@@ -16,6 +16,7 @@ import {
   getReleaseYear,
   getRuntime,
   getTitle,
+  getTitleType,
   getTrailerURL,
 } from "../apis/helperFunctions";
 import SpinnerGIF from "../components-reusable/SpinnerGIF";
@@ -55,7 +56,11 @@ export const DetailsPage = (props: { id: number }) => {
       if (data)
         return {
           title: getTitle(data),
-          basicInfo: [getReleaseYear(data), getRuntime(data)],
+          basicInfo: [
+            getTitleType(location.pathname),
+            getReleaseYear(data),
+            getRuntime(data),
+          ],
           description: getDescription(data),
           rating: getRating(data),
           genres: getGenres(data),
@@ -83,19 +88,26 @@ export const DetailsPage = (props: { id: number }) => {
         <SpinnerGIF className="details-page-spinner-wrapper" />
       ) : details ? (
         <div className="details-content-container">
-          <div className="title-wrapper">
-            <h1>{details.title}</h1>
+          <div className="top-part-wrapper">
+            <div className="title-and-basic-info-wrapper">
+              <div className="title-wrapper">
+                <h1>{details.title}</h1>
+              </div>
+              <ul
+                className={`basic-info-wrapper ${darkMode ? "dark" : "light"}`}
+              >
+                {details.basicInfo.map((item, i) => {
+                  if (item[i])
+                    return (
+                      <div key={i} className="info-item-wrapper">
+                        <li>{item}</li>
+                      </div>
+                    );
+                })}
+              </ul>
+            </div>
+            <TMDBRating darkMode={darkMode} rating={details.rating} />
           </div>
-          <ul className={`basic-info-wrapper ${darkMode ? "dark" : "light"}`}>
-            {details.basicInfo.map((item, i) => {
-              if (item[i])
-                return (
-                  <div key={i} className="info-item-wrapper">
-                    <li>{item}</li>
-                  </div>
-                );
-            })}
-          </ul>
           <div className="cover-image-and-trailer-wrapper">
             <CoverImage
               className="details-page-cover-image"
@@ -111,8 +123,7 @@ export const DetailsPage = (props: { id: number }) => {
             )}
           </div>
           <Genres darkMode={darkMode} genres={details.genres} />
-          <TMDBRating darkMode={darkMode} rating={details.rating} />
-          <p className="description">{details.description}</p>
+          <p className="short-description">{details.description}</p>
         </div>
       ) : (
         <ValidationMessage text="No details to show." />

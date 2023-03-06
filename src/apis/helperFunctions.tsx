@@ -38,6 +38,13 @@ export const getTitle = (data: dataType) => {
   );
 };
 
+export const getTitleType = (location: string) => {
+  let title = location.split("/")[1];
+  if (title === "movies") return "Movie";
+  else if (title === "tvshow") return "TV Show";
+  else return "";
+};
+
 export const getReleaseYear = (data: dataType) => {
   if (data.release_date) {
     return new Date(data.release_date).getFullYear() + "";
