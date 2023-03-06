@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { fetchMovie } from "../apis/fetchMovies";
+import { fetchCredits, fetchTitleDetails } from "../apis/fetchData";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import ValidationMessage from "../components-reusable/ValidationMessage";
 import CoverImage from "../components/CoverImage";
@@ -50,7 +50,7 @@ export const DetailsPage = (props: { id: number }) => {
 
   const fetchMovieData = async (id: number, pageType: string) => {
     dispatch(setLoading(true));
-    const data = await fetchMovie(id, pageType);
+    const data = await fetchTitleDetails(id, pageType);
     console.log(data);
     setDetails(() => {
       if (data)
@@ -71,6 +71,8 @@ export const DetailsPage = (props: { id: number }) => {
         };
       else return null;
     });
+    const creditsData = await fetchCredits(id, pageType);
+    console.log(creditsData);
     setTimeout(() => {
       dispatch(setLoading(false));
     }, 0);

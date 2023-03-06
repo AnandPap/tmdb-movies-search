@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { fetchMovies } from "../apis/fetchMovies";
+import { fetchTitles } from "../apis/fetchData";
 import { setFetchResults, setLoading } from "../redux/movies";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import Cover from "./Cover";
@@ -19,7 +19,7 @@ export const SearchResults = () => {
 
   const fetchMoviesData = async (pageType: string) => {
     dispatch(setLoading(true));
-    const res = await fetchMovies(searchTerm, pageType);
+    const res = await fetchTitles(searchTerm, pageType);
     dispatch(setFetchResults({ [page]: res }));
     setTimeout(() => {
       dispatch(setLoading(false));

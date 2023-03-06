@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchMovies = async (searchTerm: string, pageType: string) => {
+export const fetchTitles = async (searchTerm: string, pageType: string) => {
   return await axios
     .get(
       `https://api.themoviedb.org/3/search/${
@@ -16,8 +16,7 @@ export const fetchMovies = async (searchTerm: string, pageType: string) => {
     });
 };
 
-export const fetchMovie = async (id: number, pageType: string) => {
-  // function getMovieImageURL(res) {}
+export const fetchTitleDetails = async (id: number, pageType: string) => {
   try {
     const res = await axios.get(
       `https://api.themoviedb.org/3/${
@@ -29,6 +28,20 @@ export const fetchMovie = async (id: number, pageType: string) => {
     return res.data;
   } catch (err) {
     console.log(err);
-    return undefined;
+    return null;
+  }
+};
+
+export const fetchCredits = async (id: number, pageType: string) => {
+  try {
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/${
+        pageType === "/movies" ? "movie" : "tv"
+      }/${id}/credits?api_key=${import.meta.env.VITE_API_KEY}`
+    );
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return null;
   }
 };
