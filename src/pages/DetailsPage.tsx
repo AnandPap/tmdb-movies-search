@@ -20,6 +20,7 @@ import {
 } from "../apis/helperFunctions";
 import SpinnerGIF from "../components-reusable/SpinnerGIF";
 import TMDBRating from "../components/TMDBRating";
+import Genres from "../components/Genres";
 
 type detailsType = {
   title: string;
@@ -109,13 +110,8 @@ export const DetailsPage = (props: { id: number }) => {
               ></iframe>
             )}
           </div>
+          <Genres darkMode={darkMode} genres={details.genres} />
           <TMDBRating darkMode={darkMode} rating={details.rating} />
-          {details.description !== "No Description" && (
-            <h3>
-              {`${location.pathname === "/movies" ? "Movie" : "TVShow"}`}{" "}
-              Overview:
-            </h3>
-          )}
           <p className="description">{details.description}</p>
         </div>
       ) : (

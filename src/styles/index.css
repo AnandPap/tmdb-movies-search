@@ -42,6 +42,7 @@ p {
   --gray55-background-color: hsl(0, 0%, 55%);
   --gray60-background-color: hsl(0, 0%, 60%);
   --gray70-background-color: hsl(0, 0%, 70%);
+  --gray80-background-color: hsl(0, 0%, 80%);
 }
 body {
   margin: 0;

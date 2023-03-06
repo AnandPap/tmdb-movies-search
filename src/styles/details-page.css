@@ -74,6 +74,27 @@
   width: 100%;
 }
 
+.genres-wrapper {
+  display: flex;
+  margin: 1.5rem 0;
+}
+.genre {
+  border-radius: 5rem;
+  border: 1px solid gray;
+  background-color: transparent;
+  width: fit-content;
+  margin-right: 1rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+.genre:hover {
+  background-color: var(--gray25-background-color);
+}
+.genre.light:hover {
+  background-color: var(--gray80-background-color);
+}
+
 .tmdb-rating {
   opacity: 0.8;
   margin: 0;
@@ -89,13 +110,13 @@
   border-radius: 0.25rem;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.15s linear;
+  transition: background-color 0.1s ease;
 }
 .rating-wrapper:hover {
   background-color: var(--gray25-background-color);
 }
 .rating-wrapper.light:hover {
-  background-color: var(--gray70-background-color);
+  background-color: var(--gray80-background-color);
 }
 .star-icon {
   width: 35px;
@@ -127,7 +148,7 @@
 
 .description {
   max-width: 50%;
-  margin-left: 1rem;
+  margin: 1.5rem 0;
 }
 
 .light {
