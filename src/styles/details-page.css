@@ -15,6 +15,7 @@
 
 .top-part-wrapper {
   display: flex;
+  gap: 1.5rem;
 }
 .title-and-basic-info-wrapper {
   flex-grow: 1;
@@ -30,7 +31,7 @@
 }
 
 .basic-info-wrapper {
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 0;
   padding-left: 0;
   opacity: 0.8;
 }
@@ -79,7 +80,7 @@
 .rating-wrapper {
   display: flex;
   padding: 0.1rem 1rem 0.1rem 0.75rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 0;
   border-radius: 0.25rem;
   align-items: center;
   cursor: pointer;
@@ -190,7 +191,7 @@
   .details-page-trailer {
     height: 300px;
   }
-  .description {
+  .short-description {
     max-width: none;
   }
 }
