@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../redux/hooks";
-import { setDarkMode } from "../redux/movies";
+import { setTheme } from "../redux/movies";
 
 type ValidationMessageProps = {
   className?: string;
@@ -9,20 +9,17 @@ type ValidationMessageProps = {
 };
 
 const ValidationMessage = ({ className, text }: ValidationMessageProps) => {
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let darkMode = localStorage.getItem("darkMode");
-    if (darkMode) dispatch(setDarkMode(JSON.parse(darkMode)));
+    let theme = localStorage.getItem("theme");
+    if (theme)
+      if (theme === "dark" || theme === "light") dispatch(setTheme(theme));
   }, []);
 
   return (
-    <div
-      className={`validation-message-wrapper ${className} ${
-        darkMode ? "dark" : "light"
-      }`}
-    >
+    <div className={`validation-message-wrapper ${className} ${theme}`}>
       <h2>{text}</h2>
     </div>
   );

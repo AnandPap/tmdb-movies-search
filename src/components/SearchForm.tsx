@@ -27,7 +27,7 @@ export const SearchForm = ({
 }: SearchFormProps) => {
   const dispatch = useAppDispatch();
   const searchTerm = useAppSelector((state) => state.movies.searchTerm);
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const [inputText, setInputText] = useState(searchTerm);
   const [timerID, setTimerID] = useState(-1);
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ export const SearchForm = ({
   return (
     <form
       // autoComplete="off"
-      className={`search-form ${darkMode ? "dark" : "light"}`}
+      className={`search-form ${theme}`}
       onSubmit={(e) => handleSubmit(e)}
     >
       <label hidden htmlFor="search">
@@ -84,7 +84,7 @@ export const SearchForm = ({
         <input
           id="search"
           type="text"
-          className={`search-bar ${darkMode ? null : "input-light"}`}
+          className={`search-bar ${theme === "light" && "input-light"}`}
           value={inputText}
           placeholder="Search movies"
           onChange={(e) => {

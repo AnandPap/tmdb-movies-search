@@ -23,7 +23,7 @@ interface MoviesState {
   searchTerm: string;
   selectedMovieID: number;
   loading: boolean;
-  darkMode: boolean;
+  theme: "dark" | "light";
   fetchResults: fetchResultsType;
 }
 
@@ -31,7 +31,7 @@ export const initialState: MoviesState = {
   searchTerm: "",
   selectedMovieID: 0,
   loading: false,
-  darkMode: true,
+  theme: "dark",
   fetchResults: { movies: [], tvshows: [] },
 };
 
@@ -48,8 +48,8 @@ export const moviesSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    setDarkMode: (state, action: PayloadAction<boolean>) => {
-      state.darkMode = action.payload;
+    setTheme: (state, action: PayloadAction<"dark" | "light">) => {
+      state.theme = action.payload;
     },
     setFetchResults: (state, action: PayloadAction<fetchResultsActionType>) => {
       state.fetchResults = {
@@ -64,7 +64,7 @@ export const {
   setSearchTerm,
   setSelectedMovieID,
   setLoading,
-  setDarkMode,
+  setTheme,
   setFetchResults,
 } = moviesSlice.actions;
 

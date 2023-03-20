@@ -12,22 +12,19 @@ type CoverProps = {
 };
 
 const Cover = ({ id, pageType, title, posterURL }: CoverProps) => {
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
     <div
-      className={`home-page-cover ${darkMode ? "dark" : "light"}`}
+      className={`home-page-cover ${theme}`}
       onClick={() => {
         navigate(`${pageType}/details/${id}`);
         dispatch(setSelectedMovieID(id));
       }}
     >
-      <CoverImage
-        className={`cover-image ${darkMode ? "dark" : "light"}`}
-        src={posterURL}
-      />
+      <CoverImage className={`cover-image ${theme}`} src={posterURL} />
       <CoverTitle className="cover-image-title-wrapper" title={title} />
     </div>
   );

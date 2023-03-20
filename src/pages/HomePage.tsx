@@ -10,7 +10,7 @@ import HomeNavBar from "../components/HomeNavBar";
 import { useEffect } from "react";
 
 export const HomePage = () => {
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams({ search: "" });
@@ -24,7 +24,7 @@ export const HomePage = () => {
   }, [location.pathname]);
 
   return (
-    <div className={`home-page ${darkMode ? "dark" : "light"}`}>
+    <div className={`home-page ${theme}`}>
       {location.state}
       <HomeNavBar searchParam={searchParam} />
       <SearchForm searchParam={searchParam} setSearchParams={setSearchParams} />

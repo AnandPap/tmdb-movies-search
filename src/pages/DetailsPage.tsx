@@ -42,7 +42,7 @@ export type ratingType = {
 
 export const DetailsPage = (props: { id: number }) => {
   const [details, setDetails] = useState<detailsType>(null);
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const loading = useAppSelector((state) => state.movies.loading);
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -84,7 +84,7 @@ export const DetailsPage = (props: { id: number }) => {
   }, [props.id]);
 
   return (
-    <div className={`details-page ${darkMode ? "dark" : "light"}`}>
+    <div className={`details-page ${theme}`}>
       <DetailsNavBar />
       {loading ? (
         <SpinnerGIF className="details-page-spinner-wrapper" />
@@ -95,9 +95,7 @@ export const DetailsPage = (props: { id: number }) => {
               <div className="title-wrapper">
                 <h1>{details.title}</h1>
               </div>
-              <ul
-                className={`basic-info-wrapper ${darkMode ? "dark" : "light"}`}
-              >
+              <ul className={`basic-info-wrapper ${theme}`}>
                 {details.basicInfo.map((item, i) => {
                   if (item[i])
                     return (
@@ -108,7 +106,7 @@ export const DetailsPage = (props: { id: number }) => {
                 })}
               </ul>
             </div>
-            <TMDBRating darkMode={darkMode} rating={details.rating} />
+            <TMDBRating theme={theme} rating={details.rating} />
           </div>
           <div className="cover-image-and-trailer-wrapper">
             <CoverImage
@@ -124,7 +122,7 @@ export const DetailsPage = (props: { id: number }) => {
               ></iframe>
             )}
           </div>
-          <Genres darkMode={darkMode} genres={details.genres} />
+          <Genres theme={theme} genres={details.genres} />
           <p className="short-description">{details.description}</p>
         </div>
       ) : (

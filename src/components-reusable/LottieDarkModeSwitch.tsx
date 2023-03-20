@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import { setDarkMode } from "../redux/movies";
+import { setTheme } from "../redux/movies";
 import darkModeButton from "./assets/dark-mode-button1.json";
 import switchSound from "./assets/switch-sound.mp3";
 
 const LottieDarkModeSwitch = () => {
   const [timerID, setTimerID] = useState(-1);
   const lottieRef = useRef<any>();
-  const darkMode = useAppSelector((state) => state.movies.darkMode);
+  const theme = useAppSelector((state) => state.movies.theme);
   const dispatch = useAppDispatch();
   const switchAudio = new Audio(switchSound);
   const animationSpeed = 10;
@@ -16,20 +16,19 @@ const LottieDarkModeSwitch = () => {
   const moonFrame = 180;
 
   useEffect(() => {
-    let item = localStorage.getItem("darkMode");
+    let item = localStorage.getItem("theme");
     if (item !== null) {
-      let darkMode = JSON.parse(item);
-      if (darkMode) {
+      if (item === "dark") {
         lottieRef.current.goToAndStop(moonFrame, true);
-        dispatch(setDarkMode(true));
+        dispatch(setTheme("dark"));
       } else {
         lottieRef.current.goToAndStop(sunFrame, true);
-        dispatch(setDarkMode(false));
+        dispatch(setTheme("light"));
       }
     } else {
       lottieRef.current.goToAndStop(moonFrame, true);
-      dispatch(setDarkMode(true));
-      localStorage.setItem("darkMode", "true");
+      dispatch(setTheme("dark"));
+      localStorage.setItem("theme", "dark");
     }
   }, []);
 
@@ -47,24 +46,24 @@ const LottieDarkModeSwitch = () => {
     switchAudio.play();
     clearTimeout(timerID);
 
-    if (darkMode) {
-      localStorage.setItem("darkMode", JSON.stringify(false));
+    if (theme === "dark") {
+      localStorage.setItem("theme", "light");
       lottieRef.current.setDirection(-1);
       lottieRef.current.goToAndPlay(currentFrame, true);
       const tempTimerID = setTimeout(() => {
         lottieRef.current.goToAndStop(sunFrame, true);
       }, durationInFrames / frameMultiplier / animationSpeed);
       setTimerID(tempTimerID);
-      dispatch(setDarkMode(false));
+      dispatch(setTheme("light"));
     } else {
-      localStorage.setItem("darkMode", JSON.stringify(true));
+      localStorage.setItem("theme", "dark");
       lottieRef.current.setDirection(1);
       lottieRef.current.goToAndPlay(currentFrame, true);
       const tempTimerID = setTimeout(() => {
         lottieRef.current.goToAndStop(moonFrame, true);
       }, durationInFrames / frameMultiplier / animationSpeed);
       setTimerID(tempTimerID);
-      dispatch(setDarkMode(true));
+      dispatch(setTheme("dark"));
     }
   };
 
