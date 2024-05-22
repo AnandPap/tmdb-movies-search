@@ -51,7 +51,7 @@ export const DetailsPage = (props: { id: number }) => {
   const fetchMovieData = async (id: number, pageType: string) => {
     dispatch(setLoading(true));
     const data = await fetchTitleDetails(id, pageType);
-    console.log(data);
+    // console.log(data);
     setDetails(() => {
       if (data)
         return {
@@ -68,7 +68,7 @@ export const DetailsPage = (props: { id: number }) => {
       else return null;
     });
     const creditsData = await fetchCredits(id, pageType);
-    console.log(creditsData);
+    // console.log(creditsData);
     setTimeout(() => {
       dispatch(setLoading(false));
     }, 0);

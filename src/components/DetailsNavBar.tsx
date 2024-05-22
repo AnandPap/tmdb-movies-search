@@ -17,7 +17,7 @@ const DetailsNavBar = () => {
         className="tmdb-icon"
         src={tmdbIcon}
         alt="TMDB Icon"
-        onClick={() => navigate(-1)}
+        onClick={() => (location.pathname.includes("/movies") ? navigate("/movies") : navigate("/tvshows"))}
       />
       <div
         className={`nav-bar-buttons-wrapper hamburger-menu-content ${
