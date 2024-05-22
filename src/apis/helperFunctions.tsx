@@ -29,13 +29,7 @@ type imageArrayType = {
 };
 
 export const getTitle = (data: dataType) => {
-  return (
-    data.original_title ||
-    data.title ||
-    data.original_name ||
-    data.name ||
-    "No Title"
-  );
+  return data.original_title || data.title || data.original_name || data.name || "No Title";
 };
 
 export const getTitleType = (location: string) => {
@@ -62,12 +56,7 @@ export const getReleaseYear = (data: dataType) => {
 export const getReleaseDate = (data: dataType) => {
   if (data.release_date || data.first_air_date) {
     const releaseYear = new Date(data.release_date || data.first_air_date);
-    return (
-      "" +
-      releaseYear.getDate() +
-      releaseYear.getMonth() +
-      releaseYear.getFullYear()
-    );
+    return "" + releaseYear.getDate() + releaseYear.getMonth() + releaseYear.getFullYear();
   } else return "";
 };
 
@@ -86,12 +75,7 @@ export const getDescription = (data: dataType) => {
 };
 
 export const getRating = (data: dataType) => {
-  if (
-    data.vote_average &&
-    data.vote_count &&
-    data.vote_average !== 0 &&
-    typeof data.vote_average === "number"
-  ) {
+  if (data.vote_average && data.vote_count && data.vote_average !== 0 && typeof data.vote_average === "number") {
     let voteCount = data.vote_count + "";
     if (data.vote_count > 999) {
       voteCount = Math.round(data.vote_count / 1000) + "K";
@@ -140,8 +124,6 @@ export const getTrailerURL = (data: dataType) => {
     return video.type === "Trailer" && video.site === "YouTube";
   });
   let trailerURL =
-    indexOfTrailer !== -1 && indexOfTrailer
-      ? `https://www.youtube.com/embed/${videosArray[indexOfTrailer].key}`
-      : "";
+    indexOfTrailer !== -1 && indexOfTrailer ? `https://www.youtube.com/embed/${videosArray[indexOfTrailer].key}` : "";
   return trailerURL;
 };

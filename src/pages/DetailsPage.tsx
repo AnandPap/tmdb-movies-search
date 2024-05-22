@@ -56,11 +56,7 @@ export const DetailsPage = (props: { id: number }) => {
       if (data)
         return {
           title: getTitle(data),
-          basicInfo: [
-            getTitleType(location.pathname),
-            getReleaseYear(data),
-            getRuntime(data),
-          ],
+          basicInfo: [getTitleType(location.pathname), getReleaseYear(data), getRuntime(data)],
           description: getDescription(data),
           rating: getRating(data),
           genres: getGenres(data),
@@ -109,10 +105,7 @@ export const DetailsPage = (props: { id: number }) => {
             <TMDBRating theme={theme} rating={details.rating} />
           </div>
           <div className="cover-image-and-trailer-wrapper">
-            <CoverImage
-              className="details-page-cover-image"
-              src={details.posterURL}
-            />
+            <CoverImage className="details-page-cover-image" src={details.posterURL} />
             {details.trailerURL && (
               <iframe
                 className="details-page-trailer"

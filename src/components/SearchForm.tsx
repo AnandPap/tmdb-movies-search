@@ -87,6 +87,7 @@ export const SearchForm = ({
           className={`search-bar ${theme === "light" && "input-light"}`}
           value={inputText}
           placeholder="Search movies"
+          autoFocus
           onChange={(e) => {
             setInputText(e.target.value);
           }}
